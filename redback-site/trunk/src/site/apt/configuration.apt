@@ -1,0 +1,180 @@
+ -----
+ Configuration     
+ -----
+ 19 January 2008
+ -----
+
+Redback Configuration
+
+  Configuration in Redback is governed by a plexus configuration setup making
+use of properties files.  Below is a listing of all of the available configuration options along with default values and notes on what they are where applicable.
+  
+* Configuration
+
+** Application Configuration
+
+  * application.timestamp=EEE d MMM yyyy HH:mm:ss Z
+
+  * application.url=http://myurl.mycompany.com
+  
+    * Set the application base URL. The default is to derive it from the HTTP request
+
+** JDBC Setup
+
+  By default Redback uses Apache Derby for persistence of user and role
+information.  This can be configured with the following options.
+
+  * jdbc.driver.name=org.apache.derby.jdbc.EmbeddedDriver
+
+  * jdbc.url=jdbc:derby:${plexus.home}/database;create=true
+
+  * jdbc.username=sa
+
+  * jdbc.password=
+
+  By default Redback uses Apache Derby for persistence of user and role information.  This can be configured with the following options.
+
+
+** Email Settings
+
+  * email.jndiSessionName=java:comp/env/mail/Session
+  
+  * email.smtp.host=localhost
+
+  * email.smtp.port=25
+
+  * email.smtp.ssl.enabled=false
+
+  * email.smtp.tls.enabled=false
+ 
+  * email.smtp.username=
+
+  * email.smtp.password=
+
+  * email.from.address=${user.name}@localhost
+  
+    * All emails sent by the system will be from the following address
+
+  * email.from.name=Unconfigured Username
+
+  * email.validation.required=true
+
+    * If all email addresses (from new user registration) require an account validation email. 
+
+  * email.validation.timeout=2880
+
+    * Timeout (in minutes) for the key generated for an email validation to remain valid.
+
+    * 2880 minutes = 48 hours
+
+  * email.validation.subject=Welcome
+
+  * email.feedback.path=/feedback.action
+
+    * Get the Feedback to use for any outgoing emails.
+
+    * Feedback path starts with a "/" it is appended to the end of the value provided in application.url.  This value can be in the format/syntax of "/feedback.action" or even "mailto:feedback@application.com"
+ 
+
+
+** Auto Login Settings
+
+  * security.rememberme.enabled=true
+
+  * security.rememberme.timeout=525600
+
+    * Timeout in minutes ( 525600 minutes = 1 year )
+
+  * security.signon.timeout=30
+
+    * Single Sign On
+    
+    * Timeout is in minutes
+
+** Default Username Values
+
+  * redback.default.admin=admin
+
+    * name for the admin user, by default this is 'admin' and can not easily be changed after the fact at this point.  However any number of people may be assigned full administrator roles.
+
+  * redback.default.guest=guest
+
+    * name of the guest user
+
+
+
+** Security Policies
+
+  * security.policy.password.encoder=
+
+  * security.policy.password.previous.count=6
+
+  * security.policy.password.expiration.enabled=true
+
+  * security.policy.password.expiration.days=90
+
+  * security.policy.password.expiration.notify.days=10
+
+  * security.policy.allowed.login.attempt=10
+
+  * security.policy.strict.enforcement.enabled=true
+  
+    * turn off the perclick enforcement of various security policies, slightly more heavyweight since it will ensure that the User object on each click is up to date
+
+  * security.policy.strict.force.password.change.enabled=true
+
+    * forces the user to change their password immediately should their account be flagged for a password change.
+
+** Password Rules
+
+  *  security.policy.password.rule.alphanumeric.enabled=false
+
+  * security.policy.password.rule.alphacount.enabled=true
+
+  * security.policy.password.rule.alphacount.minimum=1
+
+  * security.policy.password.rule.characterlength.enabled=true
+
+  * security.policy.password.rule.characterlength.minimum=1
+
+  * security.policy.password.rule.characterlength.maximum=24
+
+  * security.policy.password.rule.musthave.enabled=true
+
+  * security.policy.password.rule.numericalcount.enabled=true
+
+  * security.policy.password.rule.numericalcount.minimum=1
+
+  * security.policy.password.rule.reuse.enabled=true
+
+  * security.policy.password.rule.nowhitespace.enabled=true
+
+** LDAP settings
+
+  * ldap.user.store.enabled=false
+
+  * ldap.bind.authenticator.enabled=false
+
+*** ldap options for configuration via properties file
+
+  * ldap.config.hostname=
+
+  * ldap.config.port=
+
+  * ldap.config.base.dn=
+
+  * ldap.config.context.factory=
+
+  * ldap.config.bind.dn=
+
+  *ldap.config.password=
+ 
+  * ldap.config.authentication.method=
+
+** UserManager
+
+  * user.manager.impl=cached
+
+
+
+  

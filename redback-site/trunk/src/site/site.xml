@@ -48,6 +48,7 @@
       <item name="Authorization" href="authorization.html"/>
       <item name="User Management" href="user-management.html"/>
       <item name="Key Stores" href="key-store.html"/>
+      <item name="Configuration" href="configuration.html"/>
     </menu>
     
     <menu name="Integration">
