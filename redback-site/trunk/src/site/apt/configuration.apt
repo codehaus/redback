@@ -9,7 +9,26 @@ Redback Configuration
   Configuration in Redback is governed by a plexus configuration setup making
 use of properties files.  Below is a listing of all of the available configuration options along with default values and notes on what they are where applicable.
   
-* Configuration
+* Configuration File Locations
+
+  Configuration file location can depend on the application that is embedding Redback.  Since Redback is currently built up off of Plexus, it would be ideal to check out the application.xml of the relevant application and look for an entry similar to the following.
+
+--------------------------------------------
+
+   <component>
+      <role>org.codehaus.plexus.redback.configuration.UserConfiguration</role>
+      <implementation>org.codehaus.plexus.redback.configuration.UserConfiguration</implementation>
+      <configuration>
+        <configs>
+          <config>${user.home}/.m2/security.properties</config>
+          <config>${user.home}/.m2/security-example.properties</config>
+        </configs>
+      </configuration>
+    </component>
+
+--------------------------------------------
+
+* Configuration Options
 
 ** Application Configuration
 
@@ -127,7 +146,7 @@ information.  This can be configured with the following options.
 
 ** Password Rules
 
-  *  security.policy.password.rule.alphanumeric.enabled=false
+  * security.policy.password.rule.alphanumeric.enabled=false
 
   * security.policy.password.rule.alphacount.enabled=true
 
@@ -151,6 +170,8 @@ information.  This can be configured with the following options.
 
 ** LDAP settings
 
+  Ldap can be used as a readonly user manager, however the role assignment is still managed entirely within the given database store.  This should be fixed in the future sometime but likely not before ldap is switched over as the default user and role store entirely.
+
   * ldap.user.store.enabled=false
 
   * ldap.bind.authenticator.enabled=false
@@ -167,14 +188,15 @@ information.  This can be configured with the following options.
 
   * ldap.config.bind.dn=
 
-  *ldap.config.password=
+  * ldap.config.password=
  
   * ldap.config.authentication.method=
 
-** UserManager
+** User Manager Implementation to use
 
   * user.manager.impl=cached
-
+  
+    * valid values for realistic usage are 'cached' and then further configuring the cached instance to use another underlying user manager like ldap or the jdo one which is used by default.  Placing 'ldap' here will check with the ldap system for a fair amount of checks and would likely be a performance issue
 
 
   
