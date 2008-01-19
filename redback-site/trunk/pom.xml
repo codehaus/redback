@@ -42,6 +42,11 @@
       </plugin>
     </plugins>
   </reporting>
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/redback/redback-site/trunk</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/redback-site/trunk</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/redback-site/trunk</url>
+  </scm>
   <distributionManagement>
    <site>
       <id>redback-site</id>
