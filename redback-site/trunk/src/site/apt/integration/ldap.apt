@@ -1,7 +1,7 @@
  ----- 
  Ldap Integration 
  ----- 
- 5 September 2007
+ 29 May 2008
  -----
 
 Redback Ldap Integration
@@ -29,7 +29,7 @@ Redback Ldap Integration
 +--------------------------------------+
 
   <component>
-<role>org.codehaus.plexus.redback.common.ldap.connection.LdapConnectionFactory</role>
+      <role>org.codehaus.plexus.redback.common.ldap.connection.LdapConnectionFactory</role>
       <role-hint>configurable</role-hint>
       <implementation>org.codehaus.plexus.redback.common.ldap.connection.ConfigurableLdapConnectionFactory</implementation>
       <description></description>
@@ -75,6 +75,7 @@ Redback Ldap Integration
         <user-id-attribute>cn</user-id-attribute>
         <user-base-dn></user-base-dn>
         <user-object-class>inetOrgPerson</user-object-class>
+        <user-filter>(|(attributeName=value1)(attributeName=value2))</user-filter>
       </configuration>
     </component>
     
@@ -91,6 +92,8 @@ Redback Ldap Integration
  * user-base-dn - The base dn that will be subtree searched for users.
  
  * user-object-class - the objectClass used in the ldap server for indentifying users, most commonly inetOrgPerson.
+
+ * user-filter - the user filter is used to reduce the number of results during a LDAP request. It is optional.
   
 []  
   
