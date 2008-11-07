@@ -144,6 +144,10 @@ information.  This can be configured with the following options.
 
     * forces the user to change their password immediately should their account be flagged for a password change.
 
+  * security.policy.unlockable.accounts
+
+    * can be specified multiple times to ensure that password policies never lock the specified account(s) (eg. security.policy.unlockable.accounts=guest )
+
 ** Password Rules
 
   * security.policy.password.rule.alphanumeric.enabled=false
