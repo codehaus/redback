@@ -65,6 +65,10 @@
       <item name="Resource Links" href="rbac/resource-links.html"/>
     </menu>
     
+    <menu name="Development">
+      <item name="Extending Redback Authentication" href="development/extending-authn.html"/>
+    </menu>
+    
     ${reports}
   </body>
 </project>
