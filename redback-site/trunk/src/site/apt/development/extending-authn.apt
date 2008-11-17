@@ -1,0 +1,68 @@
+ -----
+ Development
+ -----
+ 30 September 2008
+ -----
+
+Extending Redback Authentication
+
+  In order to accomodate the many authentication security services used in various applications, it is possible to to implement pluggable authentication providers in the Redback security system.
+
+* Requirements
+
+  * <<<redback-authentication-api>>> must be implemented
+
+    * create an authentication implementation project under <<<redback-authentication-providers>>>
+
+    * <<<org.codehaus.plexus.redback.authentication.Authenticator>>> must be implemented
+
+  * <<<redback-users-api>>> must be implemented
+
+    * create a user provider implementation project under <<<redback-users-providers>>>
+
+    * <<<org.codehaus.plexus.redback.users.User>>> must be implemented
+
+    * <<<org.codehaus.plexus.redback.users.UserManager>>> must be implemented
+
+  * utility and wrapper classes can be implemented under <<<redback-common>>>
+
+    * e.g. <<<$redback/redback-common/redback-common-ldap>>> contains the utility class <<<org.codehaus.plexus.redback.common.ldap.LdapUtils>>>, and the wrapper class <<<org.codehaus.plexus.redback.common.ldap.LdapUser>>>
+
+    * other essential classes may be placed here as well, such as the <<<org.codehaus.plexus.redback.common.ldap.connection.LdapConnectionFactory>>>
+
+
+* Examples
+
+** Implementing OpenId ({{{http://wiki.openid.net/}OpenId Homepage}})
+
+  While OpenId may be directly integrated to the authentication point of the web application, another option is to implement the redback api.
+
+  Here is something to get started:
+
+  * create the provider project <<<redback-authentication-openid>>>
+
+    * create the authenticator class, something like <<<OpenIdAuthenticator>>> that implements <<<org.codehaus.plexus.redback.authentication.Authenticator>>>
+
+  * create the provider project <<<redback-users-openid>>>
+
+    * implement <<<org.codehaus.plexus.redback.users.User>>>, something like <<<OpenIdUser>>>
+
+      * OpenId supports only the principal/username and password fields, so use dummy/default values for the unsupported fields (email, fullname) in this case.
+
+    * implement <<<org.codehaus.plexus.redback.users.UserManager>>>, something like <<<OpenIdUserManager>>>
+
+      * OpenId is a read-only authentication service, <<<createUser()>>>, <<<updateUser()>>>, <<<deleteUser()>>> may not be used
+
+    * various utility classes may be implemented in <<<redback-common-openid>>>
+
+      * <<<OpenIdConfiguration>>> may be used to encapsulate the following configuration properties (properties that may be specified in the <<<security.properties>>> file):
+
+        * <<<openid.config.provider.url>>>, where this is a url to one openid provider (support to many providers may come later, specified or via discovery, depending on the organization's security policy)
+
+      * <<<OpenIdUtils>>> class, may be implemented to normalize the User-Supplied Identifier to an Identifier that the OpenId Provider understands, e.g. redback username ('<<<johndoe>>>') to OpenId url-like identifier ('<<<http://johndoe.openidprovider.com>>>')
+
+      * <<<OpenIdAuthenticationException>>> that implements <<<org.codehaus.plexus.redback.authentication.AuthenticationException>>>
+
+      * <<<OpenIdProviderFactory>>> that takes the configuration from <<<OpenIdConfiguration>>>
+
+      * <<<OpenIdProvider>>> is where the <<<OpenIdUserManager>>> can verify a user
