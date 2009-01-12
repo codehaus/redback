@@ -35,6 +35,7 @@
     <module>plexus-registry</module>
     <module>plexus-taskqueue</module>
     <module>plexus-spring</module>
+    <module>plexus-xmlrpc</module>
   </modules>
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk</connection>
