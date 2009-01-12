@@ -37,10 +37,15 @@
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-container-default</artifactId>
       </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>compile</scope>
-    </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-spring</artifactId>
+        <scope>compile</scope>
+      </dependency>      
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>compile</scope>
+      </dependency>
   </dependencies>
 </project>

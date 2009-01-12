@@ -18,6 +18,7 @@ package org.codehaus.plexus.cache.test.examples.wine;
 
 import org.codehaus.plexus.PlexusTestCase;
 import org.codehaus.plexus.cache.Cache;
+import org.codehaus.plexus.spring.PlexusInSpringTestCase;
 
 /**
  * 
@@ -26,7 +27,7 @@ import org.codehaus.plexus.cache.Cache;
  * @author <a href="mailto:Olivier.LAMY@accor.com">Olivier Lamy</a>
  */
 public abstract class AbstractTestWineService
-    extends PlexusTestCase
+    extends PlexusInSpringTestCase
 {
     public void testBordeaux()
         throws Exception

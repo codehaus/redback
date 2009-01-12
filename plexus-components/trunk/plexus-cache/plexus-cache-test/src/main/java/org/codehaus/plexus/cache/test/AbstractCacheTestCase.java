@@ -22,6 +22,7 @@ import org.codehaus.plexus.cache.CacheException;
 import org.codehaus.plexus.cache.CacheStatistics;
 import org.codehaus.plexus.cache.factory.CacheFactory;
 import org.codehaus.plexus.cache.test.examples.wine.Wine;
+import org.codehaus.plexus.spring.PlexusInSpringTestCase;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,7 +38,7 @@ import java.util.logging.Logger;
  * @version $Id$
  */
 public abstract class AbstractCacheTestCase
-    extends PlexusTestCase
+    extends PlexusInSpringTestCase
 {
     static
     {

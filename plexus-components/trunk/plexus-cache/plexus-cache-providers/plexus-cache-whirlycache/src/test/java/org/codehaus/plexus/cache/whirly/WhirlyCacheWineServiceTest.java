@@ -1,5 +1,5 @@
-
 package org.codehaus.plexus.cache.whirly;
+
 /*
  * Copyright 2001-2007 The Codehaus.
  *
@@ -15,6 +15,7 @@ package org.codehaus.plexus.cache.whirly;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import org.codehaus.plexus.cache.test.examples.wine.AbstractTestWineService;
 
 /**

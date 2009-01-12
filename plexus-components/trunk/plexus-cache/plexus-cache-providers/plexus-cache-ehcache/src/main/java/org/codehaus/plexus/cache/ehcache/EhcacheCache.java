@@ -23,7 +23,6 @@ import net.sf.ehcache.Status;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
 
 import org.codehaus.plexus.cache.CacheStatistics;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
@@ -140,6 +139,11 @@ public class EhcacheCache
      * @plexus.configuration default-value="300"
      */
     private int timeToLiveSeconds = 300;
+    
+    /**
+     * @plexus.configuration default-value="false"
+     */    
+    private boolean failOnDuplicateCache = false;
 
     private CacheManager cacheManager;
 
@@ -152,6 +156,31 @@ public class EhcacheCache
         ehcache.removeAll();
         stats.clear();
     }
+    
+    public void initialize()
+        throws InitializationException
+    {
+        stats = new Stats();
+        cacheManager = CacheManager.getInstance();
+
+        if ( cacheManager.cacheExists( getName() ) )
+        {
+            if ( failOnDuplicateCache )
+            {
+                throw new InitializationException( "A previous cache with name [" + getName() + "] exists." );
+            }
+            else
+            {
+                log.warn( "skip duplicate cache " + getName() );
+            }
+        }
+
+        ehcache = new Cache( getName(), getMaxElementsInMemory(), getMemoryStoreEvictionPolicy(), isOverflowToDisk(),
+                             getDiskStorePath(), isEternal(), getTimeToLiveSeconds(), getTimeToIdleSeconds(),
+                             isDiskPersistent(), getDiskExpiryThreadIntervalSeconds(), null );
+
+        cacheManager.addCache( ehcache );
+    }    
 
     public void dispose()
     {
@@ -228,24 +257,6 @@ public class EhcacheCache
     public boolean hasKey( Object key )
     {
         return ehcache.isKeyInCache( key );
-    }
-
-    public void initialize()
-        throws InitializationException
-    {
-        stats = new Stats();
-        cacheManager = CacheManager.getInstance();
-
-        if ( cacheManager.cacheExists( getName() ) )
-        {
-            throw new InitializationException( "A previous cache with name [" + getName() + "] exists." );
-        }
-
-        ehcache = new Cache( getName(), getMaxElementsInMemory(), getMemoryStoreEvictionPolicy(), isOverflowToDisk(),
-                             getDiskStorePath(), isEternal(), getTimeToLiveSeconds(), getTimeToIdleSeconds(),
-                             isDiskPersistent(), getDiskExpiryThreadIntervalSeconds(), null );
-
-        cacheManager.addCache( ehcache );
     }
 
     public boolean isDiskPersistent()

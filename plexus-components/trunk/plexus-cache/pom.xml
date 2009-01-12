@@ -23,6 +23,11 @@
         <artifactId>commons-lang</artifactId>
         <version>2.1</version>
       </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-spring</artifactId>
+        <version>1.2</version>
+      </dependency>      
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -30,6 +35,12 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>  
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-spring</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <reporting>
     <plugins>
