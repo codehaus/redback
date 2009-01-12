@@ -31,6 +31,7 @@
     <module>plexus-expression-evaluator</module>
     <module>plexus-jdo2</module>
     <module>plexus-quartz</module>
+    <module>plexus-msn</module>
     <module>plexus-registry</module>
     <module>plexus-taskqueue</module>
     <module>plexus-spring</module>

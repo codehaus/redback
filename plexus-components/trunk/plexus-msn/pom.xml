@@ -1,0 +1,19 @@
+<project>
+  <parent>
+    <groupId>org.codehaus.redback</groupId>
+    <artifactId>plexus-components</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.codehaus.plexus</groupId>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>plexus-msn</artifactId>
+  <name>Plexus MSN Client Component</name>
+  <version>1.0-alpha-3-SNAPSHOT</version>
+  <dependencies>
+    <dependency>
+      <groupId>jmsn</groupId>
+      <artifactId>msnmlib</artifactId>
+      <version>1.4-20050613</version>
+    </dependency>
+  </dependencies>
+</project>
