@@ -11,6 +11,15 @@
   <version>1.0-alpha-3-SNAPSHOT</version>
   <dependencies>
     <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-component-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-container-default</artifactId>
+      <scope>test</scope>
+    </dependency>  
+    <dependency>
       <groupId>jmsn</groupId>
       <artifactId>msnmlib</artifactId>
       <version>1.4-20050613</version>

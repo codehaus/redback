@@ -76,7 +76,7 @@
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
-      <version>1.5.1</version>
+      <version>1.5.6</version>
     </dependency>	
 
     <!-- for struts2 integration -->
@@ -102,7 +102,6 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.2</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -199,6 +198,10 @@
       <email>nicolas@apache.org</email>
       <name>Nicolas De Loof</name>
     </developer>
+    <developer>
+      <email>olamy@apache.org</email>
+      <name>Olivier Lamy</name>
+    </developer>    
   </developers>
 
   <build>
@@ -211,22 +214,7 @@
           <target>1.5</target>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.0-beta-7</version>
-        <configuration>
-          <useReleaseProfile>true</useReleaseProfile>  
-          <tagBase>https://svn.codehaus.org/plexus/plexus-components/tags/</tagBase>
-          <arguments>-Prelease</arguments>
-        </configuration>    
-      </plugin>
     </plugins>
   </build>
-
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/plexus/plexus-components/trunk/</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/plexus/plexus-components/trunk</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/plexus/plexus-components/trunk/</url>
-  </scm>
-  
+ 
 </project>

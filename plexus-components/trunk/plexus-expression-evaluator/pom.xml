@@ -11,6 +11,14 @@
   <name>Plexus Expression Evaluator Components</name>
   <packaging>jar</packaging>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>1.5.6</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>

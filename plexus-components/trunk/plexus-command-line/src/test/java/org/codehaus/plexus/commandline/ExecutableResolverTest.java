@@ -27,7 +27,9 @@ import org.codehaus.plexus.PlexusTestCase;
 public class ExecutableResolverTest
     extends PlexusTestCase
 {
-    public void testBasic()
+    
+    
+    public void testEmpty()
         throws Exception
     {
         ExecutableResolver helper = (ExecutableResolver) lookup( ExecutableResolver.ROLE );
@@ -36,11 +38,17 @@ public class ExecutableResolverTest
 
         assertEquals( 0, helper.getDefaultPath().size() );
 
-        release( helper );
+    }
+
+    public void testBasic()
+        throws Exception
+    {
 
         String separator = System.getProperty( "path.separator" );
 
         System.setProperty( "plexus.system.path", "a" + separator + "b" );
+
+        ExecutableResolver helper = (ExecutableResolver) lookup( ExecutableResolver.ROLE );
 
         helper = (ExecutableResolver) lookup( ExecutableResolver.ROLE );
 

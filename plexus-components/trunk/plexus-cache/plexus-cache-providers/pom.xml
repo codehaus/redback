@@ -14,12 +14,12 @@
       <dependency>
         <groupId>org.codehaus.plexus.cache</groupId>
         <artifactId>plexus-cache-api</artifactId>
-        <version>1.0-alpha-2</version>
+        <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus.cache</groupId>
         <artifactId>plexus-cache-test</artifactId>
-        <version>1.0-alpha-2</version>
+        <version>${project.version}</version>
         <scope>test</scope>
       </dependency>
   </dependencies>

@@ -31,16 +31,15 @@
       <dependency>
         <groupId>org.codehaus.plexus.cache</groupId>
         <artifactId>plexus-cache-api</artifactId>
-        <version>1.0-alpha-2</version>
+        <version>${project.version}</version>
       </dependency>
-    <dependency>
-      <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-container-default</artifactId>
-    </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-container-default</artifactId>
+      </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
