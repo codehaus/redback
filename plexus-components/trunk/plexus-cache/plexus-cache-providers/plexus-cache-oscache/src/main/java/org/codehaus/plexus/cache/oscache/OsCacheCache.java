@@ -23,7 +23,6 @@ import java.util.Properties;
 
 import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.CacheStatistics;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 
@@ -41,7 +40,6 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
  * @plexus.component role="org.codehaus.plexus.cache.Cache" role-hint="oscache"
  */
 public class OsCacheCache
-    extends AbstractLogEnabled
     implements Cache, Initializable
 {
 

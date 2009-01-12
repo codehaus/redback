@@ -23,11 +23,12 @@ import org.codehaus.plexus.cache.impl.NoCacheCache;
 import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.codehaus.plexus.context.Context;
 import org.codehaus.plexus.context.ContextException;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Ability to obtain cache  
@@ -40,10 +41,12 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationExce
  *   role="org.codehaus.plexus.cache.builder.CacheBuilder" role-hint="default"
  */
 public class DefaultCacheBuilder
-    extends AbstractLogEnabled
     implements CacheBuilder, Initializable, Contextualizable, Disposable
 
 {
+    
+    private Logger log = LoggerFactory.getLogger( getClass() );
+    
     private Cache defaultCache;
 
     private PlexusContainer plexusContainer;
@@ -68,13 +71,13 @@ public class DefaultCacheBuilder
             catch ( ComponentLookupException e )
             {
                 String emsg = "error during lookup of Cache with role-hint default ";
-                getLogger().warn( emsg, e );
+                log.warn( emsg, e );
                 throw new InitializationException( emsg, e );
             }
         }
         else
         {
-            getLogger().info( "Cache with role-hint default doesn't exists, default will be no cache" );
+            log.info( "Cache with role-hint default doesn't exists, default will be no cache" );
             this.defaultCache = new NoCacheCache();
         }
     }
@@ -87,7 +90,7 @@ public class DefaultCacheBuilder
         }
         catch ( ComponentLookupException e )
         {
-            getLogger().warn( "error during lookup of Cache with roleHint " + roleHint );
+            log.warn( "error during lookup of Cache with roleHint " + roleHint );
         }
         
         return this.getDefaultCache();

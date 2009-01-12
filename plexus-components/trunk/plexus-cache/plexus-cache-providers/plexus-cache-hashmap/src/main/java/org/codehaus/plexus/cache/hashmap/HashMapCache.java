@@ -27,6 +27,8 @@ import org.codehaus.plexus.cache.CacheableWrapper;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>
@@ -54,9 +56,11 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationExce
  * @plexus.component role="org.codehaus.plexus.cache.Cache" role-hint="hashmap"
  */
 public class HashMapCache
-    extends AbstractLogEnabled
     implements Cache, Initializable
 {
+    
+    private Logger log = LoggerFactory.getLogger( getClass() );
+    
     class Stats
         extends AbstractCacheStatistics
         implements CacheStatistics
@@ -167,9 +171,9 @@ public class HashMapCache
             return false;
         }
         boolean result = ( System.currentTimeMillis() - cacheableWrapper.getStoredTime() ) > ( this.getRefreshTime() * 1000 );
-        if ( getLogger().isDebugEnabled() )
+        if ( log.isDebugEnabled() )
         {
-            getLogger().debug( cacheableWrapper + " is uptodate" + result );
+            log.debug( cacheableWrapper + " is uptodate" + result );
         }
         return result;
     }

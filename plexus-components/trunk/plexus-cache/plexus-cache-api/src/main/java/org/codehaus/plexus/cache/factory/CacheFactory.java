@@ -16,18 +16,17 @@ package org.codehaus.plexus.cache.factory;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.cache.Cache;
-import org.codehaus.plexus.cache.CacheException;
-import org.codehaus.plexus.cache.CacheHints;
-import org.codehaus.plexus.cache.impl.NoCacheCache;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import org.codehaus.plexus.cache.Cache;
+import org.codehaus.plexus.cache.CacheException;
+import org.codehaus.plexus.cache.CacheHints;
+import org.codehaus.plexus.cache.impl.NoCacheCache;
 
 /**
  * CacheFactory - dynamic cache creation (and tracking) facility for non-plexus objects to use.

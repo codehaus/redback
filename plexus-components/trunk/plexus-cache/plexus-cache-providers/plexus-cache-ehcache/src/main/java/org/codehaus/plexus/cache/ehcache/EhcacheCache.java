@@ -27,6 +27,8 @@ import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * EhcacheCache 
@@ -38,9 +40,11 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationExce
  * @plexus.component role="org.codehaus.plexus.cache.Cache" role-hint="ehcache"
  */
 public class EhcacheCache
-    extends AbstractLogEnabled
     implements org.codehaus.plexus.cache.Cache, Initializable, Disposable
 {
+    
+    private Logger log = LoggerFactory.getLogger( getClass() );    
+    
     class Stats
         implements CacheStatistics
     {
@@ -153,7 +157,7 @@ public class EhcacheCache
     {
         if ( cacheManager.getStatus().equals( Status.STATUS_ALIVE ) )
         {
-            getLogger().info( "Disposing cache: " + ehcache );
+            log.info( "Disposing cache: " + ehcache );
             if ( this.ehcache != null )
             {
                 cacheManager.removeCache( this.ehcache.getName() );
@@ -162,7 +166,7 @@ public class EhcacheCache
         }
         else
         {
-            getLogger().debug( "Not disposing cache, because cacheManager is not alive: " + ehcache );
+            log.debug( "Not disposing cache, because cacheManager is not alive: " + ehcache );
         }
     }
 
