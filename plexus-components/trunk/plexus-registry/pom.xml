@@ -16,10 +16,10 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <groupId>org.codehaus.plexus</groupId>
+    <groupId>org.codehaus.redback</groupId>
     <artifactId>plexus-components</artifactId>
-    <version>1.1.12</version>
-  </parent>
+    <version>1.0-SNAPSHOT</version>
+  </parent>  
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.plexus.registry</groupId>
   <artifactId>plexus-registry</artifactId>
@@ -75,7 +75,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>3.8.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

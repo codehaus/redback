@@ -1,10 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
+    <groupId>org.codehaus.redback</groupId>
     <artifactId>plexus-components</artifactId>
-    <groupId>org.codehaus.plexus</groupId>
-    <version>1.1.6</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.plexus</groupId>
   <artifactId>plexus-jdo2</artifactId>
   <name>Plexus JDO Component</name>
   <version>1.0-alpha-9-SNAPSHOT</version>
@@ -23,6 +24,11 @@
       <groupId>javax.jdo</groupId>
       <artifactId>jdo2-api</artifactId>
       <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+      <version>1.5.6</version>
     </dependency>
     <dependency>
       <groupId>jpox</groupId>
@@ -89,7 +95,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>jpox-maven-plugin</artifactId>
-        <version>1.1.6-SNAPSHOT</version>
+        <version>1.1.7</version>
         <executions>
           <execution>
             <phase>test-compile</phase>
