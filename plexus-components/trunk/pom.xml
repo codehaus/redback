@@ -27,6 +27,7 @@
   </dependencies>
   <modules>
     <module>plexus-cache</module>
+    <module>plexus-expression-evaluator</module>
     <module>plexus-jdo2</module>
     <module>plexus-quartz</module>
     <module>plexus-registry</module>
