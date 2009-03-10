@@ -180,7 +180,7 @@ security.policy.password.expiration.enabled=false
           <field-name>userImpl</field-name>
         </requirement>
         <requirement>
-          <role>org.codehaus.plexus.ehcache.EhcacheComponent</role>
+          <role>org.codehaus.plexus.cache.Cache</role>
           <role-hint>users</role-hint>
           <field-name>usersCache</field-name>
         </requirement>
