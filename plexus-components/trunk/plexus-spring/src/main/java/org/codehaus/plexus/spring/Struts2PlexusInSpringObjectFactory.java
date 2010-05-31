@@ -31,10 +31,11 @@ public class Struts2PlexusInSpringObjectFactory
     @Inject
     public Struts2PlexusInSpringObjectFactory(
             @Inject(value=StrutsConstants.STRUTS_OBJECTFACTORY_SPRING_AUTOWIRE,required=false) String autoWire,
+            @Inject(value=StrutsConstants.STRUTS_OBJECTFACTORY_SPRING_AUTOWIRE_ALWAYS_RESPECT,required=false) String alwaysAutoWire,
             @Inject(value=StrutsConstants.STRUTS_OBJECTFACTORY_SPRING_USE_CLASS_CACHE,required=false) String useClassCacheStr,
             @Inject ServletContext servletContext) {
 
-        super(autoWire, useClassCacheStr, servletContext);
+        super(autoWire, alwaysAutoWire, useClassCacheStr, servletContext);
     }
 
     /**
