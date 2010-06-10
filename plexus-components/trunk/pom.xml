@@ -8,8 +8,8 @@
   <url>http://redback.codehaus.org/plexus-components</url>
   <properties>
     <slf4jVersion>1.5.8</slf4jVersion>
-    <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/plexus</distUrlReleaseRepo>
-    <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/plexus</distUrlSnapshotRepo>
+    <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/redback</distUrlReleaseRepo>
+    <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/redback</distUrlSnapshotRepo>
   </properties>
   <dependencyManagement>
     <dependencies>
