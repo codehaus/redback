@@ -53,6 +53,9 @@ information.  This can be configured with the following options.
 
   By default Redback uses Apache Derby for persistence of user and role information.  This can be configured with the following options.
 
+  <<Note:>> If you are using MySQL as your database, the database will not be populated if the encoding is initially set to UTF-8. As a workaround, set the database to UTF-8 encoding after it has been populated. See {{{http://jira.codehaus.org/browse/REDBACK-267} REDBACK-267}} for more details.
+
+
 
 ** Email Settings
 
