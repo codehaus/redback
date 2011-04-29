@@ -4,7 +4,7 @@
   <artifactId>plexus-redback-components</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Redback Plexus Components Aggregator Project</name>
+  <name>Redback Plexus Components Parent Project</name>
   <url>http://redback.codehaus.org/plexus-components</url>
   <properties>
     <slf4jVersion>1.5.8</slf4jVersion>
@@ -53,24 +53,10 @@
       <scope>test</scope>
     </dependency>    
   </dependencies>
-  <modules>
-    <module>plexus-cache</module>
-    <module>plexus-command-line</module>
-    <module>plexus-expression-evaluator</module>
-    <module>plexus-jabber</module>
-    <module>plexus-jdo2</module>
-    <module>plexus-quartz</module>
-    <module>plexus-msn</module>
-    <module>plexus-registry</module>
-    <module>plexus-taskqueue</module>
-    <!-- Plexus Spring was moved into the Redback multi-module build -->
-    <!--<module>plexus-spring</module>-->
-    <module>plexus-xmlrpc</module>
-  </modules>
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/trunk/</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk/plexus-components-parent</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk/plexus-components-parent</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/trunk/plexus-components-parent</url>
   </scm>
   <distributionManagement>
     <repository>
@@ -131,10 +117,14 @@
   <reporting>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.2</version>
       </plugin>
       <plugin>
         <groupId>org.codehaus.plexus</groupId>
