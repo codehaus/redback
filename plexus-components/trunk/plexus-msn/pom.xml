@@ -1,6 +1,6 @@
 <project>
   <parent>
-    <groupId>org.codehaus.plexus</groupId>
+    <groupId>org.codehaus.redback</groupId>
     <artifactId>plexus-redback-components</artifactId>
     <version>1.0-SNAPSHOT</version>
     <relativePath>../plexus-components-parent/pom.xml</relativePath>
