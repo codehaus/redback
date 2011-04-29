@@ -12,6 +12,13 @@
   <name>Plexus Cache Component</name>
   <version>1.0-alpha-3-SNAPSHOT</version>
   <packaging>pom</packaging>
+
+  <scm>
+    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk/plexus-cache</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk/plexus-cache</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/trunk/plexus-cache</url>
+  </scm>
+
   <modules>
     <module>plexus-cache-api</module>
     <module>plexus-cache-test</module>
