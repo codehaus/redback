@@ -1,58 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.redback</groupId>
-  <artifactId>plexus-redback-components</artifactId>
+  <artifactId>plexus-redback-components-aggregator</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>Redback Plexus Components Aggregator Project</name>
   <url>http://redback.codehaus.org/plexus-components</url>
-  <properties>
-    <slf4jVersion>1.5.8</slf4jVersion>
-    <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/redback</distUrlReleaseRepo>
-    <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/redback</distUrlSnapshotRepo>
-  </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-component-api</artifactId>
-        <version>1.0-alpha-20</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-container-default</artifactId>
-        <version>1.0-alpha-20</version>
-      </dependency>    
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4jVersion}</version>
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>3.8.2</version>
-      </dependency>        
-    </dependencies>
-  </dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4jVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-container-default</artifactId>
-      <version>1.0-alpha-20</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>    
-  </dependencies>
+
   <modules>
     <module>plexus-cache</module>
     <module>plexus-command-line</module>
@@ -67,80 +21,4 @@
     <!--<module>plexus-spring</module>-->
     <module>plexus-xmlrpc</module>
   </modules>
-  <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/trunk/</url>
-  </scm>
-  <distributionManagement>
-    <repository>
-      <id>codehaus.org</id>
-      <name>Plexus Central Repository</name>
-      <url>${distUrlReleaseRepo}</url>
-    </repository>
-    <snapshotRepository>
-      <id>codehaus.org</id>
-      <name>Plexus Central Development Repository</name>
-      <url>${distUrlSnapshotRepo}</url>
-    </snapshotRepository>
-    <site>
-      <id>codehaus.org</id>
-      <url>dav:https://dav.codehaus.org/redback/plexus-components</url>
-    </site>
-  </distributionManagement>
-
-  <repositories>
-    <repository>
-      <id>codehaus.snapshots</id>
-      <name>Codehaus Snapshot Development Repository</name>
-      <url>http://snapshots.repository.codehaus.org</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-maven-plugin</artifactId>
-        <version>1.3.4</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>descriptor</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.0-beta-7</version>
-        <configuration>
-          <useReleaseProfile>true</useReleaseProfile>  
-          <tagBase>https://svn.codehaus.org/redback/plexus-components/tags/</tagBase>
-          <arguments>-Prelease</arguments>
-        </configuration>    
-      </plugin>      
-    </plugins>
-  </build>
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jxr-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-maven-plugin</artifactId>
-        <version>1.3.4</version>
-      </plugin>      
-    </plugins>
-  </reporting>  
 </project>
