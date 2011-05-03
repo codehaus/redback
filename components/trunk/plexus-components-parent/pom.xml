@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.redback</groupId>
-  <artifactId>plexus-redback-components</artifactId>
+  <artifactId>redback-components</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>Redback Plexus Components Parent Project</name>
-  <url>http://redback.codehaus.org/plexus-components</url>
+  <url>http://redback.codehaus.org/redback-components</url>
   <properties>
     <slf4jVersion>1.5.8</slf4jVersion>
     <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/redback</distUrlReleaseRepo>
@@ -55,9 +55,9 @@
     </dependency>    
   </dependencies>
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk/plexus-components-parent</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/trunk/plexus-components-parent</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/trunk/plexus-components-parent</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-components-parent</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-components-parent</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/plexus-components-parent</url>
   </scm>
   <distributionManagement>
     <repository>
@@ -72,7 +72,7 @@
     </snapshotRepository>
     <site>
       <id>codehaus.org</id>
-      <url>dav:https://dav.codehaus.org/redback/plexus-components</url>
+      <url>dav:https://dav.codehaus.org/redback/components</url>
     </site>
   </distributionManagement>
 
