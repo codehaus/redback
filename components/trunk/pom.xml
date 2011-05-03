@@ -1,0 +1,24 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.codehaus.redback</groupId>
+  <artifactId>plexus-redback-components-aggregator</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Redback Plexus Components Aggregator Project</name>
+  <url>http://redback.codehaus.org/plexus-components</url>
+
+  <modules>
+    <module>plexus-cache</module>
+    <module>plexus-command-line</module>
+    <module>plexus-expression-evaluator</module>
+    <module>plexus-jabber</module>
+    <module>plexus-jdo2</module>
+    <module>plexus-quartz</module>
+    <module>plexus-msn</module>
+    <module>plexus-registry</module>
+    <module>plexus-taskqueue</module>
+    <!-- Plexus Spring was moved into the Redback multi-module build -->
+    <!--<module>plexus-spring</module>-->
+    <module>plexus-xmlrpc</module>
+  </modules>
+</project>
