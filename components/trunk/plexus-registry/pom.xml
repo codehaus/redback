@@ -63,12 +63,12 @@
         <version>1.5.6</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.plexus.registry</groupId>
+        <groupId>org.codehaus.redback.components.registry</groupId>
         <artifactId>plexus-registry-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.plexus.registry</groupId>
+        <groupId>org.codehaus.redback.components.registry</groupId>
         <artifactId>plexus-registry-test</artifactId>
         <version>${project.version}</version>
       </dependency>
