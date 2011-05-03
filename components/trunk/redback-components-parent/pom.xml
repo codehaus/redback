@@ -55,9 +55,9 @@
     </dependency>    
   </dependencies>
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-components-parent</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-components-parent</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/plexus-components-parent</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/redback-components-parent</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/redback-components-parent</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/redback-components-parent</url>
   </scm>
   <distributionManagement>
     <repository>
