@@ -33,6 +33,8 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationExce
 import org.codehaus.plexus.registry.Registry;
 import org.codehaus.plexus.registry.RegistryException;
 import org.codehaus.plexus.registry.RegistryListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -59,13 +61,14 @@ import java.util.Set;
  * @plexus.component role-hint="commons-configuration"
  */
 public class CommonsConfigurationRegistry
-    extends AbstractLogEnabled
     implements Initializable, Registry
 {
     /**
      * The combined configuration instance that houses the registry.
      */
     private Configuration configuration;
+
+    private Logger logger = LoggerFactory.getLogger( getClass() );
 
     /**
      * The configuration properties for the registry. This should take the format of an input to the Commons
@@ -284,7 +287,7 @@ public class CommonsConfigurationRegistry
         {
             try
             {
-                getLogger().debug( "Loading properties configuration from classloader resource: " + resource );
+                logger.debug( "Loading properties configuration from classloader resource: {}", resource );
                 configuration.addConfiguration( new PropertiesConfiguration( resource ), null, prefix );
             }
             catch ( ConfigurationException e )
@@ -297,7 +300,7 @@ public class CommonsConfigurationRegistry
         {
             try
             {
-                getLogger().debug( "Loading XML configuration from classloader resource: " + resource );
+                logger.debug( "Loading XML configuration from classloader resource: {}", resource );
                 configuration.addConfiguration( new XMLConfiguration( resource ), null, prefix );
             }
             catch ( ConfigurationException e )
@@ -327,7 +330,7 @@ public class CommonsConfigurationRegistry
         {
             try
             {
-                getLogger().debug( "Loading properties configuration from file: " + file );
+                logger.debug( "Loading properties configuration from file: {}", file );
                 configuration.addConfiguration( new PropertiesConfiguration( file ), null, prefix );
             }
             catch ( ConfigurationException e )
@@ -340,7 +343,7 @@ public class CommonsConfigurationRegistry
         {
             try
             {
-                getLogger().debug( "Loading XML configuration from file: " + file );
+                logger.debug( "Loading XML configuration from file: {}", file );
                 configuration.addConfiguration( new XMLConfiguration( file ), null, prefix );
             }
             catch ( ConfigurationException e )
@@ -369,13 +372,13 @@ public class CommonsConfigurationRegistry
                 printConfiguration( properties, new PrintWriter( w ) );
 
                 DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-                getLogger().debug( "Loading configuration into commons-configuration: " + w.toString() );
+                logger.debug( "Loading configuration into commons-configuration: {}", w.toString() );
                 builder.load( new StringReader( w.toString() ) );
                 configuration = builder.getConfiguration( false );
             }
             else
             {
-                getLogger().debug( "Creating a default configuration - no configuration was provided" );
+                logger.debug( "Creating a default configuration - no configuration was provided" );
                 configuration = new CombinedConfiguration();
             }
 
