@@ -1,4 +1,4 @@
-package org.codehaus.plexus.apacheds;
+package org.codehaus.redback.components.apacheds;
 
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttributes;

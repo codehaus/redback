@@ -1,4 +1,4 @@
-package org.codehaus.plexus.apacheds;
+package org.codehaus.redback.components.apacheds;
 
 /*
  * Copyright 2001-2007 The Codehaus.
@@ -18,8 +18,7 @@ package org.codehaus.plexus.apacheds;
 
 import junit.framework.TestCase;
 import org.apache.directory.shared.ldap.util.AttributeUtils;
-import org.codehaus.plexus.PlexusTestCase;
-import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.redback.components.apacheds.ApacheDs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

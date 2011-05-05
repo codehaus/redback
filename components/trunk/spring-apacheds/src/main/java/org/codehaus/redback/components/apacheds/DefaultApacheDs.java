@@ -1,4 +1,4 @@
-package org.codehaus.plexus.apacheds;
+package org.codehaus.redback.components.apacheds;
 
 /*
  * Copyright 2001-2007 The Codehaus.
