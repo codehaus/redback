@@ -14,7 +14,7 @@
     <module>plexus-jdo2</module>
     <module>plexus-quartz</module>
     <module>plexus-msn</module>
-    <module>plexus-registry</module>
+    <module>spring-registry</module>
     <module>plexus-taskqueue</module>
     <!-- Plexus Spring was moved into the Redback multi-module build -->
     <!--<module>plexus-spring</module>-->
