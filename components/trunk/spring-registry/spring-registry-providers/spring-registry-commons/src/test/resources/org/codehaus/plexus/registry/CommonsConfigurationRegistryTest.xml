@@ -17,12 +17,12 @@
 <component-set>
   <components>
     <component>
-      <role>org.codehaus.plexus.registry.Registry</role>
+      <role>org.codehaus.redback.components.registry.Registry</role>
       <implementation>org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry</implementation>
       <role-hint>default</role-hint>
     </component>
     <component>
-      <role>org.codehaus.plexus.registry.Registry</role>
+      <role>org.codehaus.redback.components.registry.Registry</role>
       <implementation>org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry</implementation>
       <role-hint>builder</role-hint>
       <configuration>
@@ -33,7 +33,7 @@
       </configuration>
     </component>
     <component>
-      <role>org.codehaus.plexus.registry.Registry</role>
+      <role>org.codehaus.redback.components.registry.Registry</role>
       <implementation>org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry</implementation>
       <role-hint>test-save</role-hint>
       <configuration>
@@ -65,7 +65,7 @@
       </configuration>
     </component>
     <component>
-      <role>org.codehaus.plexus.registry.Registry</role>
+      <role>org.codehaus.redback.components.registry.Registry</role>
       <implementation>org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry</implementation>
       <role-hint>forceCreate</role-hint>
       <configuration>
@@ -75,7 +75,7 @@
       </configuration>
     </component>
     <component>
-      <role>org.codehaus.plexus.registry.Registry</role>
+      <role>org.codehaus.redback.components.registry.Registry</role>
       <implementation>org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry</implementation>
       <role-hint>noForceCreate</role-hint>
       <configuration>

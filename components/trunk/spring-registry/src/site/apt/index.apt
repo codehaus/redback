@@ -31,7 +31,7 @@ Plexus Registry
 
 -----
 <component>
-  <role>org.codehaus.plexus.registry.Registry</role>
+  <role>org.codehaus.redback.components.registry.Registry</role>
   <implementation>org.codehaus.plexus.registry.CommonsConfigurationRegistry</implementation>
   <role-hint>commons-configuration</role-hint>
   <configuration>
