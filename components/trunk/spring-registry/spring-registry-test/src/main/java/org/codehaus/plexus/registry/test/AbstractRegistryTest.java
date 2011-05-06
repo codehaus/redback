@@ -46,7 +46,7 @@ public abstract class AbstractRegistryTest
     public Registry getRegistry()
         throws Exception
     {
-        return getRegistry( getName() );
+        return getRegistry( getRoleHint() );
     }
 
     public Registry getRegistry( String name )

@@ -25,6 +25,9 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.event.EventSource;
+import org.codehaus.plexus.interpolation.InterpolationException;
+import org.codehaus.plexus.interpolation.PropertiesBasedValueSource;
+import org.codehaus.plexus.interpolation.StringSearchInterpolator;
 import org.codehaus.plexus.registry.Registry;
 import org.codehaus.plexus.registry.RegistryException;
 import org.codehaus.plexus.registry.RegistryListener;
@@ -363,7 +366,10 @@ public class CommonsConfigurationRegistry
             CombinedConfiguration configuration;
             if ( properties != null )
             {
-                // TODO check file exists
+                if (!properties.exists())
+                {
+                    throw new IllegalArgumentException( "file " + properties.getPath() + " not exists" );
+                }
                 FileInputStream fileInputStream = null;
                 try
                 {
@@ -371,8 +377,12 @@ public class CommonsConfigurationRegistry
                     DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
 
                     String conf = IOUtil.toString( fileInputStream );
+                    StringSearchInterpolator interpolator = new StringSearchInterpolator("${", "}");
+                    // interpolation as plexus did it before
+                    interpolator.addValueSource( new PropertiesBasedValueSource( System.getProperties() ));
+
                     logger.debug( "Loading configuration into commons-configuration, path : {} xml {}", properties.getPath(), conf );
-                    builder.load( new StringReader( conf ) );
+                    builder.load( new StringReader( interpolator.interpolate( conf ) ) );
                     configuration = builder.getConfiguration( false );
                 }
                 catch ( FileNotFoundException e )
@@ -380,6 +390,10 @@ public class CommonsConfigurationRegistry
                     throw new RuntimeException( e.getMessage(), e );
                 }
                 catch ( IOException e )
+                {
+                    throw new RuntimeException( e.getMessage(), e );
+                }
+                catch ( InterpolationException e )
                 {
                     throw new RuntimeException( e.getMessage(), e );
                 }
