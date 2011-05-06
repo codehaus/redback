@@ -26,22 +26,22 @@
            http://www.springframework.org/schema/context 
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean name="default" class="org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry">
+  <bean name="default" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
   </bean>
 
-  <bean name="builder" class="org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry">
+  <bean name="builder" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
     <property name="properties" value="./src/test/resources/configuration-builder.xml"/>
   </bean>
 
-  <bean name="test-save" class="org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry">
+  <bean name="test-save" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
     <property name="properties" value="./src/test/resources/configuration-test-save.xml"/>
   </bean>
 
-  <bean name="forceCreate" class="org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry">
+  <bean name="forceCreate" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
     <property name="properties" value="./src/test/resources/configuration-forceCreate.xml"/>
   </bean>
 
-  <bean name="noForceCreate" class="org.codehaus.plexus.registry.commons.CommonsConfigurationRegistry">
+  <bean name="noForceCreate" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
     <property name="properties" value="./src/test/resources/configuration-noForceCreate.xml"/>
   </bean>
 

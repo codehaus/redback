@@ -1,4 +1,4 @@
-package org.codehaus.plexus.registry.commons;
+package org.codehaus.redback.components.registry.commons;
 
 /*
  * Copyright 2007 The Codehaus Foundation.
@@ -28,10 +28,11 @@ import org.apache.commons.configuration.event.EventSource;
 import org.codehaus.plexus.interpolation.InterpolationException;
 import org.codehaus.plexus.interpolation.PropertiesBasedValueSource;
 import org.codehaus.plexus.interpolation.StringSearchInterpolator;
+import org.codehaus.plexus.util.IOUtil;
+import org.codehaus.redback.components.registry.ConfigurationListenerDelegate;
 import org.codehaus.redback.components.registry.Registry;
 import org.codehaus.redback.components.registry.RegistryException;
 import org.codehaus.redback.components.registry.RegistryListener;
-import org.codehaus.plexus.util.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
