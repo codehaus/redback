@@ -26,8 +26,8 @@
            http://www.springframework.org/schema/context 
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-  <bean name="default" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
-  </bean>
+
+  <alias name="commons-configuration" alias="default"/>
 
   <bean name="builder" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
     <property name="properties" value="./src/test/resources/configuration-builder.xml"/>

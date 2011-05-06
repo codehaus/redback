@@ -34,6 +34,7 @@ import org.codehaus.redback.components.registry.RegistryException;
 import org.codehaus.redback.components.registry.RegistryListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -61,6 +62,7 @@ import java.util.Set;
  *
  * @plexus.component role-hint="commons-configuration"
  */
+@Service("commons-configuration")
 public class CommonsConfigurationRegistry
     implements Registry
 {
