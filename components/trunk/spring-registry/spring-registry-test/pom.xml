@@ -22,7 +22,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>spring-registry-test</artifactId>
-  <name>Plexus Registry Test</name>
+  <name>Redback Spring Registry Test</name>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>

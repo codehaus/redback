@@ -22,7 +22,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>spring-registry-providers</artifactId>
-  <name>Plexus Registry Providers Parent</name>
+  <name>Redback Spring Registry Providers Parent</name>
   <packaging>pom</packaging>
   <modules>
     <module>spring-registry-commons</module>
