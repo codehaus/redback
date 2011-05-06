@@ -29,7 +29,6 @@ import org.codehaus.plexus.interpolation.InterpolationException;
 import org.codehaus.plexus.interpolation.PropertiesBasedValueSource;
 import org.codehaus.plexus.interpolation.StringSearchInterpolator;
 import org.codehaus.plexus.util.IOUtil;
-import org.codehaus.redback.components.registry.ConfigurationListenerDelegate;
 import org.codehaus.redback.components.registry.Registry;
 import org.codehaus.redback.components.registry.RegistryException;
 import org.codehaus.redback.components.registry.RegistryListener;
