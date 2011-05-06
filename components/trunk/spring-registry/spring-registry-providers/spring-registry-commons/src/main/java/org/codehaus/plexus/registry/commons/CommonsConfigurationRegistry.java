@@ -360,13 +360,14 @@ public class CommonsConfigurationRegistry
 
     @PostConstruct
     public void initialize()
+        throws RegistryException
     {
         try
         {
             CombinedConfiguration configuration;
             if ( properties != null )
             {
-                if (!properties.exists())
+                if ( !properties.exists() )
                 {
                     throw new IllegalArgumentException( "file " + properties.getPath() + " not exists" );
                 }
@@ -377,11 +378,12 @@ public class CommonsConfigurationRegistry
                     DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
 
                     String conf = IOUtil.toString( fileInputStream );
-                    StringSearchInterpolator interpolator = new StringSearchInterpolator("${", "}");
+                    StringSearchInterpolator interpolator = new StringSearchInterpolator( "${", "}" );
                     // interpolation as plexus did it before
-                    interpolator.addValueSource( new PropertiesBasedValueSource( System.getProperties() ));
+                    interpolator.addValueSource( new PropertiesBasedValueSource( System.getProperties() ) );
 
-                    logger.debug( "Loading configuration into commons-configuration, path : {} xml {}", properties.getPath(), conf );
+                    logger.debug( "Loading configuration into commons-configuration, path : {} xml {}",
+                                  properties.getPath(), conf );
                     builder.load( new StringReader( interpolator.interpolate( conf ) ) );
                     configuration = builder.getConfiguration( false );
                 }

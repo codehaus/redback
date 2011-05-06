@@ -99,6 +99,7 @@
           <systemPropertyVariables>
             <basedir>${basedir}</basedir>
           </systemPropertyVariables>
+          <forkMode>once</forkMode>
         </configuration>
       </plugin>
     </plugins>

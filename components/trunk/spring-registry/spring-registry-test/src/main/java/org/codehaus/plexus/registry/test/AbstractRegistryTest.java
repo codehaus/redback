@@ -52,7 +52,9 @@ public abstract class AbstractRegistryTest
     public Registry getRegistry( String name )
         throws Exception
     {
-        return applicationContext.getBean( name, Registry.class );
+        Registry registry = applicationContext.getBean( name, Registry.class );
+        registry.initialize();
+        return registry;
     }
 
     @Test
@@ -149,8 +151,9 @@ public abstract class AbstractRegistryTest
     public void testgetSubsetEmpty()
         throws Exception
     {
-        assertNotNull( getRegistry().getSubset( "none" ) );
-        assertTrue( getRegistry().getSubset( "none" ).isEmpty() );
+        Registry registry = getRegistry();
+        assertNotNull( registry.getSubset( "none" ) );
+        assertTrue( registry.getSubset( "none" ).isEmpty() );
 
     }
 
@@ -158,23 +161,26 @@ public abstract class AbstractRegistryTest
     public void testSetBoolean()
         throws Exception
     {
-        getRegistry().setBoolean( "keyTrue", true );
-        assertTrue( getRegistry().getBoolean( "keyTrue" ) );
+        Registry registry = getRegistry();
+        registry.setBoolean( "keyTrue", true );
+        assertTrue( registry.getBoolean( "keyTrue" ) );
     }
 
     @Test
     public void testSetInt()
         throws Exception
     {
-        getRegistry().setInt( "keyInt", 3 );
-        assertEquals( 3, getRegistry().getInt( "keyInt" ) );
+        Registry registry = getRegistry();
+        registry.setInt( "keyInt", 3 );
+        assertEquals( 3, registry.getInt( "keyInt" ) );
     }
 
     @Test
     public void testSetString()
         throws Exception
     {
-        getRegistry().setString( "what", "zorglub" );
-        assertEquals( "zorglub", getRegistry().getString( "what" ) );
+        Registry registry = getRegistry();
+        registry.setString( "what", "zorglub" );
+        assertEquals( "zorglub", registry.getString( "what" ) );
     }
 }

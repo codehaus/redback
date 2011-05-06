@@ -29,8 +29,6 @@ import java.util.Properties;
 public interface Registry
 {
 
-    String ROLE = Registry.class.getName();
-
     /**
      * Dump the entire registry to a string, for debugging purposes.
      *
@@ -242,4 +240,6 @@ public interface Registry
      * @param key the subset to remove
      */
     void removeSubset( String key );
+
+    void initialize() throws RegistryException;
 }
