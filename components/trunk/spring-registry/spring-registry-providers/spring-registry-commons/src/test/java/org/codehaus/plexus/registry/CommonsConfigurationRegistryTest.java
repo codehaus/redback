@@ -19,6 +19,7 @@ package org.codehaus.plexus.registry;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.codehaus.plexus.registry.test.AbstractRegistryTest;
 import org.codehaus.plexus.util.FileUtils;
+import org.junit.Test;
 
 import java.io.File;
 import java.util.Arrays;
@@ -42,10 +43,11 @@ public class CommonsConfigurationRegistryTest
         return "builder";
     }
 
+    @Test
     public void testDefaultConfiguration()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         assertEquals( "Check system property override", System.getProperty( "user.dir" ), registry
             .getString( "user.dir" ) );
@@ -53,10 +55,11 @@ public class CommonsConfigurationRegistryTest
         assertNull( "Check other properties are not loaded", registry.getString( "test.value" ) );
     }
 
+    @Test
     public void testBuilderConfiguration()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         assertEquals( "Check system property override", "new user dir", registry.getString( "user.dir" ) );
         assertEquals( "Check system property default", System.getProperty( "user.home" ), registry
@@ -66,19 +69,21 @@ public class CommonsConfigurationRegistryTest
         assertTrue( "Check other properties are loaded", registry.getBoolean( "test.boolean" ) );
     }
 
+    @Test
     public void testDump()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         String dump = registry.dump();
         assertTrue( dump.startsWith( "Configuration Dump.\n\"" ) );
     }
 
+    @Test
     public void testDefaults()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         assertNull( "Check getString returns null", registry.getString( "foo" ) );
         assertEquals( "Check getString returns default", "bar", registry.getString( "foo", "bar" ) );
@@ -108,10 +113,11 @@ public class CommonsConfigurationRegistryTest
         assertTrue( "Check getBoolean returns default", registry.getBoolean( "foo", true ) );
     }
 
+    @Test
     public void testInterpolation()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         assertEquals( "Check system property interpolation", System.getProperty( "user.home" ) + "/.m2/repository",
                       registry.getString( "repository" ) );
@@ -120,26 +126,28 @@ public class CommonsConfigurationRegistryTest
                       registry.getString( "test.interpolation" ) );
     }
 
+    @Test
     public void testAddConfigurationXmlFile()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
-        registry.addConfigurationFromFile( getTestFile( "src/test/resources/org/codehaus/plexus/registry/test.xml" ) );
+        registry.addConfigurationFromFile( new File( "./src/test/resources/org/codehaus/plexus/registry/test.xml" ) );
 
         assertEquals( "Check system property default", System.getProperty( "user.dir" ), registry
             .getString( "user.dir" ) );
         assertEquals( "Check other properties are loaded", "foo", registry.getString( "test.value" ) );
     }
 
+    @Test
     public void testAddConfigurationPropertiesFile()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         registry
             .addConfigurationFromFile(
-                getTestFile( "src/test/resources/org/codehaus/plexus/registry/test.properties" ) );
+                new File( "./src/test/resources/org/codehaus/plexus/registry/test.properties" ) );
 
         assertEquals( "Check system property default", System.getProperty( "user.dir" ), registry
             .getString( "user.dir" ) );
@@ -147,10 +155,11 @@ public class CommonsConfigurationRegistryTest
         assertNull( "Check other properties are not loaded", registry.getString( "test.value" ) );
     }
 
+    @Test
     public void testAddConfigurationXmlResource()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         registry.addConfigurationFromResource( "org/codehaus/plexus/registry/test.xml" );
 
@@ -159,10 +168,11 @@ public class CommonsConfigurationRegistryTest
         assertEquals( "Check other properties are loaded", "foo", registry.getString( "test.value" ) );
     }
 
+    @Test
     public void testAddConfigurationPropertiesResource()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         registry.addConfigurationFromResource( "org/codehaus/plexus/registry/test.properties" );
 
@@ -172,10 +182,11 @@ public class CommonsConfigurationRegistryTest
         assertNull( "Check other properties are not loaded", registry.getString( "test.value" ) );
     }
 
+    @Test
     public void testAddConfigurationUnrecognisedType()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         try
         {
@@ -190,7 +201,7 @@ public class CommonsConfigurationRegistryTest
         try
         {
             registry
-                .addConfigurationFromFile( getTestFile( "src/test/resources/org/codehaus/plexus/registry/test.foo" ) );
+                .addConfigurationFromFile( new File( "./src/test/resources/org/codehaus/plexus/registry/test.foo" ) );
             fail();
         }
         catch ( RegistryException e )
@@ -199,19 +210,21 @@ public class CommonsConfigurationRegistryTest
         }
     }
 
+    @Test
     public void testIsEmpty()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "default" );
+        registry = getRegistry ( "default" );
 
         assertFalse( registry.isEmpty() );
         assertTrue( registry.getSubset( "foo" ).isEmpty() );
     }
 
+    @Test
     public void testGetSubset()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         Registry registry = this.registry.getSubset( "test" );
         assertEquals( "Check other properties are loaded", "foo", registry.getString( "value" ) );
@@ -219,10 +232,11 @@ public class CommonsConfigurationRegistryTest
         assertTrue( "Check other properties are loaded", registry.getBoolean( "boolean" ) );
     }
 
+    @Test
     public void testGetSubsetList()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         List list = registry.getSubsetList( "objects.object" );
         assertEquals( 2, list.size() );
@@ -232,10 +246,11 @@ public class CommonsConfigurationRegistryTest
         assertTrue( "bar".equals( r.getString( "foo" ) ) || "baz".equals( r.getString( "foo" ) ) );
     }
 
+    @Test
     public void testGetProperties()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         Properties properties = registry.getProperties( "properties" );
         assertEquals( 2, properties.size() );
@@ -243,10 +258,11 @@ public class CommonsConfigurationRegistryTest
         assertEquals( "baz", properties.getProperty( "bar" ) );
     }
 
+    @Test
     public void testGetList()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         List list = registry.getList( "strings.string" );
         assertEquals( 3, list.size() );
@@ -255,20 +271,22 @@ public class CommonsConfigurationRegistryTest
         assertEquals( "s3", list.get( 2 ) );
     }
 
+    @Test
     public void testGetSection()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         Registry registry = this.registry.getSection( "properties" );
         assertNull( registry.getString( "test.value" ) );
         assertEquals( "baz", registry.getString( "foo.bar" ) );
     }
 
+    @Test
     public void testRemoveKey()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         Registry registry = this.registry.getSection( "properties" );
         assertEquals( "baz", registry.getString( "foo.bar" ) );
@@ -276,10 +294,11 @@ public class CommonsConfigurationRegistryTest
         assertNull( registry.getString( "foo.bar" ) );
     }
 
+    @Test
     public void testRemoveSubset()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "builder" );
+        registry = getRegistry ( "builder" );
 
         registry.removeSubset( "strings" );
         assertEquals( Collections.EMPTY_LIST, registry.getList( "strings.string" ) );
@@ -305,22 +324,24 @@ public class CommonsConfigurationRegistryTest
     }
 */
 
+    @Test
     public void testGetDontForceCreateByName()
         throws Exception
     {
-        registry = (Registry) lookup( Registry.class.getName(), "noForceCreate" );
+        registry = getRegistry ( "noForceCreate" );
 
         assertNull( registry.getSection( "foo" ) );
     }
 
+    @Test
     public void testSaveSection()
         throws Exception
     {
-        File src = getTestFile( "src/test/resources/test-save.xml" );
-        File dest = getTestFile( "target/test-classes/test-save.xml" );
+        File src = new File( "./src/test/resources/test-save.xml" );
+        File dest = new File( "./target/test-classes/test-save.xml" );
         FileUtils.copyFile( src, dest );
 
-        registry = (Registry) lookup( Registry.class.getName(), "test-save" );
+        registry = getRegistry ( "test-save" );
 
         Registry registry = this.registry.getSection( "org.codehaus.plexus.registry" );
         assertEquals( "check list elements", Arrays.asList( new String[]{"1", "2", "3"} ),

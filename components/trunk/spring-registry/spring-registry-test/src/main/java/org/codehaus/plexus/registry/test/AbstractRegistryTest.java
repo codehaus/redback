@@ -16,9 +16,15 @@ package org.codehaus.plexus.registry.test;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.PlexusTestCase;
+import junit.framework.TestCase;
 import org.codehaus.plexus.registry.Registry;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.inject.Inject;
 import java.util.NoSuchElementException;
 
 /**
@@ -26,18 +32,30 @@ import java.util.NoSuchElementException;
  * @version $Id$
  * @since 8 feb. 07
  */
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context.xml" } )
 public abstract class AbstractRegistryTest
-    extends PlexusTestCase
+    extends TestCase
 {
+
+    @Inject
+    protected ApplicationContext applicationContext;
 
     public abstract String getRoleHint();
 
     public Registry getRegistry()
         throws Exception
     {
-        return (Registry) lookup( Registry.ROLE, getRoleHint() );
+        return getRegistry( getName() );
     }
 
+    public Registry getRegistry( String name )
+        throws Exception
+    {
+        return applicationContext.getBean( name, Registry.class );
+    }
+
+    @Test
     public void testInt()
         throws Exception
     {
@@ -45,6 +63,7 @@ public abstract class AbstractRegistryTest
         assertEquals( "not 2 ", 2, registry.getInt( "two" ) );
     }
 
+    @Test
     public void testIntUnknown()
         throws Exception
     {
@@ -60,6 +79,7 @@ public abstract class AbstractRegistryTest
         }
     }
 
+    @Test
     public void testString()
         throws Exception
     {
@@ -67,6 +87,7 @@ public abstract class AbstractRegistryTest
         assertEquals( "not foo ", "foo", registry.getString( "string" ) );
     }
 
+    @Test
     public void testStringUnknown()
         throws Exception
     {
@@ -76,6 +97,7 @@ public abstract class AbstractRegistryTest
 
     }
 
+    @Test
     public void testBoolean()
         throws Exception
     {
@@ -83,6 +105,7 @@ public abstract class AbstractRegistryTest
         assertEquals( "not true ", true, registry.getBoolean( "boolean" ) );
     }
 
+    @Test
     public void testBooleanUnknown()
         throws Exception
     {
@@ -98,18 +121,21 @@ public abstract class AbstractRegistryTest
         }
     }
 
+    @Test
     public void testIsNotEmpty()
         throws Exception
     {
         assertFalse( getRegistry().isEmpty() );
     }
 
+    @Test
     public void testGetSubRegistry()
         throws Exception
     {
         assertNotNull( getRegistry().getSubset( "subOne" ) );
     }
 
+    @Test
     public void testgetSubsetValues()
         throws Exception
     {
@@ -119,6 +145,7 @@ public abstract class AbstractRegistryTest
         assertEquals( "entryTwo", sub.getString( "secondEntry" ) );
     }
 
+    @Test
     public void testgetSubsetEmpty()
         throws Exception
     {
@@ -127,6 +154,7 @@ public abstract class AbstractRegistryTest
 
     }
 
+    @Test
     public void testSetBoolean()
         throws Exception
     {
@@ -134,6 +162,7 @@ public abstract class AbstractRegistryTest
         assertTrue( getRegistry().getBoolean( "keyTrue" ) );
     }
 
+    @Test
     public void testSetInt()
         throws Exception
     {
@@ -141,6 +170,7 @@ public abstract class AbstractRegistryTest
         assertEquals( 3, getRegistry().getInt( "keyInt" ) );
     }
 
+    @Test
     public void testSetString()
         throws Exception
     {

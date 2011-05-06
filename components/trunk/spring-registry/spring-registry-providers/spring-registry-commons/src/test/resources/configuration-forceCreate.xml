@@ -1,0 +1,3 @@
+<configuration>
+  <xml fileName="${basedir}/target/foo-forced" config-name="foo" config-forceCreate="true" config-optional="true"/>
+</configuration>
