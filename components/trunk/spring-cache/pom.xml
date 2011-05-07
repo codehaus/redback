@@ -20,7 +20,7 @@
   </scm>
 
   <modules>
-    <module>plexus-cache-api</module>
+    <module>spring-cache-api</module>
     <module>plexus-cache-test</module>
     <module>plexus-cache-providers</module>
   </modules>

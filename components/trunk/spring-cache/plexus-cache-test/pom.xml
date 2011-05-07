@@ -30,7 +30,7 @@
   <dependencies>
       <dependency>
         <groupId>org.codehaus.redback.components.cache</groupId>
-        <artifactId>plexus-cache-api</artifactId>
+        <artifactId>spring-cache-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

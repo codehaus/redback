@@ -7,8 +7,8 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>plexus-cache-api</artifactId>
-  <name>Plexus Cache API</name>
+  <artifactId>spring-cache-api</artifactId>
+  <name>Spring Cache API</name>
   <build>
     <plugins>
       <plugin>
