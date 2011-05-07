@@ -42,7 +42,6 @@ import java.util.Set;
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
  * @author Olivier Lamy
  * @version $Id$
- * 
  */
 public class DefaultApacheDs
     implements ApacheDs
@@ -57,9 +56,9 @@ public class DefaultApacheDs
     private boolean enableNetworking;
 
     private File basedir;
-    
+
     private int port;
-    
+
     private String password;
 
     // ----------------------------------------------------------------------
@@ -117,7 +116,7 @@ public class DefaultApacheDs
     public void addPartition( String name, String root, Set indexedAttributes, Attributes partitionAttributes )
         throws NamingException
     {
-    	MutablePartitionConfiguration configuration = new MutablePartitionConfiguration();
+        MutablePartitionConfiguration configuration = new MutablePartitionConfiguration();
         configuration.setId( name );
         configuration.setSuffix( root );
         configuration.setIndexedAttributes( indexedAttributes );
@@ -127,8 +126,8 @@ public class DefaultApacheDs
 
     public void addPartition( Partition partition )
         throws NamingException
-    {	
-    	MutablePartitionConfiguration configuration = new MutablePartitionConfiguration();
+    {
+        MutablePartitionConfiguration configuration = new MutablePartitionConfiguration();
 
         configuration.setId( partition.getName() );
         configuration.setSuffix( partition.getSuffix() );
@@ -205,7 +204,7 @@ public class DefaultApacheDs
         Properties environment = new Properties();
         environment.setProperty( "java.naming.security.authentication", "simple" );
         environment.setProperty( "java.naming.security.principal", "uid=admin,ou=system" );
-        if (password != null)
+        if ( password != null )
         {
             environment.setProperty( "java.naming.security.credentials", password );
         }
@@ -221,11 +220,14 @@ public class DefaultApacheDs
         configuration.setEnableNetworking( enableNetworking );
         configuration.setSynchPeriodMillis( 100 );
 
-        configuration.setPartitionConfigurations( partitionConfigurations );
-
+        if ( configuration.getPartitionConfigurations() == null || ( configuration.getPartitionConfigurations() != null
+            && configuration.getPartitionConfigurations().isEmpty() ) )
+        {
+            configuration.setPartitionConfigurations( partitionConfigurations );
+        }
         Properties env = new Properties();
         env.setProperty( Context.SECURITY_PRINCIPAL, "uid=admin,ou=system" );
-        if (password != null)
+        if ( password != null )
         {
             env.setProperty( Context.SECURITY_CREDENTIALS, password );
         }
@@ -236,13 +238,13 @@ public class DefaultApacheDs
         InitialDirContext context = new InitialDirContext( env );
 
         //Attributes inetAttributes = context.getAttributes( "cn=inetorgperson,ou=schema" );
-        
+
         //inetAttributes.remove( "m-disabled" );
-        
+
         this.configuration = configuration;
 
         logger.info( "Started Apache Directory Server server." );
-        
+
         stopped = false;
     }
 
@@ -265,6 +267,11 @@ public class DefaultApacheDs
         new InitialDirContext( env );
 
         logger.info( "Apache Directory Server server stopped." );
+    }
+
+    public boolean isStopped()
+    {
+        return stopped;
     }
 
     public void sync()
