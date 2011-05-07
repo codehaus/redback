@@ -7,7 +7,7 @@
   <name>Redback Components Aggregator Project</name>
 
   <modules>
-    <module>plexus-cache</module>
+    <module>spring-cache</module>
     <module>plexus-command-line</module>
     <module>plexus-expression-evaluator</module>
     <module>plexus-jabber</module>
