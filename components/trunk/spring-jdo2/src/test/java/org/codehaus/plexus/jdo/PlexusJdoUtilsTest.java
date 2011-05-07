@@ -16,9 +16,16 @@ package org.codehaus.plexus.jdo;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.PlexusTestCase;
+import junit.framework.TestCase;
 import org.jpox.SchemaTool;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import java.net.URL;
@@ -32,16 +39,21 @@ import java.util.Properties;
  * @author <a href="mailto:joakim@erdfelt.com">Joakim Erdfelt</a>
  * @version $Id$
  */
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context.xml" } )
 public class PlexusJdoUtilsTest
-    extends PlexusTestCase
+    extends TestCase
 {
     private PersistenceManagerFactory pmf;
 
-    protected void setUp()
+    @Inject @Named(value = "jdoUtilsTest")
+    DefaultConfigurableJdoFactory jdoFactory;
+
+    @Before
+    public void setUp()
         throws Exception
     {
         super.setUp();
-        DefaultConfigurableJdoFactory jdoFactory = (DefaultConfigurableJdoFactory) lookup( JdoFactory.ROLE );
         assertEquals( DefaultConfigurableJdoFactory.class.getName(), jdoFactory.getClass().getName() );
 
         jdoFactory.setPersistenceManagerFactoryClass( "org.jpox.PersistenceManagerFactoryImpl" ); 
@@ -86,7 +98,8 @@ public class PlexusJdoUtilsTest
 
         return pm;
     }
-    
+
+    @Test
     public void testAddGetUpdateBasic()
         throws Exception
     {
@@ -114,7 +127,8 @@ public class PlexusJdoUtilsTest
         Basic actual = (Basic) PlexusJdoUtils.getObjectById( getPersistenceManager(), Basic.class, id );
         assertEquals( BRAINSLUG, actual.getDescription() );
     }
-    
+
+    @Test
     public void testAddGetUpdateParentChild()
         throws Exception
     {

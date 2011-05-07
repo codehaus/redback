@@ -24,17 +24,16 @@ package org.codehaus.plexus.jdo;
  * SOFTWARE.
  */
 
-import java.util.Properties;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
-
-import org.codehaus.plexus.logging.AbstractLogEnabled;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * @author David Wynter
@@ -42,11 +41,10 @@ import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
  * @version $Id$
  */
 public class DefaultJdoFactory
-    extends AbstractLogEnabled
-    implements JdoFactory,
-    Initializable,
-    Disposable
+    implements JdoFactory
 {
+    private Logger logger = LoggerFactory.getLogger( getClass() );
+
     private static final String CONNECTION_DRIVER_NAME = "javax.jdo.option.ConnectionDriverName";
 
     /**
@@ -65,10 +63,10 @@ public class DefaultJdoFactory
     // Component Lifecycle
     // ----------------------------------------------------------------------
 
+    @PostConstruct
     public void initialize()
-        throws InitializationException
     {
-        getLogger().info( "Initializing JDO." );
+        logger.info( "Initializing JDO." );
 
         persistenceManagerFactory = JDOHelper.getPersistenceManagerFactory( properties );
 
@@ -80,7 +78,7 @@ public class DefaultJdoFactory
             
             if ( driverClass == null )
             {
-                throw new InitializationException( "Property " + CONNECTION_DRIVER_NAME + " was not set in JDO Factory." );
+                throw new RuntimeException( "Property " + CONNECTION_DRIVER_NAME + " was not set in JDO Factory." );
             }
 
             //TODO: Class.forName is evil
@@ -88,7 +86,7 @@ public class DefaultJdoFactory
         }
         catch ( ClassNotFoundException e )
         {
-            throw new InitializationException( "Cannot find driver class: " + driverClass, e );
+            throw new RuntimeException( "Cannot find driver class: " + driverClass, e );
         }
     }
 
@@ -98,6 +96,7 @@ public class DefaultJdoFactory
         dispose();
     }
 
+    @PreDestroy
     public void dispose()
     {
         if ( properties != null )

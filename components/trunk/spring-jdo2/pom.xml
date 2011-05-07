@@ -6,15 +6,15 @@
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>plexus-jdo2</artifactId>
+  <artifactId>spring-jdo2</artifactId>
   <name>Plexus JDO Component</name>
-  <version>1.0-alpha-9-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <inceptionYear>2005</inceptionYear>
 
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-jdo2</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-jdo2</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/plexus-jdo2</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-jdo2</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-jdo2</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/spring-jdo2</url>
   </scm>
 
   <developers>
@@ -34,18 +34,49 @@
     </dependency>
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-component-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-container-default</artifactId>
-      <scope>test</scope>
-    </dependency>    
-    <dependency>
-      <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-utils</artifactId>
       <version>1.5.6</version>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4jVersion}</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>jpox</groupId>
       <artifactId>jpox</artifactId>
@@ -121,18 +152,6 @@
             <configuration>
               <classes>${basedir}/target/test-classes</classes>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-maven-plugin</artifactId>
-        <version>1.3.4</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>descriptor</goal>
-            </goals>
           </execution>
         </executions>
       </plugin>

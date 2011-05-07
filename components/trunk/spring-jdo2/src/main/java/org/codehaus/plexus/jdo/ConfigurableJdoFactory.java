@@ -25,7 +25,6 @@ import java.util.Properties;
 public interface ConfigurableJdoFactory
     extends JdoFactory
 {
-    String ROLE = ConfigurableJdoFactory.class.getName();
 
     void setPersistenceManagerFactoryClass( String persistenceManagerFactoryClass );
 

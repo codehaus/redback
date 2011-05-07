@@ -16,8 +16,6 @@ package org.codehaus.plexus.jdo;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -30,7 +28,7 @@ import java.util.Properties;
  */
 public class DefaultConfigurableJdoFactory
     extends AbstractConfigurableJdoFactory
-    implements ConfigurableJdoFactory, Initializable
+    implements ConfigurableJdoFactory
 {
     // ----------------------------------------------------------------------
     // Configuration
@@ -159,4 +157,6 @@ public class DefaultConfigurableJdoFactory
     {
         return userName;
     }
+
+
 }

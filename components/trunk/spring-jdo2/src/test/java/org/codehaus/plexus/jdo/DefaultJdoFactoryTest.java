@@ -24,23 +24,34 @@ package org.codehaus.plexus.jdo;
  * SOFTWARE.
  */
 
+import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
-
-import org.codehaus.plexus.PlexusTestCase;
 
 /**
  * @author David Wynter
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
  * @version $Id$
  */
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context.xml" } )
 public class DefaultJdoFactoryTest
-    extends PlexusTestCase
+    extends TestCase
 {
+
+    @Inject
+    JdoFactory jdoFactory;
+
+    @Test
     public void testBasic()
         throws Exception
     {
-        JdoFactory jdoFactory = (JdoFactory) lookup( JdoFactory.ROLE );
 
         PersistenceManagerFactory pmf = jdoFactory.getPersistenceManagerFactory();
 

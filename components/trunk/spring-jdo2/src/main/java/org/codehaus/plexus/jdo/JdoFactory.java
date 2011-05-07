@@ -31,8 +31,6 @@ import javax.jdo.PersistenceManagerFactory;
  */
 public interface JdoFactory
 {
-    String ROLE = JdoFactory.class.getName();
-
     PersistenceManagerFactory getPersistenceManagerFactory();
 
     void shutdown()

@@ -1,8 +1,14 @@
 package org.codehaus.plexus.jdo;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jdo.PersistenceManager;
 
 import org.jpox.PersistenceManagerFactoryImpl;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /*
  * Copyright 2006 The Apache Software Foundation.
@@ -26,15 +32,19 @@ import org.jpox.PersistenceManagerFactoryImpl;
  * @author <a href="mailto:carlos@apache.org">Carlos Sanchez</a>
  * @version $Id$
  */
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context-configurable.xml" } )
 public class DefaultConfigurableJdoFactoryTest
     extends DefaultJdoFactoryTest
 {
 
+    @Inject @Named(value = "jdoFactory")
+    DefaultConfigurableJdoFactory jdoFactory;
+
+    @Test
     public void testLoad()
         throws Exception
     {
-        DefaultConfigurableJdoFactory jdoFactory = (DefaultConfigurableJdoFactory) lookup( JdoFactory.ROLE );
-
         String password = jdoFactory.getProperties().getProperty( "javax.jdo.option.ConnectionPassword" );
         assertNull( password );
 

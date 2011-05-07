@@ -16,15 +16,15 @@ package org.codehaus.plexus.jdo;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.logging.AbstractLogEnabled;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.jdo.PersistenceManagerFactory;
+import javax.annotation.PostConstruct;
 import javax.jdo.JDOHelper;
-import java.util.Properties;
+import javax.jdo.PersistenceManagerFactory;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * AbstractConfigurableJdoFactory 
@@ -32,9 +32,11 @@ import java.util.Map;
  * @version $Id$
  */
 public abstract class AbstractConfigurableJdoFactory
-    extends AbstractLogEnabled
-    implements ConfigurableJdoFactory, Initializable
+    implements ConfigurableJdoFactory
 {
+
+    private Logger logger = LoggerFactory.getLogger( getClass() );
+
     /**
      * @plexus.configuration default-value="org.jpox.PersistenceManagerFactoryImpl"
      */
@@ -48,8 +50,8 @@ public abstract class AbstractConfigurableJdoFactory
 
     protected Properties otherProperties;
 
+    @PostConstruct
     public void initialize()
-        throws InitializationException
     {
         if ( otherProperties == null )
         {
@@ -106,15 +108,15 @@ public abstract class AbstractConfigurableJdoFactory
     {
         Properties properties = getProperties();
 
-        if ( getLogger().isDebugEnabled() )
+        if ( logger.isDebugEnabled() )
         {
-            getLogger().debug( "Configuring JDO Factory." );
+            logger.debug( "Configuring JDO Factory." );
 
             for ( Iterator it = properties.entrySet().iterator(); it.hasNext(); )
             {
                 Map.Entry entry = (Map.Entry) it.next();
 
-                getLogger().debug( entry.getKey() + "=" + entry.getValue() );
+                logger.debug( entry.getKey() + "=" + entry.getValue() );
             }
         }
 
@@ -151,5 +153,25 @@ public abstract class AbstractConfigurableJdoFactory
         }
 
         properties.setProperty( key, value );
+    }
+
+    public Boolean getConfigured()
+    {
+        return configured;
+    }
+
+    public void setConfigured( Boolean configured )
+    {
+        this.configured = configured;
+    }
+
+    public Properties getOtherProperties()
+    {
+        return otherProperties;
+    }
+
+    public void setOtherProperties( Properties otherProperties )
+    {
+        this.otherProperties = otherProperties;
     }
 }
