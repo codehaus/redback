@@ -25,6 +25,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.configuration.event.EventSource;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.interpolation.InterpolationException;
 import org.codehaus.plexus.interpolation.PropertiesBasedValueSource;
 import org.codehaus.plexus.interpolation.StringSearchInterpolator;
@@ -79,7 +80,8 @@ public class CommonsConfigurationRegistry
      * <a href="http://commons.apache.org/configuration/howto_configurationbuilder.html">configuration
      * builder</a>.
      */
-    private File properties;
+    private String properties;
+
 
     public CommonsConfigurationRegistry()
     {
@@ -367,35 +369,22 @@ public class CommonsConfigurationRegistry
         try
         {
             CombinedConfiguration configuration;
-            if ( properties != null )
+            if ( StringUtils.isNotBlank( properties) )
             {
-                if ( !properties.exists() )
-                {
-                    throw new IllegalArgumentException( "file " + properties.getPath() + " not exists" );
-                }
                 FileInputStream fileInputStream = null;
                 try
                 {
-                    fileInputStream = new FileInputStream( properties );
                     DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
 
-                    String conf = IOUtil.toString( fileInputStream );
                     StringSearchInterpolator interpolator = new StringSearchInterpolator( "${", "}" );
                     // interpolation as plexus did it before
                     interpolator.addValueSource( new PropertiesBasedValueSource( System.getProperties() ) );
 
-                    logger.debug( "Loading configuration into commons-configuration, path : {} xml {}",
-                                  properties.getPath(), conf );
-                    builder.load( new StringReader( interpolator.interpolate( conf ) ) );
+                    String interpolatedProps = interpolator.interpolate( properties );
+
+                    logger.debug( "Loading configuration into commons-configuration, xml {}",interpolatedProps );
+                    builder.load( new StringReader( interpolatedProps ) );
                     configuration = builder.getConfiguration( false );
-                }
-                catch ( FileNotFoundException e )
-                {
-                    throw new RuntimeException( e.getMessage(), e );
-                }
-                catch ( IOException e )
-                {
-                    throw new RuntimeException( e.getMessage(), e );
                 }
                 catch ( InterpolationException e )
                 {
@@ -422,11 +411,10 @@ public class CommonsConfigurationRegistry
         }
     }
 
-    public void setProperties( File properties )
+    public void setProperties( String properties )
     {
         this.properties = properties;
     }
-
 
     public Registry getSection( String name )
     {

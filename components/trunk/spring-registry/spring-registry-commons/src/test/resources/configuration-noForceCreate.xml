@@ -1,3 +1,0 @@
-<configuration>
-  <xml fileName="${basedir}/target/foo" config-name="foo" config-optional="true"/>
-</configuration>

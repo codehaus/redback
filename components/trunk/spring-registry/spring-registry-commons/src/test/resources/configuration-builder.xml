@@ -1,5 +1,0 @@
-<configuration>
-  <xml fileName="org/codehaus/plexus/registry/test.xml"/>
-  <properties fileName="org/codehaus/plexus/registry/test.properties" config-name="properties"/>
-
-</configuration>

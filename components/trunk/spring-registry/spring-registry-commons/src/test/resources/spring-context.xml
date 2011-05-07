@@ -30,19 +30,76 @@
   <alias name="commons-configuration" alias="default"/>
 
   <bean name="builder" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
-    <property name="properties" value="./src/test/resources/configuration-builder.xml"/>
+    <property name="properties">
+      <value>
+        <![CDATA[
+          <configuration>
+            <xml fileName="org/codehaus/plexus/registry/test.xml"/>
+            <properties fileName="org/codehaus/plexus/registry/test.properties" config-name="properties"/>
+
+          </configuration>
+        ]]>
+      </value>
+    </property>
   </bean>
 
   <bean name="test-save" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
-    <property name="properties" value="./src/test/resources/configuration-test-save.xml"/>
+    <property name="properties">
+      <value>
+        <![CDATA[
+        <configuration>
+          <system/>
+          <xml fileName="${basedir}/target/test-classes/test-save.xml"
+               config-name="org.codehaus.plexus.registry"
+               config-at="org.codehaus.plexus.registry"/>
+          <jndi prefix="java:comp/env" config-optional="true"/>
+          <xml fileName="${basedir}/target/conf/continuum.xml" config-optional="true"
+               config-at="org.apache.maven.continuum" config-forceCreate="true"/>
+          <xml fileName="${basedir}/target/conf/shared.xml" config-optional="true"
+               config-name="org.apache.maven.shared.app.user" config-at="org.apache.maven.shared.app"
+               config-forceCreate="true"/>
+          <xml fileName="${basedir}/target/conf/shared.xml" config-optional="true"
+               config-name="org.apache.maven.shared.app.base" config-at="org.apache.maven.shared.app"/>
+          <xml fileName="${basedir}/target/conf/common.xml" config-optional="true"/>
+          <properties fileName="${basedir}/conf/security.properties" config-optional="true"
+                      config-at="org.codehaus.plexus.redback"/>
+          <xml fileName="${basedir}/target/conf/continuum.xml" config-optional="true"
+               config-at="org.apache.maven.continuum" config-name="org.apache.maven.continuum.user"
+               config-forceCreate="true"/>
+          <xml fileName="${basedir}/target/conf/shared.xml" config-optional="true"
+               config-at="org.apache.maven.shared.app" />
+          <xml fileName="${basedir}/target/conf/common.xml" config-optional="true"/>
+          <properties fileName="${basedir}/conf/security.properties" config-optional="true"
+                      config-at="org.codehaus.plexus.redback"/>
+
+        </configuration>
+        ]]>
+      </value>
+    </property>
   </bean>
 
   <bean name="forceCreate" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
-    <property name="properties" value="./src/test/resources/configuration-forceCreate.xml"/>
+    <property name="properties">
+      <value>
+        <![CDATA[
+        <configuration>
+          <xml fileName="${basedir}/target/foo-forced" config-name="foo" config-forceCreate="true" config-optional="true"/>
+        </configuration>
+        ]]>
+      </value>
+    </property>
   </bean>
 
   <bean name="noForceCreate" class="org.codehaus.redback.components.registry.commons.CommonsConfigurationRegistry">
-    <property name="properties" value="./src/test/resources/configuration-noForceCreate.xml"/>
+    <property name="properties">
+      <value>
+        <![CDATA[
+        <configuration>
+          <xml fileName="${basedir}/target/foo" config-name="foo" config-optional="true"/>
+        </configuration>
+        ]]>
+      </value>
+    </property>
   </bean>
 
 </beans>
