@@ -7,8 +7,8 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>plexus-cache-ehcache</artifactId>
-  <name>Plexus Cache Provider :: ehcache</name>
+  <artifactId>spring-cache-ehcache</artifactId>
+  <name>Spring Cache Provider :: ehcache</name>
 
   <packaging>jar</packaging>
 

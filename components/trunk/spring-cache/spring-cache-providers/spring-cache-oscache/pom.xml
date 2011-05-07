@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>plexus-cache-oscache</artifactId>
-  <name>Plexus Cache Provider :: oscache</name>
+  <name>Spring Cache Provider :: oscache</name>
 
   <packaging>jar</packaging>
 

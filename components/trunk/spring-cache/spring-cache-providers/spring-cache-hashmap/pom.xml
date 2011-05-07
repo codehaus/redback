@@ -7,8 +7,8 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>plexus-cache-hashmap</artifactId>
-  <name>Plexus Cache Provider :: hashmap</name>
+  <artifactId>spring-cache-hashmap</artifactId>
+  <name>Spring Cache Provider :: hashmap</name>
 
   <packaging>jar</packaging>
 
