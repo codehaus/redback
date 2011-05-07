@@ -22,7 +22,7 @@
   <modules>
     <module>spring-cache-api</module>
     <module>spring-cache-test</module>
-    <module>plexus-cache-providers</module>
+    <module>spring-cache-providers</module>
   </modules>
   <dependencyManagement>
     <dependencies>
