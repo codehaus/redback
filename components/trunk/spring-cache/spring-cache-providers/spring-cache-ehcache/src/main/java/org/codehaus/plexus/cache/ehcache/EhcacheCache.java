@@ -145,7 +145,7 @@ public class EhcacheCache
 
     private boolean statisticsEnabled = true;
 
-    private CacheManager cacheManager;
+    private CacheManager cacheManager = CacheManager.getInstance();
 
     private net.sf.ehcache.Cache ehcache;
 
@@ -161,7 +161,6 @@ public class EhcacheCache
     public void initialize()
     {
         stats = new Stats();
-        cacheManager = CacheManager.getInstance();
 
         boolean cacheExists = cacheManager.cacheExists( getName() );
 
