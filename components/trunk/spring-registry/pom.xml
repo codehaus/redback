@@ -36,7 +36,6 @@
 
   <modules>
     <module>spring-registry-api</module>
-    <module>spring-registry-test</module>
     <module>spring-registry-commons</module>
   </modules>
   <dependencyManagement>
