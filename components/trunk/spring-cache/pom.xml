@@ -8,9 +8,9 @@
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>
   <groupId>org.codehaus.redback.components.cache</groupId>
-  <artifactId>plexus-cache</artifactId>
+  <artifactId>spring-cache</artifactId>
   <name>Spring Cache Component</name>
-  <version>1.0-alpha-3-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <scm>
