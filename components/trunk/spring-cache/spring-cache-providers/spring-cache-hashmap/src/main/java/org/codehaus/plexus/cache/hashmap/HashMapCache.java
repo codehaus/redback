@@ -16,19 +16,18 @@ package org.codehaus.plexus.cache.hashmap;
  * limitations under the License.
  */
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.codehaus.plexus.cache.AbstractCacheStatistics;
 import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.CacheStatistics;
 import org.codehaus.plexus.cache.CacheableWrapper;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -55,8 +54,9 @@ import org.slf4j.LoggerFactory;
  * 
  * @plexus.component role="org.codehaus.plexus.cache.Cache" role-hint="hashmap"
  */
+@Service("cache#hashmap")
 public class HashMapCache
-    implements Cache, Initializable
+    implements Cache
 {
     
     private Logger log = LoggerFactory.getLogger( getClass() );
@@ -104,7 +104,7 @@ public class HashMapCache
 
     public HashMapCache()
     {
-
+        // noop
     }
 
     /**
@@ -214,8 +214,8 @@ public class HashMapCache
         return contains;
     }
 
+    @PostConstruct
     public void initialize()
-        throws InitializationException
     {
         stats = new Stats();
 
@@ -335,7 +335,7 @@ public class HashMapCache
     }
 
     /** 
-     * @see org.codehaus.plexus.cache.Cache#setRefreshTime(int)
+     *
      */
     public void setRefreshTime( int refreshTime )
     {
@@ -348,5 +348,30 @@ public class HashMapCache
     protected boolean isCacheAvailable()
     {
         return this.getRefreshTime() >= 0;
+    }
+
+    public double getCacheHitRatio()
+    {
+        return cacheHitRatio;
+    }
+
+    public void setCacheHitRatio( double cacheHitRatio )
+    {
+        this.cacheHitRatio = cacheHitRatio;
+    }
+
+    public int getCacheMaxSize()
+    {
+        return cacheMaxSize;
+    }
+
+    public void setCacheMaxSize( int cacheMaxSize )
+    {
+        this.cacheMaxSize = cacheMaxSize;
+    }
+
+    public Stats getStats()
+    {
+        return stats;
     }
 }

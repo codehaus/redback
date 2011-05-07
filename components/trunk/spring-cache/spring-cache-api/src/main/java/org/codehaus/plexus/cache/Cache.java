@@ -24,8 +24,6 @@ package org.codehaus.plexus.cache;
  */
 public interface Cache
 {
-    public static final String ROLE = Cache.class.getName();
-
     /**
      * Tests to see if the provided key exists within the cache.
      * 

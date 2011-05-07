@@ -17,6 +17,8 @@ package org.codehaus.plexus.cache.test.examples.wine;
  * limitations under the License.
  */
 
+import org.springframework.stereotype.Repository;
+
 /**
  * @since 5 February, 2007
  * @version $Id$
@@ -24,6 +26,7 @@ package org.codehaus.plexus.cache.test.examples.wine;
  * @plexus.component
  *   role="org.codehaus.plexus.cache.test.examples.wine.WineDao" role-hint="mock"
  */
+@Repository
 public class MockWineDao
     implements WineDao
 {

@@ -21,7 +21,6 @@ import org.codehaus.plexus.cache.AbstractCacheStatistics;
 import com.opensymphony.oscache.base.Cache;
 
 /**
- * @since 3 févr. 07
  * @version $Id$
  * @author <a href="mailto:olamy@codehaus.org">Olivier Lamy</a>
  */

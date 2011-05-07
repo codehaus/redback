@@ -16,64 +16,45 @@ package org.codehaus.plexus.cache.builder;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.PlexusConstants;
-import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.impl.NoCacheCache;
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.codehaus.plexus.context.Context;
-import org.codehaus.plexus.context.ContextException;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 
 /**
- * Ability to obtain cache  
- * 
- * @author <a href="mailto:Olivier.LAMY@accor.com">Olivier Lamy</a>
+ * Ability to obtain cache
+ *
+ * @author Olivier Lamy
  * @version $Id$
- * @since 5 February, 2007
- * 
- * @plexus.component
- *   role="org.codehaus.plexus.cache.builder.CacheBuilder" role-hint="default"
+ * @plexus.component role="org.codehaus.plexus.cache.builder.CacheBuilder" role-hint="default"
  */
+@Service
 public class DefaultCacheBuilder
-    implements CacheBuilder, Initializable, Contextualizable, Disposable
-
+    implements CacheBuilder
 {
-    
-    private Logger log = LoggerFactory.getLogger( getClass() );
-    
-    private Cache defaultCache;
 
-    private PlexusContainer plexusContainer;
+    private Logger log = LoggerFactory.getLogger( getClass() );
+
+    private Cache defaultCache;
 
     private Cache noCache = new NoCacheCache();
 
-    public void contextualize( Context context )
-        throws ContextException
-    {
-        this.plexusContainer = (PlexusContainer) context.get( PlexusConstants.PLEXUS_KEY );
-    }
+    @Inject
+    private ApplicationContext applicationContext;
 
+    @PostConstruct
     public void initialize()
-        throws InitializationException
     {
-        if ( this.plexusContainer.hasComponent( Cache.ROLE, "default" ) )
+        if ( this.applicationContext.containsBean( "cache#default" ) )
         {
-            try
-            {
-                this.defaultCache = (Cache) this.plexusContainer.lookup( Cache.ROLE, "default" );
-            }
-            catch ( ComponentLookupException e )
-            {
-                String emsg = "error during lookup of Cache with role-hint default ";
-                log.warn( emsg, e );
-                throw new InitializationException( emsg, e );
-            }
+            this.defaultCache = this.applicationContext.getBean( "cache#default", Cache.class );
+
         }
         else
         {
@@ -84,15 +65,11 @@ public class DefaultCacheBuilder
 
     public Cache getCache( String roleHint )
     {
-        try
+        if ( this.applicationContext.containsBean( "cache#" + roleHint ) )
         {
-            return (Cache) this.plexusContainer.lookup( Cache.ROLE, roleHint );
+            return this.applicationContext.getBean( "cache#" + roleHint, Cache.class );
         }
-        catch ( ComponentLookupException e )
-        {
-            log.warn( "error during lookup of Cache with roleHint " + roleHint );
-        }
-        
+
         return this.getDefaultCache();
     }
 
@@ -101,10 +78,10 @@ public class DefaultCacheBuilder
         return this.getCache( clazz.getName() );
     }
 
+    @PreDestroy
     public void dispose()
     {
-        // TODO dispose default ? 
-        // Cache extends Disposable ?
+        // TODO dispose default ?
     }
 
     public Cache getDefaultCache()

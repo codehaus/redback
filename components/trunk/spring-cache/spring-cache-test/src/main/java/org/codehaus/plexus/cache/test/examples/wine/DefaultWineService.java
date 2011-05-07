@@ -17,6 +17,9 @@ package org.codehaus.plexus.cache.test.examples.wine;
  */
 
 import org.codehaus.plexus.cache.builder.CacheBuilder;
+import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
 
 /**
  * @since 5 February, 2007
@@ -25,19 +28,14 @@ import org.codehaus.plexus.cache.builder.CacheBuilder;
  * @plexus.component
  *   role="org.codehaus.plexus.cache.test.examples.wine.WineService" role-hint="default"
  */
+@Service
 public class DefaultWineService
     implements WineService
 {
-    /**
-     * @plexus.requirement
-     *  role-hint="default"
-     */
+    @Inject
     private CacheBuilder cacheBuilder;
 
-    /**
-     * @plexus.requirement
-     *  role-hint="mock"
-     */
+    @Inject
     private WineDao wineDao;
 
     public Wine getWine( String name )

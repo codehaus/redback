@@ -16,25 +16,39 @@ package org.codehaus.plexus.cache.test.examples.wine;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.PlexusTestCase;
+import junit.framework.TestCase;
 import org.codehaus.plexus.cache.Cache;
-import org.codehaus.plexus.spring.PlexusInSpringTestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * 
- * @since 5 February, 2007
  * @version $Id$
- * @author <a href="mailto:Olivier.LAMY@accor.com">Olivier Lamy</a>
+ * @author Olivier Lamy
  */
+ @RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = {"classpath*:/META-INF/spring-context.xml","classpath*:/spring-context.xml"} )
 public abstract class AbstractTestWineService
-    extends PlexusInSpringTestCase
+    extends TestCase
 {
+    @Inject
+    WineService wineService;
+
+    @Inject @Named(value = "cache#wine")
+    Cache cache;
+
+    @Test
     public void testBordeaux()
         throws Exception
     {
-        WineService wineService = (WineService) this.lookup( WineService.ROLE );
+        //cache.clear();
+        //cache.getStatistics().clear();
         Wine firstWine = wineService.getWine( "bordeaux" );
-        Cache cache = (Cache) this.lookup( Cache.ROLE, Wine.class.getName() );
         assertEquals( 1, cache.getStatistics().getSize() );
         Wine secondWine = wineService.getWine( "bordeaux" );
         // testing on hashCode to be sure it's the same object

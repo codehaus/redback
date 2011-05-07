@@ -16,31 +16,28 @@ package org.codehaus.plexus.cache.oscache;
  * limitations under the License.
  */
 
+import com.opensymphony.oscache.base.CacheEntry;
+import com.opensymphony.oscache.base.NeedsRefreshException;
+import com.opensymphony.oscache.general.GeneralCacheAdministrator;
+import org.codehaus.plexus.cache.Cache;
+import org.codehaus.plexus.cache.CacheStatistics;
+
+import javax.annotation.PostConstruct;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.codehaus.plexus.cache.Cache;
-import org.codehaus.plexus.cache.CacheStatistics;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
-
-import com.opensymphony.oscache.base.CacheEntry;
-import com.opensymphony.oscache.base.NeedsRefreshException;
-import com.opensymphony.oscache.general.GeneralCacheAdministrator;
-
 /**
  * For configuration see documentation : http://opensymphony.com/oscache/wiki/Configuration.html
  * 
- * @since 3 February, 2007
  * @version $Id$
  * @author <a href="mailto:olamy@codehaus.org">Olivier Lamy</a>
  * 
  * @plexus.component role="org.codehaus.plexus.cache.Cache" role-hint="oscache"
  */
 public class OsCacheCache
-    implements Cache, Initializable
+    implements Cache
 {
 
     private GeneralCacheAdministrator generalCacheAdministrator;
@@ -125,9 +122,9 @@ public class OsCacheCache
 
     //---------------------------------------------
     // Component lifecycle
-    //---------------------------------------------    
+    //---------------------------------------------
+    @PostConstruct
     public void initialize()
-        throws InitializationException
     {
         Properties cacheProperties = new Properties();
         if ( this.getAdditionnalProperties() != null )

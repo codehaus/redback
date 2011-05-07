@@ -10,42 +10,22 @@
   <name>Spring Cache Tests</name>
   <packaging>jar</packaging>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate</id>
-            <goals>
-              <goal>descriptor</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>      
-    </plugins>
-  </build>  
   
   <dependencies>
-      <dependency>
-        <groupId>org.codehaus.redback.components.cache</groupId>
-        <artifactId>spring-cache-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-container-default</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-spring</artifactId>
-        <scope>compile</scope>
-      </dependency>      
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <scope>compile</scope>
-      </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.codehaus.redback.components.cache</groupId>
+      <artifactId>spring-cache-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>compile</scope>
+    </dependency>
+</dependencies>
 </project>

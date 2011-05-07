@@ -16,13 +16,17 @@ package org.codehaus.plexus.cache.test;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.PlexusTestCase;
+import junit.framework.TestCase;
 import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.CacheException;
 import org.codehaus.plexus.cache.CacheStatistics;
 import org.codehaus.plexus.cache.factory.CacheFactory;
 import org.codehaus.plexus.cache.test.examples.wine.Wine;
-import org.codehaus.plexus.spring.PlexusInSpringTestCase;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -37,8 +41,10 @@ import java.util.logging.Logger;
  * @author <a href="mailto:joakim@erdfelt.com">Joakim Erdfelt</a>
  * @version $Id$
  */
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = {"classpath*:/META-INF/spring-context.xml","classpath*:/spring-context.xml"} )
 public abstract class AbstractCacheTestCase
-    extends PlexusInSpringTestCase
+    extends TestCase
 {
     static
     {
@@ -51,22 +57,18 @@ public abstract class AbstractCacheTestCase
     
     protected Cache cache;
 
-    protected void setUp()
+    @Before
+    public void setUp()
         throws Exception
     {
         super.setUp();
-        cache = (Cache) lookup( Cache.ROLE, getProviderHint() );
+        cache = getCache();
     }
 
-    protected void tearDown()
-        throws Exception
-    {
-        release( cache );
-        super.tearDown();
-    }
 
-    public abstract String getProviderHint();
+    public abstract Cache getCache();
 
+    @Test
     public void testSimplePutGet()
     {
         Integer fooInt = new Integer( 42 );
@@ -78,6 +80,7 @@ public abstract class AbstractCacheTestCase
         assertNull( cache.get( "bar" ) );
     }
 
+    @Test
     public void testLargePutGet()
     {
         EnglishNumberFormat fmt = new EnglishNumberFormat();
@@ -158,6 +161,7 @@ public abstract class AbstractCacheTestCase
     public abstract Cache getAlwaysRefresCache()
         throws Exception;
 
+    @Test
     public void testAlwaysRefresh()
         throws Exception
     {
@@ -171,6 +175,7 @@ public abstract class AbstractCacheTestCase
     public abstract Cache getNeverRefresCache()
         throws Exception;
 
+    @Test
     public void testNeverRefresh()
         throws Exception
     {
@@ -187,6 +192,7 @@ public abstract class AbstractCacheTestCase
     public abstract Cache getOneSecondRefresCache()
         throws Exception;
 
+    @Test
     public void testOneSecondRefresh()
         throws Exception
     {
@@ -201,6 +207,7 @@ public abstract class AbstractCacheTestCase
     public abstract Cache getTwoSecondRefresCache()
         throws Exception;
 
+    @Test
     public void testTwoSecondRefresh()
         throws Exception
     {
@@ -216,6 +223,7 @@ public abstract class AbstractCacheTestCase
 
     public abstract Class getCacheClass();
 
+    @Test
     public void testCacheFactory() throws CacheException
     {
         Cache cache = CacheFactory.getInstance().getCache( "foo-factory-test", null );

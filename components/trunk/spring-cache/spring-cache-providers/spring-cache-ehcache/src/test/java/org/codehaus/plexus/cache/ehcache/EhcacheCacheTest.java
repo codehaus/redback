@@ -19,6 +19,9 @@ package org.codehaus.plexus.cache.ehcache;
 import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.test.AbstractCacheTestCase;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * EhcacheCacheTest 
  *
@@ -28,33 +31,50 @@ import org.codehaus.plexus.cache.test.AbstractCacheTestCase;
 public class EhcacheCacheTest
     extends AbstractCacheTestCase
 {
-    public String getProviderHint()
+
+    @Inject @Named(value = "cache#ehcache")
+    Cache cache;
+
+    @Inject @Named(value = "cache#alwaysrefresh")
+    Cache cachealwaysrefresh;
+
+    @Inject @Named(value = "cache#onesecondrefresh")
+    Cache cacheonesecondrefresh;
+
+    @Inject @Named(value = "cache#onesecondrefresh")
+    Cache cachetwosecondrefresh;
+
+    @Inject @Named(value = "cache#neverrefresh")
+    Cache cacheneversecondrefresh;
+
+    @Override
+    public Cache getCache()
     {
-        return "ehcache";
+        return cache;
     }
 
     public Cache getAlwaysRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "alwaysrefresh" );
+        return cachealwaysrefresh;
     }
 
     public Cache getNeverRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "neverrefresh" );
+        return cacheneversecondrefresh;
     }
 
     public Cache getOneSecondRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "onesecondrefresh" );
+        return cacheonesecondrefresh;
     }
 
     public Cache getTwoSecondRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "twosecondrefresh" );
+        return cachetwosecondrefresh;
     }
 
     public Class getCacheClass()

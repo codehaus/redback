@@ -19,6 +19,9 @@ package org.codehaus.plexus.cache.hashmap;
 import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.test.AbstractCacheTestCase;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 /**
  * HashMapCacheTest 
  *
@@ -28,33 +31,46 @@ import org.codehaus.plexus.cache.test.AbstractCacheTestCase;
 public class HashMapCacheTest
     extends AbstractCacheTestCase
 {
-    public String getProviderHint()
+    @Inject @Named(value = "cache#hashmap")
+    Cache cache;
+
+    @Inject @Named(value = "cache#alwaysrefresh")
+    Cache cachealwaysrefresh;
+
+    @Inject @Named(value = "cache#onesecondrefresh")
+    Cache cacheonesecondrefresh;
+
+    @Inject @Named(value = "cache#onesecondrefresh")
+    Cache cachetwosecondrefresh;
+
+    @Override
+    public Cache getCache()
     {
-        return "hashmap";
+        return cache;
     }
 
     public Cache getAlwaysRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "alwaysrefresh" );
+        return cachealwaysrefresh;
     }
 
     public Cache getNeverRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "hashmap" );
+        return cache;
     }
 
     public Cache getOneSecondRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "onesecondrefresh" );
+        return cacheonesecondrefresh;
     }
 
     public Cache getTwoSecondRefresCache()
         throws Exception
     {
-        return (Cache) getContainer().lookup( Cache.ROLE, "twosecondrefresh" );
+        return cachetwosecondrefresh;
     }
 
     public Class getCacheClass()

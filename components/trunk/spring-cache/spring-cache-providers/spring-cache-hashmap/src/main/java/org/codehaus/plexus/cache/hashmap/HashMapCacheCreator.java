@@ -20,10 +20,9 @@ import org.codehaus.plexus.cache.Cache;
 import org.codehaus.plexus.cache.CacheException;
 import org.codehaus.plexus.cache.CacheHints;
 import org.codehaus.plexus.cache.factory.CacheCreator;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 
 /**
- * HashMapCacheCreator 
+ * HashMapCacheCreator
  *
  * @author <a href="mailto:joakim@erdfelt.com">Joakim Erdfelt</a>
  * @version $Id$
@@ -37,14 +36,8 @@ public class HashMapCacheCreator
         // Supports NO CacheHints.
 
         HashMapCache cache = new HashMapCache();
-        try
-        {
-            cache.initialize();
-        }
-        catch ( InitializationException e )
-        {
-            throw new CacheException( "Unable to initialize HashMapCache: " + e.getMessage(), e );
-        }
+
+        cache.initialize();
 
         return cache;
     }

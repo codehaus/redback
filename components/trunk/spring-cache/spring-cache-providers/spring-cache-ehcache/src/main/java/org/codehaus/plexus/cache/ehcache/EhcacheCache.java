@@ -21,13 +21,11 @@ import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.Status;
 import net.sf.ehcache.store.MemoryStoreEvictionPolicy;
-
 import org.codehaus.plexus.cache.CacheStatistics;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.annotation.PostConstruct;
 
 /**
  * EhcacheCache 
@@ -39,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * @plexus.component role="org.codehaus.plexus.cache.Cache" role-hint="ehcache"
  */
 public class EhcacheCache
-    implements org.codehaus.plexus.cache.Cache, Initializable, Disposable
+    implements org.codehaus.plexus.cache.Cache
 {
     
     private Logger log = LoggerFactory.getLogger( getClass() );    
@@ -145,6 +143,8 @@ public class EhcacheCache
      */    
     private boolean failOnDuplicateCache = false;
 
+    private boolean statisticsEnabled = true;
+
     private CacheManager cacheManager;
 
     private net.sf.ehcache.Cache ehcache;
@@ -156,18 +156,20 @@ public class EhcacheCache
         ehcache.removeAll();
         stats.clear();
     }
-    
+
+    @PostConstruct
     public void initialize()
-        throws InitializationException
     {
         stats = new Stats();
         cacheManager = CacheManager.getInstance();
 
-        if ( cacheManager.cacheExists( getName() ) )
+        boolean cacheExists = cacheManager.cacheExists( getName() );
+
+        if ( cacheExists )
         {
             if ( failOnDuplicateCache )
             {
-                throw new InitializationException( "A previous cache with name [" + getName() + "] exists." );
+                throw new RuntimeException( "A previous cache with name [" + getName() + "] exists." );
             }
             else
             {
@@ -175,11 +177,16 @@ public class EhcacheCache
             }
         }
 
-        ehcache = new Cache( getName(), getMaxElementsInMemory(), getMemoryStoreEvictionPolicy(), isOverflowToDisk(),
-                             getDiskStorePath(), isEternal(), getTimeToLiveSeconds(), getTimeToIdleSeconds(),
-                             isDiskPersistent(), getDiskExpiryThreadIntervalSeconds(), null );
+        if (!cacheExists)
+        {
+            ehcache = new Cache( getName(), getMaxElementsInMemory(), getMemoryStoreEvictionPolicy(), isOverflowToDisk(),
+                                 getDiskStorePath(), isEternal(), getTimeToLiveSeconds(), getTimeToIdleSeconds(),
+                                 isDiskPersistent(), getDiskExpiryThreadIntervalSeconds(), null );
 
-        cacheManager.addCache( ehcache );
+
+            cacheManager.addCache( ehcache );
+            ehcache.setStatisticsEnabled( statisticsEnabled );
+        }
     }    
 
     public void dispose()
@@ -356,5 +363,25 @@ public class EhcacheCache
     public void setTimeToLiveSeconds( int timeToLiveSeconds )
     {
         this.timeToLiveSeconds = timeToLiveSeconds;
+    }
+
+    public boolean isStatisticsEnabled()
+    {
+        return statisticsEnabled;
+    }
+
+    public void setStatisticsEnabled( boolean statisticsEnabled )
+    {
+        this.statisticsEnabled = statisticsEnabled;
+    }
+
+    public boolean isFailOnDuplicateCache()
+    {
+        return failOnDuplicateCache;
+    }
+
+    public void setFailOnDuplicateCache( boolean failOnDuplicateCache )
+    {
+        this.failOnDuplicateCache = failOnDuplicateCache;
     }
 }

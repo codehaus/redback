@@ -16,7 +16,6 @@ package org.codehaus.plexus.cache;
  * limitations under the License.
  */
 /**
- * @since 5 févr. 07
  * @version $Id$
  * @author <a href="mailto:Olivier.LAMY@accor.com">Olivier Lamy</a>
  */
