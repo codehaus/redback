@@ -208,6 +208,10 @@ public class EhcacheCache
 
     public Object get( Object key )
     {
+        if (key == null)
+        {
+            return null;
+        }
         Element elem = ehcache.get( key );
         if ( elem == null )
         {
