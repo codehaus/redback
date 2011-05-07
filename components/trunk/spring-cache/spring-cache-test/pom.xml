@@ -6,8 +6,8 @@
     <artifactId>spring-cache</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>plexus-cache-test</artifactId>
-  <name>Plexus Cache Tests</name>
+  <artifactId>spring-cache-test</artifactId>
+  <name>Spring Cache Tests</name>
   <packaging>jar</packaging>
 
   <build>

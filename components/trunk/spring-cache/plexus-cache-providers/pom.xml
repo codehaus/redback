@@ -18,7 +18,7 @@
     </dependency>
     <dependency>
       <groupId>org.codehaus.redback.components.cache</groupId>
-      <artifactId>plexus-cache-test</artifactId>
+      <artifactId>spring-cache-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
