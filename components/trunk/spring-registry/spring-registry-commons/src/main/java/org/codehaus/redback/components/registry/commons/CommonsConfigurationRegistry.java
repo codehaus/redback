@@ -371,7 +371,6 @@ public class CommonsConfigurationRegistry
             CombinedConfiguration configuration;
             if ( StringUtils.isNotBlank( properties) )
             {
-                FileInputStream fileInputStream = null;
                 try
                 {
                     DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
@@ -389,10 +388,6 @@ public class CommonsConfigurationRegistry
                 catch ( InterpolationException e )
                 {
                     throw new RuntimeException( e.getMessage(), e );
-                }
-                finally
-                {
-                    IOUtil.close( fileInputStream );
                 }
             }
             else
