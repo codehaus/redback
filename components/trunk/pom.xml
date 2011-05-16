@@ -16,7 +16,6 @@
     <module>plexus-msn</module>
     <module>spring-registry</module>
     <module>plexus-taskqueue</module>
-    <!-- Plexus Spring was moved into the Redback multi-module build -->
     <!--<module>plexus-spring</module>-->
     <module>plexus-xmlrpc</module>
     <module>spring-apacheds</module>
