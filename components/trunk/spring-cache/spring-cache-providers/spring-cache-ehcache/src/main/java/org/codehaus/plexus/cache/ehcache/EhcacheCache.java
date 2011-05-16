@@ -173,6 +173,7 @@ public class EhcacheCache
             else
             {
                 log.warn( "skip duplicate cache " + getName() );
+                ehcache = cacheManager.getCache( getName() );
             }
         }
 
