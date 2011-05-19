@@ -18,8 +18,8 @@ package org.codehaus.redback.components.registry.commons;
 
 import org.apache.commons.configuration.event.ConfigurationEvent;
 import org.apache.commons.configuration.event.ConfigurationListener;
-import org.codehaus.redback.components.registry.Registry;
-import org.codehaus.redback.components.registry.RegistryListener;
+import org.codehaus.plexus.registry.Registry;
+import org.codehaus.plexus.registry.RegistryListener;
 
 /**
  * Commons configuration listener that delegates to the given registry listener.

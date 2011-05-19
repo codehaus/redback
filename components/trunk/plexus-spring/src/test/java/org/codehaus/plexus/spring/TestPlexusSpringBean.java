@@ -18,7 +18,7 @@
  */
 package org.codehaus.plexus.spring;
 
-import org.codehaus.redback.components.registry.Registry;
+import org.codehaus.plexus.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

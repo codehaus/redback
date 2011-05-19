@@ -17,6 +17,8 @@ package org.codehaus.redback.components.registry;
  */
 
 import org.apache.commons.configuration.XMLConfiguration;
+import org.codehaus.plexus.registry.Registry;
+import org.codehaus.plexus.registry.RegistryException;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.Test;
 

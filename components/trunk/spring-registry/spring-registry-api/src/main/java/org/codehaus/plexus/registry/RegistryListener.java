@@ -1,4 +1,4 @@
-package org.codehaus.redback.components.registry;
+package org.codehaus.plexus.registry;
 
 /*
  * Copyright 2007 The Codehaus Foundation.
