@@ -174,7 +174,7 @@ public class CommonsConfigurationRegistry
         }
         else
         {
-            throw new UnsupportedOperationException( "Can only save file-based configurations" );
+            throw new RegistryException( "Can only save file-based configurations" );
         }
     }
 
