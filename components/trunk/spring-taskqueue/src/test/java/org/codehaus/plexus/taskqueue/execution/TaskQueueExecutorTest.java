@@ -34,6 +34,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
@@ -45,7 +46,7 @@ import javax.inject.Inject;
 public class TaskQueueExecutorTest
     extends TestCase
 {
-    @Inject
+    @Inject @Named(value = "taskQueue#default")
     private TaskQueue taskQueue;
 
 

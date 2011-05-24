@@ -31,6 +31,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ import java.util.List;
 public class TaskQueueTest
     extends TestCase
 {
-    @Inject
+    @Inject @Named(value = "taskQueue#taskQueueTest")
     private TaskQueue taskQueue;
 
 

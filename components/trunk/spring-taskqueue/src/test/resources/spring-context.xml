@@ -27,7 +27,7 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-  <bean name="taskQueue#default" class="org.codehaus.plexus.taskqueue.DefaultTaskQueue">
+  <bean abstract="true" name="abstractQueue" class="org.codehaus.plexus.taskqueue.DefaultTaskQueue">
     <property name="taskEntryEvaluators">
       <list>
         <ref bean="taskEntryEvaluator#a"/>
@@ -46,5 +46,9 @@
       </list>
     </property>
   </bean>
+
+  <bean name="taskQueue#default" parent="abstractQueue"/>
+
+  <bean name="taskQueue#taskQueueTest" parent="abstractQueue"/>
 
 </beans>
