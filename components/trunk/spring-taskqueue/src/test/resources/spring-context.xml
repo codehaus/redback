@@ -27,6 +27,18 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
+  <bean name="queueExecutor#default" class="org.codehaus.plexus.taskqueue.execution.ThreadedTaskQueueExecutor">
+    <property name="queue" ref="taskQueue#default"/>
+    <property name="executor" ref="taskExecutor#build-project"/>
+    <property name="name" value="default"/>
+  </bean>
+
+  <bean name="queueExecutor#taskQueueTest" class="org.codehaus.plexus.taskqueue.execution.ThreadedTaskQueueExecutor">
+    <property name="queue" ref="taskQueue#taskQueueTest"/>
+    <property name="executor" ref="taskExecutor#build-project"/>
+    <property name="name" value="taskQueueTest"/>
+  </bean>
+
   <bean abstract="true" name="abstractQueue" class="org.codehaus.plexus.taskqueue.DefaultTaskQueue">
     <property name="taskEntryEvaluators">
       <list>

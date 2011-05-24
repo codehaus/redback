@@ -59,13 +59,11 @@ public class ThreadedTaskQueueExecutor
     /**
      * requirement
      */
-    @Inject
     private TaskQueue queue;
 
     /**
      * requirement
      */
-    @Inject
     private TaskExecutor executor;
 
     /**
