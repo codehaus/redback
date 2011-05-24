@@ -24,28 +24,20 @@ package org.codehaus.plexus.taskqueue;
  * SOFTWARE.
  */
 
-import org.codehaus.plexus.PlexusConstants;
-import org.codehaus.plexus.PlexusContainer;
-import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
-import org.codehaus.plexus.configuration.PlexusConfiguration;
-import org.codehaus.plexus.configuration.PlexusConfigurationException;
-import org.codehaus.plexus.context.Context;
-import org.codehaus.plexus.context.ContextException;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Configurable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Contextualizable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import org.codehaus.redback.components.springutils.ComponentContainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import edu.emory.mathcs.backport.java.util.concurrent.BlockingQueue;
-import edu.emory.mathcs.backport.java.util.concurrent.LinkedBlockingQueue;
-import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
-
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author <a href="mailto:jason@maven.org">Jason van Zyl</a>
@@ -53,16 +45,25 @@ import java.util.List;
  * @version $Id$
  */
 public class DefaultTaskQueue
-    extends AbstractLogEnabled
-    implements TaskQueue, Contextualizable, Configurable, Initializable
+    implements TaskQueue
 {
-    private PlexusContainer container;
 
-    private List taskEntryEvaluators;
+    private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    private List taskExitEvaluators;
+    @Inject
+    private ComponentContainer componentContainer;
 
-    private List taskViabilityEvaluators;
+    private List<String> taskEntryEvaluators;
+
+    private List<TaskEntryEvaluator> taskEntryEvaluatorComponents = new ArrayList<TaskEntryEvaluator>();
+
+    private List<String> taskExitEvaluators;
+
+    private List<TaskExitEvaluator> taskExitEvaluatorComponents = new ArrayList<TaskExitEvaluator>();
+
+    private List<String> taskViabilityEvaluators;
+
+    private List<TaskViabilityEvaluator> taskViabilityEvaluatorComponents = new ArrayList<TaskViabilityEvaluator>();
 
     private BlockingQueue queue;
 
@@ -70,67 +71,43 @@ public class DefaultTaskQueue
     // Component Lifecycle
     // ----------------------------------------------------------------------
 
-    public void contextualize( Context context )
-        throws ContextException
-    {
-        container = (PlexusContainer) context.get( PlexusConstants.PLEXUS_KEY );
-    }
 
-    public void configure( PlexusConfiguration config )
-        throws PlexusConfigurationException
+    @PostConstruct
+    public void configure()
     {
-        
-        PlexusConfiguration entryEvaluatorsConfiguration = config.getChild( "task-entry-evaluators" );
-        
-        taskEntryEvaluators = new ArrayList();
-        
-        if ( entryEvaluatorsConfiguration != null )
+
+        if ( taskEntryEvaluators != null )
         {
-            PlexusConfiguration[] entryEvaluators = entryEvaluatorsConfiguration.getChildren( "task-entry-evaluator" );
 
-            for ( int i = 0; i < entryEvaluators.length; i++ )
+            for ( String taskEntryEvaluator : taskEntryEvaluators )
             {
-                configureEntryEvaluator( entryEvaluators[i] );
+                this.taskEntryEvaluatorComponents.add(
+                    componentContainer.getComponent( TaskEntryEvaluator.class, taskEntryEvaluator ) );
             }
 
         }
-        
-        PlexusConfiguration exitEvaluatorsConfiguration = config.getChild( "task-exit-evaluators" );
 
-        taskExitEvaluators = new ArrayList();
-
-        if ( exitEvaluatorsConfiguration != null )
+        if ( taskExitEvaluators != null )
         {
-            PlexusConfiguration[] exitEvaluators = exitEvaluatorsConfiguration.getChildren( "task-exit-evaluator" );
 
-            for ( int i = 0; i < exitEvaluators.length; i++ )
+            for ( String taskExitEvaluator : taskExitEvaluators )
             {
-                configureExitEvaluator( exitEvaluators[i] );
+                this.taskExitEvaluatorComponents.add(
+                    componentContainer.getComponent( TaskExitEvaluator.class, taskExitEvaluator ) );
             }
         }
-        
-        
-        PlexusConfiguration viabilityEvaluatorsConfiguration = config.getChild( "task-viability-evaluators" );
 
-        taskViabilityEvaluators = new ArrayList();
-
-        if ( viabilityEvaluatorsConfiguration != null )
+        if ( taskViabilityEvaluators != null )
         {
 
-            PlexusConfiguration[] viabilityEvaluators = viabilityEvaluatorsConfiguration
-                .getChildren( "task-viability-evaluator" );
-
-            for ( int i = 0; i < viabilityEvaluators.length; i++ )
+            for ( String taskViabilityEvaluator : taskViabilityEvaluators )
             {
-                configureViabilityEvaluator( viabilityEvaluators[i] );
+                this.taskViabilityEvaluatorComponents.add(
+                    componentContainer.getComponent( TaskViabilityEvaluator.class, taskViabilityEvaluator ) );
             }
 
         }
-    }
 
-    public void initialize()
-        throws InitializationException
-    {
         queue = new LinkedBlockingQueue();
     }
 
@@ -149,10 +126,8 @@ public class DefaultTaskQueue
         // Check that all the task entry evaluators accepts the task
         // ----------------------------------------------------------------------
 
-        for ( Iterator it = taskEntryEvaluators.iterator(); it.hasNext(); )
+        for ( TaskEntryEvaluator taskEntryEvaluator : taskEntryEvaluatorComponents )
         {
-            TaskEntryEvaluator taskEntryEvaluator = (TaskEntryEvaluator) it.next();
-
             boolean result = taskEntryEvaluator.evaluate( task );
 
             if ( !result )
@@ -171,10 +146,8 @@ public class DefaultTaskQueue
         // Check that all the task viability evaluators accepts the task
         // ----------------------------------------------------------------------
 
-        for ( Iterator it = taskViabilityEvaluators.iterator(); it.hasNext(); )
+        for ( TaskViabilityEvaluator taskViabilityEvaluator : taskViabilityEvaluatorComponents )
         {
-            TaskViabilityEvaluator taskViabilityEvaluator = (TaskViabilityEvaluator) it.next();
-
             Collection toBeRemoved = taskViabilityEvaluator.evaluate( Collections.unmodifiableCollection( queue ) );
 
             for ( Iterator it2 = toBeRemoved.iterator(); it2.hasNext(); )
@@ -200,10 +173,8 @@ public class DefaultTaskQueue
                 return null;
             }
 
-            for ( Iterator it = taskExitEvaluators.iterator(); it.hasNext(); )
+            for ( TaskExitEvaluator taskExitEvaluator : taskExitEvaluatorComponents )
             {
-                TaskExitEvaluator taskExitEvaluator = (TaskExitEvaluator) it.next();
-
                 boolean result = taskExitEvaluator.evaluate( task );
 
                 if ( !result )
@@ -233,13 +204,12 @@ public class DefaultTaskQueue
     {
         return queue.remove( task );
     }
-    
+
     public boolean removeAll( List tasks )
         throws ClassCastException, NullPointerException
     {
         return queue.removeAll( tasks );
     }
-    
 
     // ----------------------------------------------------------------------
     // Queue Inspection
@@ -265,67 +235,64 @@ public class DefaultTaskQueue
         return (Task) queue.poll();
     }
 
-    // ----------------------------------------------------------------------
-    // Configuration Helpers
-    // ----------------------------------------------------------------------
-
-    protected void configureEntryEvaluator( PlexusConfiguration config )
-        throws PlexusConfigurationException
+    public List<String> getTaskEntryEvaluators()
     {
-        String name = config.getValue();
-
-        TaskEntryEvaluator taskEntryEvaluator = null;
-
-        try
-        {
-            taskEntryEvaluator = (TaskEntryEvaluator) container.lookup( TaskEntryEvaluator.ROLE, name );
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new PlexusConfigurationException( "Couldn't look up task entry evaluator '" + name + "'.", e );
-        }
-
-        taskEntryEvaluators.add( taskEntryEvaluator );
+        return taskEntryEvaluators;
     }
 
-    protected void configureExitEvaluator( PlexusConfiguration config )
-        throws PlexusConfigurationException
+    public void setTaskEntryEvaluators( List<String> taskEntryEvaluators )
     {
-        String name = config.getValue();
-
-        TaskExitEvaluator taskExitEvaluator = null;
-
-        try
-        {
-            taskExitEvaluator = (TaskExitEvaluator) container.lookup( TaskExitEvaluator.ROLE, name );
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new PlexusConfigurationException( "Couldn't look up task exit evaluator '" + name + "'.", e );
-        }
-
-        taskExitEvaluators.add( taskExitEvaluator );
+        this.taskEntryEvaluators = taskEntryEvaluators;
     }
 
-    protected void configureViabilityEvaluator( PlexusConfiguration config )
-        throws PlexusConfigurationException
+    public List<String> getTaskExitEvaluators()
     {
-        String name = config.getValue();
+        return taskExitEvaluators;
+    }
 
-        TaskViabilityEvaluator taskViabilityEvaluator = null;
+    public void setTaskExitEvaluators( List<String> taskExitEvaluators )
+    {
+        this.taskExitEvaluators = taskExitEvaluators;
+    }
 
-        try
-        {
-            taskViabilityEvaluator = (TaskViabilityEvaluator) container.lookup( TaskViabilityEvaluator.ROLE, name );
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new PlexusConfigurationException( "Couldn't look up task viability evaluator '" + name + "'.", e );
-        } catch (NullPointerException e)
-        {
-            throw new PlexusConfigurationException( "NullPointerException look up task viability evaluator '" + name + "'.", e );
-        }
+    public List<String> getTaskViabilityEvaluators()
+    {
+        return taskViabilityEvaluators;
+    }
 
-        taskViabilityEvaluators.add( taskViabilityEvaluator );
+    public void setTaskViabilityEvaluators( List<String> taskViabilityEvaluators )
+    {
+        this.taskViabilityEvaluators = taskViabilityEvaluators;
+    }
+
+
+    public List<TaskEntryEvaluator> getTaskEntryEvaluatorComponents()
+    {
+        return taskEntryEvaluatorComponents;
+    }
+
+    public void setTaskEntryEvaluatorComponents( List<TaskEntryEvaluator> taskEntryEvaluatorComponents )
+    {
+        this.taskEntryEvaluatorComponents = taskEntryEvaluatorComponents;
+    }
+
+    public List<TaskExitEvaluator> getTaskExitEvaluatorComponents()
+    {
+        return taskExitEvaluatorComponents;
+    }
+
+    public void setTaskExitEvaluatorComponents( List<TaskExitEvaluator> taskExitEvaluatorComponents )
+    {
+        this.taskExitEvaluatorComponents = taskExitEvaluatorComponents;
+    }
+
+    public List<TaskViabilityEvaluator> getTaskViabilityEvaluatorComponents()
+    {
+        return taskViabilityEvaluatorComponents;
+    }
+
+    public void setTaskViabilityEvaluatorComponents( List<TaskViabilityEvaluator> taskViabilityEvaluatorComponents )
+    {
+        this.taskViabilityEvaluatorComponents = taskViabilityEvaluatorComponents;
     }
 }

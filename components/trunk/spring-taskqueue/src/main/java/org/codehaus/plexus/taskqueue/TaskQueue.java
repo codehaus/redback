@@ -24,9 +24,8 @@ package org.codehaus.plexus.taskqueue;
  * SOFTWARE.
  */
 
-import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
-
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author <a href="mailto:jason@maven.org">Jason van Zyl</a>
