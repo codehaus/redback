@@ -27,6 +27,8 @@ package org.codehaus.plexus.taskqueue;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.backportconcurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -34,6 +36,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
@@ -44,7 +48,8 @@ import java.util.List;
 public class TaskQueueTest
     extends TestCase
 {
-    @Inject @Named(value = "taskQueue#taskQueueTest")
+    @Inject
+    @Named( value = "taskQueue#taskQueueTest" )
     private TaskQueue taskQueue;
 
 
@@ -134,6 +139,11 @@ public class TaskQueueTest
     public void testRemoveAll()
         throws Exception
     {
+
+        BlockingQueue<String> foo = new LinkedBlockingQueue<String>();
+        foo.offer("1");
+        foo.offer("2");
+
         Task firstTask = new BuildProjectTask( 110 );
 
         taskQueue.put( firstTask );

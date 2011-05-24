@@ -36,6 +36,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+
 /**
  * @author <a href="mailto:jason@maven.org">Jason van Zyl</a>
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
@@ -96,7 +97,8 @@ public class DefaultTaskQueue
 
         for ( TaskViabilityEvaluator taskViabilityEvaluator : taskViabilityEvaluators )
         {
-            Collection<Task> toBeRemoved = taskViabilityEvaluator.evaluate( Collections.unmodifiableCollection( queue ) );
+            Collection<Task> toBeRemoved =
+                taskViabilityEvaluator.evaluate( Collections.unmodifiableCollection( queue ) );
 
             for ( Iterator<Task> it2 = toBeRemoved.iterator(); it2.hasNext(); )
             {
@@ -112,6 +114,7 @@ public class DefaultTaskQueue
     public Task take()
         throws TaskQueueException
     {
+        logger.debug( "take" );
         while ( true )
         {
             Task task = dequeue();
@@ -144,6 +147,7 @@ public class DefaultTaskQueue
     public Task poll( int timeout, TimeUnit timeUnit )
         throws InterruptedException
     {
+        logger.debug( "pool" );
         return queue.poll( timeout, timeUnit );
     }
 
@@ -175,11 +179,13 @@ public class DefaultTaskQueue
 
     private void enqueue( Task task )
     {
-        queue.offer( task );
+        boolean success = queue.add( task );
+        logger.debug( "enqueue success {}", success );
     }
 
     private Task dequeue()
     {
+        logger.debug( "dequeue" );
         return queue.poll();
     }
 
