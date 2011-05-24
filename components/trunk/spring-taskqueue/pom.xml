@@ -6,14 +6,14 @@
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>  
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>plexus-taskqueue</artifactId>
-  <name>Plexus Task Queue</name>
-  <version>1.0-alpha-9-SNAPSHOT</version>
+  <artifactId>spring-taskqueue</artifactId>
+  <name>Spring Task Queue</name>
+  <version>1.0-SNAPSHOT</version>
 
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-taskqueue</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-taskqueue</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/plexus-tasqueue</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-taskqueue</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-taskqueue</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/spring-taskqueue</url>
   </scm>
 
   <dependencies>
