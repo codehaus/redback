@@ -24,32 +24,32 @@ package org.codehaus.plexus.taskqueue.execution;
  * SOFTWARE.
  */
 
-import org.codehaus.plexus.PlexusTestCase;
+import junit.framework.TestCase;
 import org.codehaus.plexus.taskqueue.BuildProjectTask;
 import org.codehaus.plexus.taskqueue.TaskQueue;
 import org.codehaus.plexus.taskqueue.TaskQueueException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
 
 /**
  *
  * @author <a href="mailto:kenney@apache.org">Kenney Westerhof</a>
  *
  */
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context.xml" } )
 public class TaskQueueExecutorTest
-    extends PlexusTestCase
+    extends TestCase
 {
+    @Inject
     private TaskQueue taskQueue;
 
-    protected void setUp()
-        throws Exception
-    {
-        super.setUp();
 
-        taskQueue = (TaskQueue) lookup( TaskQueue.ROLE );
-
-        // look up the taskqueueexecutor so it gets initialized
-        lookup( TaskQueueExecutor.ROLE, "build-project" );
-    }
-
+    @Test
     public void testTimeoutWithInterrupts()
         throws TaskQueueException, InterruptedException
     {
@@ -61,6 +61,7 @@ public class TaskQueueExecutorTest
         assertFalse( task.isDone() );
     }
 
+    @Test
     public void testTimeoutWithoutInterrupts()
         throws TaskQueueException, InterruptedException
     {

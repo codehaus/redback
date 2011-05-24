@@ -24,12 +24,9 @@ package org.codehaus.plexus.taskqueue;
  * SOFTWARE.
  */
 
-import org.codehaus.redback.components.springutils.ComponentContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -50,66 +47,17 @@ public class DefaultTaskQueue
 
     private Logger logger = LoggerFactory.getLogger( getClass() );
 
-    @Inject
-    private ComponentContainer componentContainer;
+    private List<TaskEntryEvaluator> taskEntryEvaluators = new ArrayList<TaskEntryEvaluator>();
 
-    private List<String> taskEntryEvaluators;
+    private List<TaskExitEvaluator> taskExitEvaluators = new ArrayList<TaskExitEvaluator>();
 
-    private List<TaskEntryEvaluator> taskEntryEvaluatorComponents = new ArrayList<TaskEntryEvaluator>();
+    private List<TaskViabilityEvaluator> taskViabilityEvaluators = new ArrayList<TaskViabilityEvaluator>();
 
-    private List<String> taskExitEvaluators;
-
-    private List<TaskExitEvaluator> taskExitEvaluatorComponents = new ArrayList<TaskExitEvaluator>();
-
-    private List<String> taskViabilityEvaluators;
-
-    private List<TaskViabilityEvaluator> taskViabilityEvaluatorComponents = new ArrayList<TaskViabilityEvaluator>();
-
-    private BlockingQueue queue;
+    private BlockingQueue<Task> queue = new LinkedBlockingQueue<Task>();
 
     // ----------------------------------------------------------------------
     // Component Lifecycle
     // ----------------------------------------------------------------------
-
-
-    @PostConstruct
-    public void configure()
-    {
-
-        if ( taskEntryEvaluators != null )
-        {
-
-            for ( String taskEntryEvaluator : taskEntryEvaluators )
-            {
-                this.taskEntryEvaluatorComponents.add(
-                    componentContainer.getComponent( TaskEntryEvaluator.class, taskEntryEvaluator ) );
-            }
-
-        }
-
-        if ( taskExitEvaluators != null )
-        {
-
-            for ( String taskExitEvaluator : taskExitEvaluators )
-            {
-                this.taskExitEvaluatorComponents.add(
-                    componentContainer.getComponent( TaskExitEvaluator.class, taskExitEvaluator ) );
-            }
-        }
-
-        if ( taskViabilityEvaluators != null )
-        {
-
-            for ( String taskViabilityEvaluator : taskViabilityEvaluators )
-            {
-                this.taskViabilityEvaluatorComponents.add(
-                    componentContainer.getComponent( TaskViabilityEvaluator.class, taskViabilityEvaluator ) );
-            }
-
-        }
-
-        queue = new LinkedBlockingQueue();
-    }
 
     // ----------------------------------------------------------------------
     // TaskQueue Implementation
@@ -126,7 +74,7 @@ public class DefaultTaskQueue
         // Check that all the task entry evaluators accepts the task
         // ----------------------------------------------------------------------
 
-        for ( TaskEntryEvaluator taskEntryEvaluator : taskEntryEvaluatorComponents )
+        for ( TaskEntryEvaluator taskEntryEvaluator : taskEntryEvaluators )
         {
             boolean result = taskEntryEvaluator.evaluate( task );
 
@@ -146,13 +94,13 @@ public class DefaultTaskQueue
         // Check that all the task viability evaluators accepts the task
         // ----------------------------------------------------------------------
 
-        for ( TaskViabilityEvaluator taskViabilityEvaluator : taskViabilityEvaluatorComponents )
+        for ( TaskViabilityEvaluator taskViabilityEvaluator : taskViabilityEvaluators )
         {
-            Collection toBeRemoved = taskViabilityEvaluator.evaluate( Collections.unmodifiableCollection( queue ) );
+            Collection<Task> toBeRemoved = taskViabilityEvaluator.evaluate( Collections.unmodifiableCollection( queue ) );
 
-            for ( Iterator it2 = toBeRemoved.iterator(); it2.hasNext(); )
+            for ( Iterator<Task> it2 = toBeRemoved.iterator(); it2.hasNext(); )
             {
-                Task t = (Task) it2.next();
+                Task t = it2.next();
 
                 queue.remove( t );
             }
@@ -173,7 +121,7 @@ public class DefaultTaskQueue
                 return null;
             }
 
-            for ( TaskExitEvaluator taskExitEvaluator : taskExitEvaluatorComponents )
+            for ( TaskExitEvaluator taskExitEvaluator : taskExitEvaluators )
             {
                 boolean result = taskExitEvaluator.evaluate( task );
 
@@ -196,7 +144,7 @@ public class DefaultTaskQueue
     public Task poll( int timeout, TimeUnit timeUnit )
         throws InterruptedException
     {
-        return (Task) queue.poll( timeout, timeUnit );
+        return queue.poll( timeout, timeUnit );
     }
 
     public boolean remove( Task task )
@@ -215,7 +163,7 @@ public class DefaultTaskQueue
     // Queue Inspection
     // ----------------------------------------------------------------------
 
-    public List getQueueSnapshot()
+    public List<Task> getQueueSnapshot()
         throws TaskQueueException
     {
         return Collections.unmodifiableList( new ArrayList( queue ) );
@@ -232,67 +180,36 @@ public class DefaultTaskQueue
 
     private Task dequeue()
     {
-        return (Task) queue.poll();
+        return queue.poll();
     }
 
-    public List<String> getTaskEntryEvaluators()
+    public List<TaskEntryEvaluator> getTaskEntryEvaluators()
     {
         return taskEntryEvaluators;
     }
 
-    public void setTaskEntryEvaluators( List<String> taskEntryEvaluators )
+    public void setTaskEntryEvaluators( List<TaskEntryEvaluator> taskEntryEvaluators )
     {
         this.taskEntryEvaluators = taskEntryEvaluators;
     }
 
-    public List<String> getTaskExitEvaluators()
+    public List<TaskExitEvaluator> getTaskExitEvaluators()
     {
         return taskExitEvaluators;
     }
 
-    public void setTaskExitEvaluators( List<String> taskExitEvaluators )
+    public void setTaskExitEvaluators( List<TaskExitEvaluator> taskExitEvaluators )
     {
         this.taskExitEvaluators = taskExitEvaluators;
     }
 
-    public List<String> getTaskViabilityEvaluators()
+    public List<TaskViabilityEvaluator> getTaskViabilityEvaluators()
     {
         return taskViabilityEvaluators;
     }
 
-    public void setTaskViabilityEvaluators( List<String> taskViabilityEvaluators )
+    public void setTaskViabilityEvaluators( List<TaskViabilityEvaluator> taskViabilityEvaluators )
     {
         this.taskViabilityEvaluators = taskViabilityEvaluators;
-    }
-
-
-    public List<TaskEntryEvaluator> getTaskEntryEvaluatorComponents()
-    {
-        return taskEntryEvaluatorComponents;
-    }
-
-    public void setTaskEntryEvaluatorComponents( List<TaskEntryEvaluator> taskEntryEvaluatorComponents )
-    {
-        this.taskEntryEvaluatorComponents = taskEntryEvaluatorComponents;
-    }
-
-    public List<TaskExitEvaluator> getTaskExitEvaluatorComponents()
-    {
-        return taskExitEvaluatorComponents;
-    }
-
-    public void setTaskExitEvaluatorComponents( List<TaskExitEvaluator> taskExitEvaluatorComponents )
-    {
-        this.taskExitEvaluatorComponents = taskExitEvaluatorComponents;
-    }
-
-    public List<TaskViabilityEvaluator> getTaskViabilityEvaluatorComponents()
-    {
-        return taskViabilityEvaluatorComponents;
-    }
-
-    public void setTaskViabilityEvaluatorComponents( List<TaskViabilityEvaluator> taskViabilityEvaluatorComponents )
-    {
-        this.taskViabilityEvaluatorComponents = taskViabilityEvaluatorComponents;
     }
 }

@@ -24,15 +24,18 @@ package org.codehaus.plexus.taskqueue;
  * SOFTWARE.
  */
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Iterator;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
  * @version $Id$
  */
+@Service( "taskViabilityEvaluator#build-project" )
 public class BuildProjectTaskViabilityEvaluator
     implements TaskViabilityEvaluator
 {

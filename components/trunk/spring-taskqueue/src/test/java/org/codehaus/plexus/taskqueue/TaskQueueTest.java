@@ -24,36 +24,39 @@ package org.codehaus.plexus.taskqueue;
  * SOFTWARE.
  */
 
+import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.codehaus.plexus.PlexusTestCase;
 
 /**
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
  * @version $Id$
  */
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context.xml" } )
 public class TaskQueueTest
-    extends PlexusTestCase
+    extends TestCase
 {
+    @Inject
     private TaskQueue taskQueue;
 
-    protected void setUp()
-        throws Exception
-    {
-        super.setUp();
-
-        taskQueue = (TaskQueue) lookup( TaskQueue.ROLE );
-    }
 
     // NOTE: If we were using a blocking queue, the sleep/continue in the ThreadedTaskQueueExecutor wouldn't
     // be necessary; the queue would block until an element was available.
+    @Test
     public void testEmptyQueue()
         throws Exception
     {
         assertNull( taskQueue.take() );
     }
 
+    @Test
     public void testTaskEntryAndExitEvaluators()
         throws Exception
     {
@@ -68,6 +71,7 @@ public class TaskQueueTest
         assertTaskIsRejected( new BuildProjectTask( true, true, true, false ) );
     }
 
+    @Test
     public void testTaskViabilityEvaluators()
         throws Exception
     {
@@ -112,6 +116,7 @@ public class TaskQueueTest
         assertNull( taskQueue.take() );
     }
 
+    @Test
     public void testRemoveTask()
         throws Exception
     {
@@ -123,7 +128,8 @@ public class TaskQueueTest
 
         assertNull( taskQueue.take() );
     }
-    
+
+    @Test
     public void testRemoveAll()
         throws Exception
     {

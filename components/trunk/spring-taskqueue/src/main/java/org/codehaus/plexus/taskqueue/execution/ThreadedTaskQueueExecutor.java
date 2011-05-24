@@ -56,15 +56,21 @@ public class ThreadedTaskQueueExecutor
 
     private static final int CANCEL_TASK = 2;
 
-    /** requirement */
+    /**
+     * requirement
+     */
     @Inject
     private TaskQueue queue;
 
-    /** requirement */
+    /**
+     * requirement
+     */
     @Inject
     private TaskExecutor executor;
 
-    /** configuration */
+    /**
+     * configuration
+     */
     private String name;
 
     // ----------------------------------------------------------------------
@@ -98,7 +104,7 @@ public class ThreadedTaskQueueExecutor
                 }
                 catch ( InterruptedException e )
                 {
-                    logger.info( "Executor thread interrupted, command: " + ( command == SHUTDOWN
+                    logger.info( "Executor thread interrupted, command: {}", ( command == SHUTDOWN
                         ? "Shutdown"
                         : command == CANCEL_TASK ? "Cancel task" : "Unknown" ) );
                     continue;
@@ -138,7 +144,7 @@ public class ThreadedTaskQueueExecutor
 
             currentTask = null;
 
-            logger.info( "Executor thread '" + name + "' exited." );
+            logger.info( "Executor thread '{}' exited.", name );
 
             done = true;
 
@@ -198,7 +204,7 @@ public class ThreadedTaskQueueExecutor
                 }
                 catch ( TimeoutException e )
                 {
-                    logger.warn( "Task " + task + " didn't complete within time, cancelling it." );
+                    logger.warn( "Task {} didn't complete within time, cancelling it.", task );
                     cancel( future );
                     return;
                 }

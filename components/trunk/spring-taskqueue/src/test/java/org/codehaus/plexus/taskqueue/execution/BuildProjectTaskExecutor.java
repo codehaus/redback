@@ -16,19 +16,24 @@ package org.codehaus.plexus.taskqueue.execution;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.taskqueue.BuildProjectTask;
 import org.codehaus.plexus.taskqueue.Task;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author <a href="mailto:kenney@apache.org">Kenney Westerhof</a>
  *
  */
+@Service("taskExecutor#build-project")
 public class BuildProjectTaskExecutor
-    extends AbstractLogEnabled
     implements TaskExecutor
 {
+
+    private Logger logger = LoggerFactory.getLogger( getClass() );
+
     public void executeTask( Task task0 )
         throws TaskExecutionException
     {
@@ -36,7 +41,7 @@ public class BuildProjectTaskExecutor
 
         task.start();
 
-        getLogger().info( "Task: " + task + " cancelled: " + task.isCancelled() + "; done: " + task.isDone() );
+        logger.info( "Task: " + task + " cancelled: " + task.isCancelled() + "; done: " + task.isDone() );
 
         long time = System.currentTimeMillis();
 
@@ -46,14 +51,13 @@ public class BuildProjectTaskExecutor
         {
             try
             {
-                getLogger().info( "Sleeping " + timeToSleep + "ms (interrupts ignored: " + task.ignoreInterrupts()
-                    + ")" );
+                logger.info( "Sleeping " + timeToSleep + "ms (interrupts ignored: " + task.ignoreInterrupts() + ")" );
                 Thread.sleep( timeToSleep );
 
                 task.done();
 
-                getLogger().info( "Task completed normally: " + task + " cancelled: " + task.isCancelled() + "; done: "
-                    + task.isDone() );
+                logger.info( "Task completed normally: " + task + " cancelled: " + task.isCancelled() + "; done: "
+                                 + task.isDone() );
             }
             catch ( InterruptedException e )
             {
@@ -61,14 +65,14 @@ public class BuildProjectTaskExecutor
                 {
                     task.cancel();
 
-                    getLogger().info( "Task cancelled: " + task + " cancelled: " + task.isCancelled() + "; done: "
-                        + task.isDone() );
+                    logger.info(
+                        "Task cancelled: " + task + " cancelled: " + task.isCancelled() + "; done: " + task.isDone() );
 
                     throw new TaskExecutionException( "Never interrupt sleeping threads! :)", e );
                 }
                 else
                 {
-                    getLogger().info( "Ignoring interrupt" );
+                    logger.info( "Ignoring interrupt" );
                 }
             }
         }

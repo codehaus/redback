@@ -40,6 +40,6 @@ public interface TaskViabilityEvaluator
      * @return Returns a list of tasks to remove from the queue.
      * @throws TaskQueueException
      */
-    Collection evaluate( Collection tasks )
+    Collection<Task> evaluate( Collection tasks )
         throws TaskQueueException;
 }
