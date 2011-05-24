@@ -15,7 +15,7 @@
     <module>plexus-quartz</module>
     <module>plexus-msn</module>
     <module>spring-registry</module>
-    <module>plexus-taskqueue</module>
+    <module>spring-taskqueue</module>
     <module>plexus-spring</module>
     <module>plexus-xmlrpc</module>
     <module>spring-apacheds</module>
