@@ -24,9 +24,9 @@ package org.codehaus.plexus.taskqueue.execution;
  * SOFTWARE.
  */
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.taskqueue.Task;
 import org.codehaus.plexus.taskqueue.TaskQueue;
-import org.codehaus.plexus.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -282,7 +282,7 @@ public class ThreadedTaskQueueExecutor
     public void start()
     {
 
-        if ( StringUtils.isEmpty( name ) )
+        if ( StringUtils.isBlank( name ) )
         {
             throw new IllegalArgumentException( "'name' must be set." );
         }
