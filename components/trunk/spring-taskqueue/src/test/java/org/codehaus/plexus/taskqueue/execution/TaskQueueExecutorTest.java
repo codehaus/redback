@@ -37,17 +37,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
  * @author <a href="mailto:kenney@apache.org">Kenney Westerhof</a>
- *
  */
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "classpath*:/META-INF/spring-context.xml", "classpath*:/spring-context.xml" } )
 public class TaskQueueExecutorTest
     extends TestCase
 {
-    @Inject @Named(value = "taskQueue#default")
+    @Inject
+    @Named( value = "taskQueue#default" )
     private TaskQueue taskQueue;
+
+    // inject this to start the executor see @PostConstruct in {@link ThreadedTaskQueueExecutor
+    @Inject
+    @Named( value = "queueExecutor#default" )
+    private TaskQueueExecutor taskQueueExecutor;
 
 
     @Test
