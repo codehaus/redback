@@ -12,7 +12,7 @@
     <module>plexus-expression-evaluator</module>
     <module>plexus-jabber</module>
     <module>spring-jdo2</module>
-    <module>plexus-quartz</module>
+    <module>spring-quartz</module>
     <module>plexus-msn</module>
     <module>spring-registry</module>
     <module>spring-taskqueue</module>

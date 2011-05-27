@@ -1,4 +1,4 @@
-package org.codehaus.plexus.scheduler;
+package org.codehaus.redback.components.scheduler;
 
 /*
  * Copyright 2004-2005 The Apache Software Foundation.
@@ -16,15 +16,27 @@ package org.codehaus.plexus.scheduler;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.PlexusTestCase;
+import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.inject.Inject;
+
+@RunWith( SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = {"classpath*:/META-INF/spring-context.xml","classpath:/spring-context.xml"} )
 public class CronExpressionValidatorTest
-    extends PlexusTestCase
+    extends TestCase
 {
+
+    @Inject
+    CronExpressionValidator validator;
+
+    @Test
     public void testValidation()
         throws Exception
     {
-        CronExpressionValidator validator = (CronExpressionValidator) lookup( CronExpressionValidator.ROLE );
 
         assertTrue( validator.validate( "0 0 * * * ?" ) );
 

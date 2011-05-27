@@ -1,4 +1,4 @@
-package org.codehaus.plexus.scheduler;
+package org.codehaus.redback.components.scheduler;
 
 /*
  * Copyright 2001-2005 The Apache Software Foundation.
@@ -16,8 +16,10 @@ package org.codehaus.plexus.scheduler;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.quartz.CronTrigger;
+import org.quartz.impl.triggers.CronTriggerImpl;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,9 +31,9 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:evenisse@codehaus.org">Emmanuel Venisse</a>
  * @version $Id$
  */
+@Service
 public final class CronExpressionValidator
 {
-    public static final String ROLE = CronExpressionValidator.class.getName();
 
     /**
      * Validates a cron expression.
@@ -50,7 +52,7 @@ public final class CronExpressionValidator
                 return false;
             }
 
-            CronTrigger cronTrigger = new CronTrigger();
+            CronTriggerImpl cronTrigger = new CronTriggerImpl();
 
             cronTrigger.setCronExpression( cronExpression );
 

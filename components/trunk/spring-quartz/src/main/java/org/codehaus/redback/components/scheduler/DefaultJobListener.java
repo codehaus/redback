@@ -1,4 +1,4 @@
-package org.codehaus.plexus.scheduler;
+package org.codehaus.redback.components.scheduler;
 
 /* ----------------------------------------------------------------------------
  * The Apache Software License, Version 1.1
@@ -68,14 +68,13 @@ import org.quartz.JobListener;
  *
  * @author <a href="mailto:jason@zenplex.com">Jason van Zyl</a>
  * @version $Id$
- * @todo Make this a component using the lifecycle interfaces.
  */
 public class DefaultJobListener
-     implements JobListener
+    implements JobListener
 {
     /**
      * <p>
-     *
+     * <p/>
      * Get the name of the <code>JobListener</code>.</p>
      */
     public String getName()
@@ -85,20 +84,20 @@ public class DefaultJobListener
 
     /**
      * <p>
-     *
+     * <p/>
      * Called by the <code>{@link Scheduler}</code> when a <code>{@link Job}</code>
      * is about to be executed (an associated <code>{@link org.quartz.Trigger}</code> has
      * occured).</p>
      */
-    public void jobToBeExecuted(JobExecutionContext context)
+    public void jobToBeExecuted( JobExecutionContext context )
     {
         Job job = context.getJobInstance();
-                
+
         // Only attempt to set the ServiceBroker when we are dealing
         // with subclasses AbstractJob.
-        if (job instanceof AbstractJob)
+        if ( job instanceof AbstractJob )
         {
-            ((AbstractJob)job).setJobDataMap(context.getJobDetail().getJobDataMap());
+            ( (AbstractJob) job ).setJobDataMap( context.getJobDetail().getJobDataMap() );
         }
     }
 
@@ -108,19 +107,18 @@ public class DefaultJobListener
 
     /**
      * <p>
-     *
+     * <p/>
      * Called by the <code>{@link Scheduler}</code> after a <code>{@link Job}</code>
      * has been executed, and be for the associated <code>Trigger</code>'s
      * <code>triggered(xx)</code> method has been called.</p>
      */
-    public void jobWasExecuted(JobExecutionContext context,
-                               JobExecutionException jobException)
+    public void jobWasExecuted( JobExecutionContext context, JobExecutionException jobException )
     {
         Job job = context.getJobInstance();
-        
+
         // Only attempt to null the ServiceBroker when we are dealing
         // with subclasses AbstractJob.
-        if (job instanceof AbstractJob)
+        if ( job instanceof AbstractJob )
         {
         }
     }

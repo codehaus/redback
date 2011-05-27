@@ -1,4 +1,4 @@
-package org.codehaus.plexus.scheduler;
+package org.codehaus.redback.components.scheduler;
 
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -60,7 +60,8 @@ import org.quartz.JobExecutionException;
 
 import java.util.Date;
 
-public class JobOne implements Job
+public class JobOne
+    implements Job
 {
     public JobOne()
     {
@@ -69,9 +70,9 @@ public class JobOne implements Job
     public void execute( JobExecutionContext context )
         throws JobExecutionException
     {
-
-        System.out.println( "    --- Testing Scheduler Component\n    --- "
-                            + context.getJobDetail().getFullName() + " executed.[" + new Date() + "]" );
+        System.out.println(
+            "    --- Testing Scheduler Component\n    --- " + context.getJobDetail().getDescription() + " executed.["
+                + new Date() + "]" );
 
     }
 
