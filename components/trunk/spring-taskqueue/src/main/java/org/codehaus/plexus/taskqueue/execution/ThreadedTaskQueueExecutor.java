@@ -170,7 +170,7 @@ public class ThreadedTaskQueueExecutor
                     else
                     {
                         logger.debug( "Waiting at most {} ms for task completion", task.getMaxExecutionTime() );
-                        future.get( task.getMaxExecutionTime(), java.util.concurrent.TimeUnit.MILLISECONDS );
+                        future.get( task.getMaxExecutionTime(), TimeUnit.MILLISECONDS );
                         logger.debug( "Task completed within {} ms", task.getMaxExecutionTime() );
                         return;
                     }
