@@ -36,12 +36,12 @@ public class DataSourceConfigurableJdoFactory
     // ----------------------------------------------------------------------
 
     /**
-     * @plexus.configuration
+     * plexus.configuration
      */
     private String connectionFactoryName;
 
     /**
-     * @plexus.configuration
+     * plexus.configuration
      */
     private String shutdownConnectionFactoryName;
 
@@ -95,5 +95,25 @@ public class DataSourceConfigurableJdoFactory
         }
 
         super.shutdown();
+    }
+
+    public String getConnectionFactoryName()
+    {
+        return connectionFactoryName;
+    }
+
+    public void setConnectionFactoryName( String connectionFactoryName )
+    {
+        this.connectionFactoryName = connectionFactoryName;
+    }
+
+    public String getShutdownConnectionFactoryName()
+    {
+        return shutdownConnectionFactoryName;
+    }
+
+    public void setShutdownConnectionFactoryName( String shutdownConnectionFactoryName )
+    {
+        this.shutdownConnectionFactoryName = shutdownConnectionFactoryName;
     }
 }
