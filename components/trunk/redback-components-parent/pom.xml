@@ -7,7 +7,7 @@
   <name>Redback Plexus Components Parent Project</name>
   <url>http://redback.codehaus.org/redback-components</url>
   <properties>
-    <slf4jVersion>1.5.8</slf4jVersion>
+    <slf4jVersion>1.6.1</slf4jVersion>
     <springVersion>3.0.5.RELEASE</springVersion>
     <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/redback</distUrlReleaseRepo>
     <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/redback</distUrlSnapshotRepo>
