@@ -254,7 +254,7 @@ public class CommonsConfigurationRegistry
 
     public void setInt( String key, int value )
     {
-        configuration.setProperty( key, new Integer( value ) );
+        configuration.setProperty( key, Integer.valueOf( value ) );
     }
 
     public boolean getBoolean( String key )

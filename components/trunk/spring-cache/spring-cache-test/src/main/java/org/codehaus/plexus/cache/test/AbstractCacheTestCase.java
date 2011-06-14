@@ -71,7 +71,7 @@ public abstract class AbstractCacheTestCase
     @Test
     public void testSimplePutGet()
     {
-        Integer fooInt = new Integer( 42 );
+        Integer fooInt = Integer.valueOf( 42 );
         cache.put( "foo", fooInt );
 
         Integer val = (Integer) cache.get( "foo" );
@@ -88,7 +88,7 @@ public abstract class AbstractCacheTestCase
         for ( int i = 4500; i <= 5000; i++ )
         {
             String key = fmt.toText( i );
-            cache.put( key, new Integer( i ) );
+            cache.put( key, Integer.valueOf( i ) );
         }
 
         // Put some holes into the list.
@@ -104,8 +104,8 @@ public abstract class AbstractCacheTestCase
         }
 
         // Some direct gets
-        assertEquals( new Integer( 4590 ), cache.get( "four thousand five hundred ninety" ) );
-        assertEquals( new Integer( 4912 ), cache.get( "four thousand nine hundred twelve" ) );
+        assertEquals( Integer.valueOf( 4590 ), cache.get( "four thousand five hundred ninety" ) );
+        assertEquals( Integer.valueOf( 4912 ), cache.get( "four thousand nine hundred twelve" ) );
         int DIRECT = 2;
 
         // Fetch the list repeatedly
@@ -117,7 +117,7 @@ public abstract class AbstractCacheTestCase
             for ( int num = LOW; num < HIGH; num++ )
             {
                 String key = fmt.toText( num );
-                Integer expected = new Integer( num );
+                Integer expected = Integer.valueOf( num );
                 Integer val = (Integer) cache.get( key );
 
                 // Intentionally removed entries?
@@ -236,7 +236,7 @@ public abstract class AbstractCacheTestCase
         // Now do some basic set/get functions to test if the cache has been initialized (or not).
         assertNull( cache.get( "bad wolf" ) );
         
-        Integer fooInt = new Integer( 42 );
+        Integer fooInt = Integer.valueOf( 42 );
         cache.put( "foo", fooInt );
 
         Integer val = (Integer) cache.get( "foo" );

@@ -333,7 +333,7 @@ public class PlexusJdoUtils
                 pm.getFetchPlan().addGroup( fetchGroup );
             }
 
-            Object objectId = pm.newObjectIdInstance( clazz, new Long( id ) );
+            Object objectId = pm.newObjectIdInstance( clazz, Long.valueOf( id ) );
 
             Object object = pm.getObjectById( objectId );
 
