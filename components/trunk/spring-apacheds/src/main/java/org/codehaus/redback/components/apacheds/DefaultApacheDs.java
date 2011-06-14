@@ -147,17 +147,17 @@ public class DefaultApacheDs
             throw new NamingException( "Illegal argument, there has to be at least one domain component." );
         }
 
-        String suffix = "";
+        StringBuilder suffix = new StringBuilder();
 
         for ( int i = 0; i < domainComponents.length; i++ )
         {
             String dc = domainComponents[i];
 
-            suffix += "dc=" + dc;
+            suffix.append( "dc=" ).append( dc );
 
             if ( i != domainComponents.length - 1 )
             {
-                suffix += ",";
+                suffix.append( "," );
             }
         }
 
@@ -175,7 +175,7 @@ public class DefaultApacheDs
 
         Partition partition = new Partition();
         partition.setName( name );
-        partition.setSuffix( suffix );
+        partition.setSuffix( suffix.toString() );
         partition.setContextAttributes( attributes );
         HashSet set = new HashSet();
         set.add( "uid" );
