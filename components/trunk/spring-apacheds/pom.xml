@@ -38,11 +38,6 @@
     </dependency>
     <dependency>
       <groupId>org.apache.directory.server</groupId>
-      <artifactId>apacheds-schema-extras</artifactId>
-      <version>${apacheds.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.directory.server</groupId>
       <artifactId>apacheds-bootstrap-partition</artifactId>
       <version>${apacheds.version}</version>
     </dependency>
