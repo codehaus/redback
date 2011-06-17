@@ -16,7 +16,7 @@ package org.codehaus.plexus.jdo;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -223,7 +223,7 @@ public class PlexusJdoUtils
     public static Object getObjectById( PersistenceManager pm, Class clazz, String id, String fetchGroup )
         throws PlexusStoreException, PlexusObjectNotFoundException
     {
-        if ( StringUtils.isEmpty( id ) )
+        if ( StringUtils.isBlank( id ) )
         {
             throw new PlexusStoreException( "Unable to get object '" + clazz.getName() + "' from jdo using null id." );
         }
