@@ -24,20 +24,6 @@
     <module>spring-cache-test</module>
     <module>spring-cache-providers</module>
   </modules>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>commons-lang</groupId>
-        <artifactId>commons-lang</artifactId>
-        <version>2.1</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.plexus</groupId>
-        <artifactId>plexus-spring</artifactId>
-        <version>1.2</version>
-      </dependency>      
-    </dependencies>
-  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
