@@ -22,12 +22,11 @@
   <publishDate format="yyyy-MM-dd" position="right" />
   <version position="right" />
 
+  <body>
     <links>
       <item name="The Codehaus" href="http://codehaus.org" />
       <item name="Redback" href="http://redback.codehaus.org"/>
     </links>
-
-  <body>
     <menu ref="modules" />
     <menu ref="reports"/>
   </body>
