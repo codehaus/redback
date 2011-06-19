@@ -13,7 +13,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <url>http://redback.codehaus.org/components/${project.artifactId}</url>
+  <url>http://redback.codehaus.org/components/spring-cache</url>
 
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-cache</connection>
@@ -33,6 +33,13 @@
     </dependency>  
   </dependencies>
 
+  <distributionManagement>
+    <site>
+      <id>codehaus.org</id>
+      <url>dav:https://dav.codehaus.org/redback/components/spring-cache</url>
+    </site>
+  </distributionManagement>
+
   <reporting>
     <plugins>
       <plugin>
@@ -46,4 +53,5 @@
       </plugin>
     </plugins>
   </reporting>
+
 </project>
