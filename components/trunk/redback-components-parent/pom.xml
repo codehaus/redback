@@ -261,6 +261,22 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>all</id>
+      <modules>
+        <module>../spring-cache</module>
+        <module>../spring-jdo2</module>
+        <module>../spring-quartz</module>
+        <module>../spring-apacheds</module>
+        <module>../spring-registry</module>
+        <module>../plexus-command-line</module>
+        <module>../plexus-expression-evaluator</module>
+        <module>../plexus-jabber</module>
+        <module>../plexus-msn</module>
+        <module>../plexus-spring</module>
+        <module>../plexus-xmlrpc</module>
+      </modules>
+    </profile>
   </profiles>
 
 </project>
