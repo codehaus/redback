@@ -13,6 +13,8 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <url>http://redback.codehaus.org/components/${project.artifactId}</url>
+
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-cache</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-cache</developerConnection>
