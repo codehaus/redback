@@ -30,10 +30,13 @@
     <src>http://media.codehaus.org/images/unity-codehaus-logo.png</src>
   </bannerRight>
   -->
+  <publishDate format="yyyy-MM-dd" position="right" />
+  <version position="right" />
  
   <body>
     <links>
       <item name="The Codehaus" href="http://codehaus.org" />
+      <item name="Redback Core" href="http://redback.codehaus.org/redback-core"/>
     </links>
 
     <menu name="Overview">
@@ -64,6 +67,7 @@
       <item name="Redback Core" href="http://redback.codehaus.org/redback-core"/>
     </menu>
     
-    ${reports}
+    <menu ref="reports" />
+
   </body>
 </project>
