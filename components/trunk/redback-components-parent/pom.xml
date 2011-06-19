@@ -5,7 +5,7 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>Redback Plexus Components Parent Project</name>
-  <url>http://redback.codehaus.org/redback-components</url>
+  <url>http://redback.codehaus.org/components</url>
   <properties>
     <slf4jVersion>1.6.1</slf4jVersion>
     <springVersion>3.0.5.RELEASE</springVersion>
