@@ -34,7 +34,6 @@
   <body>
     <links>
       <item name="The Codehaus" href="http://codehaus.org" />
-      <item name="Plexus" href="http://plexus.codehaus.org/"/>
     </links>
 
     <menu name="Overview">
@@ -62,6 +61,7 @@
     
     <menu name="Development">
       <item name="Extending Redback Authentication" href="development/extending-authn.html"/>
+      <item name="Redback Core" href="http://redback.codehaus.org/redback-core"/>
     </menu>
     
     ${reports}
