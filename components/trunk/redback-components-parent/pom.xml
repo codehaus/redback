@@ -13,6 +13,7 @@
     <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/redback</distUrlSnapshotRepo>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <description>Parent Pom for various components used in redback, Apache Archiva and Apache Continuum.</description>
   <dependencyManagement>
     <dependencies>
       <dependency>
