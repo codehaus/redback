@@ -6,6 +6,8 @@
 
 Redback Ldap Integration
 
+ <<NOTE>>: This has changed dramatically and may not be correct.
+
  With the alpha-3 release of redback limited support for ldap has been added as an authentication source.  Limited support for ldap means:
  
  * Read-Only User Management

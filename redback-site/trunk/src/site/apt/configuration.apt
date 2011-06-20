@@ -6,6 +6,8 @@
 
 Redback Configuration
 
+  <<NOTE>>: This has changed dramatically and may not be correct.
+
   Configuration in Redback is governed by a plexus configuration setup making
 use of properties files.  Below is a listing of all of the available configuration options along with default values and notes on what they are where applicable.
   

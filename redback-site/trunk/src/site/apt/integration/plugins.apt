@@ -6,6 +6,8 @@
 
 Plugin Configuration
 
+ <<NOTE>>: This has changed dramatically and may not be correct.
+
  Then you will also want to setup the following plugins in the <build> section of the webapp's pom as well.
  Briefly, the maven-clean-plugin needs to be configured a little bit to point to the different locations of
  files to be cleaned.  The maven-war-plugin is being used to pull in the plexus-security war overlay and
