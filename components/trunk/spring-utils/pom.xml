@@ -25,6 +25,15 @@
   <name>Spring Utils Goodies</name>
   <description>Contains some spring goodies.</description>
 
+  <url>http://redback.codehaus.org/components/${project.artifactId}</url>
+
+  <distributionManagement>
+    <site>
+      <id>codehaus.org</id>
+      <url>dav:https://dav.codehaus.org/redback/components/${project.artifactId}</url>
+    </site>
+  </distributionManagement>
+
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-utils</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-utils</developerConnection>

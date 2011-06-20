@@ -10,6 +10,15 @@
   <name>Plexus MSN Client Component</name>
   <version>1.0-alpha-3-SNAPSHOT</version>
 
+  <url>http://redback.codehaus.org/components/${project.artifactId}</url>
+
+  <distributionManagement>
+    <site>
+      <id>codehaus.org</id>
+      <url>dav:https://dav.codehaus.org/redback/components/${project.artifactId}</url>
+    </site>
+  </distributionManagement>
+
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-msn</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-msn</developerConnection>

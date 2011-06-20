@@ -28,6 +28,15 @@
     <mavenVersion>2.0.8</mavenVersion>
   </properties>
 
+  <url>http://redback.codehaus.org/components/${project.artifactId}</url>
+
+  <distributionManagement>
+    <site>
+      <id>codehaus.org</id>
+      <url>dav:https://dav.codehaus.org/redback/components/${project.artifactId}</url>
+    </site>
+  </distributionManagement>
+
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-spring</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/plexus-spring</developerConnection>
