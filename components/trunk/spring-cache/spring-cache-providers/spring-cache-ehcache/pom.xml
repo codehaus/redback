@@ -10,6 +10,8 @@
   <artifactId>spring-cache-ehcache</artifactId>
   <name>Spring Cache Provider :: ehcache</name>
 
+  <description>Commons Cache API : ehcache implementation.</description>
+
   <packaging>jar</packaging>
 
   <dependencies>

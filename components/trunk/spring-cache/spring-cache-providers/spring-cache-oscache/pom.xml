@@ -10,6 +10,8 @@
   <artifactId>plexus-cache-oscache</artifactId>
   <name>Spring Cache Provider :: oscache</name>
 
+  <description>Commons Cache API : oscache implementation.</description>
+
   <packaging>jar</packaging>
 
   <dependencies>

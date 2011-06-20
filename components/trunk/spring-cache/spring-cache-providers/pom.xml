@@ -10,6 +10,8 @@
   <name>Spring Cache Providers</name>
   <packaging>pom</packaging>
 
+  <description>Commons Cache API Providers Parent Pom.</description>
+
   <dependencies>
     <dependency>
       <groupId>org.codehaus.redback.components.cache</groupId>

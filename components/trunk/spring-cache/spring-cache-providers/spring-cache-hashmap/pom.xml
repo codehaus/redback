@@ -10,6 +10,8 @@
   <artifactId>spring-cache-hashmap</artifactId>
   <name>Spring Cache Provider :: hashmap</name>
 
+  <description>Commons Cache API : simple in memory HashMap implementation.</description>
+
   <packaging>jar</packaging>
 
   <dependencies>
