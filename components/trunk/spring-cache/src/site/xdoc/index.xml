@@ -35,6 +35,7 @@ cacheBuilder.getCache( Wine.class )
             <li>if not found : return NoCacheCache implementation in order to prevent NPE</li>
           </ul>
         </p>
+      </subsection>
     </section>
   </body>
 </document>
