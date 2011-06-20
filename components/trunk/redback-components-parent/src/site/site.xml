@@ -22,6 +22,12 @@
   <publishDate format="yyyy-MM-dd" position="right" />
   <version position="right" />
 
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-default-skin</artifactId>
+    <version>1.0</version>
+  </skin>
+
   <body>
     <links>
       <item name="The Codehaus" href="http://codehaus.org" />
