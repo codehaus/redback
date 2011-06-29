@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>spring-jdo2</artifactId>
   <name>Spring JDO2 Component</name>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <inceptionYear>2005</inceptionYear>
 
   <url>http://redback.codehaus.org/components/${project.artifactId}</url>
@@ -21,9 +21,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/tags/spring-jdo2-1.0</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/tags/spring-jdo2-1.0</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/tags/spring-jdo2-1.0</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-jdo2</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-jdo2</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/spring-jdo2</url>
   </scm>
 
   <developers>
