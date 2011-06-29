@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.codehaus.redback.components</groupId>
     <artifactId>redback-components</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>
   <artifactId>plexus-expression-evaluator</artifactId>
