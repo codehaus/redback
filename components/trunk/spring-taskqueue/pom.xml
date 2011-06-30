@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>spring-taskqueue</artifactId>
   <name>Spring Task Queue</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <url>http://redback.codehaus.org/components/${project.artifactId}</url>
 
@@ -20,9 +20,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-taskqueue</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-taskqueue</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/spring-taskqueue</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/tags/spring-taskqueue-1.0</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/tags/spring-taskqueue-1.0</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/tags/spring-taskqueue-1.0</url>
   </scm>
 
   <dependencies>
