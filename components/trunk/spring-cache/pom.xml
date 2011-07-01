@@ -10,7 +10,7 @@
   <groupId>org.codehaus.redback.components.cache</groupId>
   <artifactId>spring-cache</artifactId>
   <name>Spring Cache Component</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
 
   <description>Cache API with various implementations : simple HashMap, ehcache, oscache. Based on Spring container.</description>
@@ -18,9 +18,9 @@
   <url>http://redback.codehaus.org/components/spring-cache</url>
 
   <scm>
-    <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-cache</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/redback/components/trunk/spring-cache</developerConnection>
-    <url>http://fisheye.codehaus.org/browse/redback/components/trunk/spring-cache</url>
+    <connection>scm:svn:https://svn.codehaus.org/redback/plexus-components/tags/spring-cache-1.0</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/redback/plexus-components/tags/spring-cache-1.0</developerConnection>
+    <url>http://fisheye.codehaus.org/browse/redback/plexus-components/tags/spring-cache-1.0</url>
   </scm>
 
   <modules>
