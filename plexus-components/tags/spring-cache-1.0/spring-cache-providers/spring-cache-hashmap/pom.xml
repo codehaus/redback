@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.codehaus.redback.components.cache</groupId>
+    <artifactId>spring-cache-providers</artifactId>
+    <version>1.0</version>
+  </parent>
+
+  <artifactId>spring-cache-hashmap</artifactId>
+  <name>Spring Cache Provider :: hashmap</name>
+
+  <description>Commons Cache API : simple in memory HashMap implementation.</description>
+
+  <packaging>jar</packaging>
+
+  <dependencies>
+  </dependencies>
+</project>
