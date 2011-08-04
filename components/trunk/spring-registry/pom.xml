@@ -114,13 +114,18 @@
   <reporting>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
           <aggregate>true</aggregate>
+<bootclasspathArtifacts>
+  <bootclasspathArtifact>
+    <groupId>geronimo-spec</groupId>
+    <artifactId>geronimo-spec</artifactId>
+    <version>geronimo-spec</version>
+  </bootclasspathArtifact>
+</bootclasspathArtifacts>
         </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jxr-plugin</artifactId>
       </plugin>
     </plugins>
   </reporting>
