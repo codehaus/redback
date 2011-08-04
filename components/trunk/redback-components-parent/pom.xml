@@ -296,6 +296,16 @@
         <module>../plexus-spring</module>
         <module>../plexus-xmlrpc</module>
       </modules>
+      <reporting>
+        <plugins>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <aggregate>true</aggregate>
+            </configuration>
+          </plugin>
+        </plugins>
+      </reporting>
     </profile>
   </profiles>
 
