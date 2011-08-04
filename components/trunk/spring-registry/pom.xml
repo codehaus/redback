@@ -18,7 +18,7 @@
   <parent>
     <groupId>org.codehaus.redback.components</groupId>
     <artifactId>redback-components</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>  
   <modelVersion>4.0.0</modelVersion>
@@ -110,4 +110,19 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <aggregate>true</aggregate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jxr-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+
 </project>
