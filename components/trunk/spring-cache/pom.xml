@@ -17,7 +17,7 @@
   <parent>
     <groupId>org.codehaus.redback.components</groupId>
     <artifactId>redback-components</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>
   <groupId>org.codehaus.redback.components.cache</groupId>
@@ -52,7 +52,14 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-    </dependency>  
+    </dependency>
+    <!-- only here to avoid issue with doclava -->
+    <dependency>
+      <groupId>geronimo-spec</groupId>
+      <artifactId>geronimo-spec-jta</artifactId>
+      <version>1.0.1B-rc4</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
 
@@ -61,16 +68,7 @@
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <configuration>
-          <!--
           <aggregate>true</aggregate>
-          <bootclasspathArtifacts>
-            <bootclasspathArtifact>
-              <groupId>geronimo-spec</groupId>
-              <artifactId>geronimo-spec-jta</artifactId>
-              <version>1.0.1B-rc4</version>
-            </bootclasspathArtifact>
-          </bootclasspathArtifacts>
-          -->
         </configuration>
       </plugin>
     </plugins>
