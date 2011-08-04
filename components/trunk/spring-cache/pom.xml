@@ -53,13 +53,6 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
-    <!-- only here to avoid issue with doclava -->
-    <dependency>
-      <groupId>geronimo-spec</groupId>
-      <artifactId>geronimo-spec-jta</artifactId>
-      <version>1.0.1B-rc4</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
 
 
@@ -67,8 +60,17 @@
     <plugins>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <!-- see MJAVADOC-322 -->
+        <version>2.8.1-SNAPSHOT</version>
         <configuration>
           <aggregate>true</aggregate>
+          <additionnalDependencies>
+            <additionnalDependency>
+              <groupId>geronimo-spec</groupId>
+              <artifactId>geronimo-spec-jta</artifactId>
+              <version>1.0.1B-rc4</version>
+            </additionnalDependency>
+          </additionnalDependencies>
         </configuration>
       </plugin>
     </plugins>
