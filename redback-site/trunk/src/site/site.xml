@@ -37,6 +37,7 @@
     <links>
       <item name="The Codehaus" href="http://codehaus.org" />
       <item name="Redback Core" href="http://redback.codehaus.org/redback-core"/>
+      <item name="Redback Components" href="http://redback.codehaus.org/components"/>
     </links>
 
     <menu name="Overview">
@@ -63,6 +64,7 @@
     <menu name="Development">
       <item name="Extending Redback Authentication" href="development/extending-authn.html"/>
       <item name="Redback Core" href="http://redback.codehaus.org/redback-core"/>
+      <item name="Redback Components" href="http://redback.codehaus.org/components"/>
     </menu>
     
     <menu ref="reports" />
