@@ -8,6 +8,9 @@
   <artifactId>redback-site</artifactId>
   <name>Redback :: Site</name>
   <packaging>pom</packaging>
+  <properties>
+    <redbackVersion>${project.version}</redbackVersion>
+  </properties>
   <build>
     <plugins>
       <plugin>
