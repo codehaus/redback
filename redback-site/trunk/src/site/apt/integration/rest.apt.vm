@@ -101,7 +101,7 @@ Redback Rest Support
 +--------------------------------------+
 
    @RedbackAuthorization( permission = "user-management-user-create" )
-
+   public Boolean deleteUser( @PathParam( "userName" ) String username )
 +--------------------------------------+
 
    The interceptor will basically check if the user has the required permission.
@@ -113,6 +113,7 @@ Redback Rest Support
 +--------------------------------------+
 
    @RedbackAuthorization(noRestriction = true)
+   public Boolean ping()
 
 +--------------------------------------+
 
