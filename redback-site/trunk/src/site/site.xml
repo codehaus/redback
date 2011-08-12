@@ -53,7 +53,7 @@
       <item name="General" href="integration/general.html"/>
       <item name="Webwork" href="integration/webwork.html"/>
       <item name="Ldap" href="integration/ldap.html"/>
-      <item name="rest" href="integration/rest.html"/>
+      <item name="Rest" href="integration/rest.html"/>
     </menu>
 
     <menu name="Role Based Access Control">

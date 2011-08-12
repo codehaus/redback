@@ -106,7 +106,7 @@ Redback Rest Support
 
    The interceptor will basically check if the user has the required permission.
 
-   Note all exposed services must be marked with this annotation. If not a forbidden http response will be returned.
+   <<Note all exposed services must be marked with this annotation. If not forbidden http response will be returned.>>
 
    If the service doesn't need special permission you must do :
 
