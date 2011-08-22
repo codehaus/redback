@@ -8,7 +8,7 @@
   <url>http://redback.codehaus.org/components</url>
   <properties>
     <slf4jVersion>1.6.1</slf4jVersion>
-    <springVersion>3.0.5.RELEASE</springVersion>
+    <springVersion>3.0.6.RELEASE</springVersion>
     <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/redback</distUrlReleaseRepo>
     <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/redback</distUrlSnapshotRepo>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
