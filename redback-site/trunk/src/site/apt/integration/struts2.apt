@@ -1,5 +1,5 @@
  ----- 
- Webwork Integration
+ Struts2 Integration
  -----
  Olivier Lamy
  ----- 
@@ -27,11 +27,11 @@
 ~~ http://maven.apache.org/guides/mini/guide-apt-format.html
 
 
-Redback Webwork Integration
+Redback Struts2 Integration
 
   <<NOTE>>: This has changed dramatically and may not be correct.
 
- The Webwork integration comes as a war overlay that will integration
+ The Struts2 integration comes as a war overlay that will integration
  smoothly with your web application through some minor configuration in the
  xwork.xml file and the weaving of the relavent components in the
  application.xml or other component declaration file.
@@ -50,10 +50,11 @@ Redback Webwork Integration
  Prior to 1.3 release, you can use a file to auto create the admin user.
  Start your jvm with the following System Property :  -Dredback.admin.creation.file=path to a file with the following properties.
 
++----------------------------
     redback.admin.fullname=
     redback.admin.email=
     redback.admin.password=
-
++----------------------------
 
 * Plugin Configuration
 
