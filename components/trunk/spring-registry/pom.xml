@@ -18,7 +18,7 @@
   <parent>
     <groupId>org.codehaus.redback.components</groupId>
     <artifactId>redback-components</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <relativePath>../redback-components-parent/pom.xml</relativePath>
   </parent>  
   <modelVersion>4.0.0</modelVersion>

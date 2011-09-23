@@ -101,7 +101,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-    </dependency>    
+    </dependency>
   </dependencies>
   <scm>
     <connection>scm:svn:https://svn.codehaus.org/redback/components/trunk/redback-components-parent</connection>
@@ -138,7 +138,7 @@
       </snapshots>
     </repository>
   </repositories>
-  
+
   <build>
     <extensions>
       <extension>
@@ -165,11 +165,11 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>2.1</version>
         <configuration>
-          <useReleaseProfile>true</useReleaseProfile>  
-          <tagBase>https://svn.codehaus.org/redback/plexus-components/tags/</tagBase>
+          <useReleaseProfile>false</useReleaseProfile>
+          <tagBase>https://svn.codehaus.org/redback/components/tags/</tagBase>
           <arguments>-Prelease</arguments>
           <goals>clean deploy</goals>
-        </configuration>    
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -306,6 +306,52 @@
           </plugin>
         </plugins>
       </reporting>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <configuration>
+              <passphrase>${gpg.passphrase}</passphrase>
+              <useAgent>${gpg.useagent}</useAgent>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
