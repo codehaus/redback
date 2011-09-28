@@ -215,7 +215,7 @@ public abstract class AbstractCacheTestCase
         Wine wine = new Wine( "bordeaux", "west/south of France" );
         String key = wine.getName();
         cache.put( key, wine );
-        Thread.sleep( 1000 );
+        Thread.sleep( 500 );
         Object o = cache.get( key );
         assertNotNull( o );
         assertEquals( wine.hashCode(), o.hashCode() );

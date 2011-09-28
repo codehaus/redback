@@ -7,7 +7,7 @@
     <version>1.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>plexus-cache-oscache</artifactId>
+  <artifactId>spring-cache-oscache</artifactId>
   <name>Spring Cache Provider :: oscache</name>
 
   <description>Commons Cache API : oscache implementation.</description>
