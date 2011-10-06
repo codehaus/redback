@@ -117,6 +117,38 @@ Redback Rest Support
 
 +--------------------------------------+
 
+* Client Usage
+
+  Dependencies to add in order to use those REST Services
+
++-------------------------
+
+    <dependency>
+      <groupId>org.codehaus.redback</groupId>
+      <artifactId>redback-rest-api</artifactId>
+      <version>${redbackVersion}</version>
+    </dependency>
+
+    if you use CXF:
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-bundle-jaxrs</artifactId>
+      <version>2.4.2</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-server</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
++-------------------------
+
+  Sample on how to use
+
+%{snippet|id=create-user|url=http://svn.codehaus.org/redback/redback/trunk/redback-integrations/redback-rest/redback-rest-services/src/test/java/org/codehaus/redback/rest/services/LoginServiceTest.java}
+
 
 
 
