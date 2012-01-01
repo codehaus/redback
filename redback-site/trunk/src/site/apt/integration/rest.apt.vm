@@ -104,7 +104,7 @@ Redback Rest Support
    public Boolean deleteUser( @PathParam( "userName" ) String username )
 +--------------------------------------+
 
-   The interceptor will basically check if the user has on of the required permissions.
+   The interceptor will basically check if the user has one of the required permissions.
 
    <<Note all exposed services must be marked with this annotation. If not forbidden http response will be returned.>>
 
