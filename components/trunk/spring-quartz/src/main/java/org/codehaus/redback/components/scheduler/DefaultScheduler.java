@@ -90,9 +90,9 @@ public class DefaultScheduler
         scheduler.getListenerManager().addTriggerListener( listener, new AllMatch() );
     }
 
-    private static class AllMatch<T extends Key> implements Matcher<T>
+    private static class AllMatch<R extends Key<?>> implements Matcher<R>
     {
-        public boolean isMatch( T key )
+        public boolean isMatch( R key )
         {
             return true;
         }
