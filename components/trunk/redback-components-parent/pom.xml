@@ -7,8 +7,8 @@
   <name>Redback Components Parent Project</name>
   <url>http://redback.codehaus.org/components</url>
   <properties>
-    <slf4jVersion>1.6.1</slf4jVersion>
-    <springVersion>3.0.6.RELEASE</springVersion>
+    <slf4jVersion>1.6.4</slf4jVersion>
+    <springVersion>3.1.0.RELEASE</springVersion>
     <distUrlReleaseRepo>dav:https://dav.codehaus.org/repository/redback</distUrlReleaseRepo>
     <distUrlSnapshotRepo>dav:https://dav.codehaus.org/snapshots.repository/redback</distUrlSnapshotRepo>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -144,7 +144,7 @@
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
         <artifactId>wagon-webdav-jackrabbit</artifactId>
-        <version>2.0</version>
+        <version>2.2</version>
       </extension>
     </extensions>
     <plugins>
