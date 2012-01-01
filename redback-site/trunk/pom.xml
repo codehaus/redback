@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.codehaus.redback</groupId>
     <artifactId>redback</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.4</version>
   </parent>
   <artifactId>redback-site</artifactId>
   <name>Redback :: Site</name>
