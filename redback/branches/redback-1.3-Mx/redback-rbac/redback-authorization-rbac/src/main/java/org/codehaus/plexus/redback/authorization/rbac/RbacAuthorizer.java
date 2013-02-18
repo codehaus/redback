@@ -96,11 +96,11 @@ public class RbacAuthorizer
                         }
                     }
 
-                    log.info( "no permission found for operation " +  operation.toString() + " resource " + resource );
+                    log.debug( "no permission found for operation {} resource {}", operation.toString(), resource );
                 }
                 else
                 {
-                    log.info( "permission map does not contain operation: " + operation.toString() );
+                    log.debug( "permission map does not contain operation: {}", operation.toString() );
                 }
             }
             // check if guest user is enabled, if so check the global permissions
