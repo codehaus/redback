@@ -49,7 +49,7 @@
       <s:form action="restore" method="post" validate="true">
         <table>
           <s:textfield name="restoreDirectory" label="Backup directory"
-            size="70" required="true" />
+            size="70" requiredLabel="true" />
           <s:submit value="Restore Backup" theme="simple" />
         </table>         
       </s:form>

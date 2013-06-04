@@ -32,10 +32,10 @@
 <s:form action="password" namespace="/security" theme="xhtml" 
          id="passwordForm" method="post" name="password" cssClass="security password">
   <c:if test="${provideExisting}">
-    <s:password  label="%{getText('password.existing')}" name="existingPassword" size="20" required="true" />
+    <s:password  label="%{getText('password.existing')}" name="existingPassword" size="20" requiredLabel="true" />
   </c:if>
-  <s:password  label="%{getText('password.new')}" name="newPassword" size="20" required="true" />
-  <s:password  label="%{getText('password.new.confirm')}" name="newPasswordConfirm" size="20" required="true" />
+  <s:password  label="%{getText('password.new')}" name="newPassword" size="20" requiredLabel="true" />
+  <s:password  label="%{getText('password.new.confirm')}" name="newPasswordConfirm" size="20" requiredLabel="true" />
   <s:submit value="%{getText('password.change')}" method="submit" />
   <s:submit value="%{getText('cancel')}" method="cancel" />
 </s:form>

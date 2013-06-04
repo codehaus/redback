@@ -27,7 +27,7 @@
 	  <s:label label="%{getText('username')}"         name="user.username" />
 	</redback:isReadOnlyUserManager>
 	<redback:isNotReadOnlyUserManager>
-      <s:textfield label="%{getText('username')}"         name="user.username" size="30" required="true"/>
+      <s:textfield label="%{getText('username')}"         name="user.username" size="30" requiredLabel="true"/>
 	</redback:isNotReadOnlyUserManager>
   </c:otherwise>
 </c:choose>
@@ -38,27 +38,27 @@
     <s:label label="%{getText('full.name')}"         name="user.fullName" />
   </redback:isReadOnlyUserManager>
   <redback:isNotReadOnlyUserManager>
-    <s:textfield label="%{getText('full.name')}"        name="user.fullName" size="30" required="true"/>
+    <s:textfield label="%{getText('full.name')}"        name="user.fullName" size="30" requiredLabel="true"/>
   </redback:isNotReadOnlyUserManager>
   
   <redback:isReadOnlyUserManager>
     <s:label label="%{getText('email.address')}"         name="user.email" />
   </redback:isReadOnlyUserManager>
   <redback:isNotReadOnlyUserManager>
-    <s:textfield label="%{getText('email.address')}"    name="user.email" size="50"    required="true"/>
+    <s:textfield label="%{getText('email.address')}"    name="user.email" size="50"    requiredLabel="true"/>
   </redback:isNotReadOnlyUserManager>
   
   <redback:isNotReadOnlyUserManager>
   <c:choose>
     <c:when test="${self}">
-      <s:password  label="%{getText('current.password')}" name="oldPassword" size="20" required="true"/>
-      <s:password  label="%{getText('new.password')}" name="user.password" size="20" required="true"/>
+      <s:password  label="%{getText('current.password')}" name="oldPassword" size="20" requiredLabel="true"/>
+      <s:password  label="%{getText('new.password')}" name="user.password" size="20" requiredLabel="true"/>
     </c:when>
     <c:otherwise>
-      <s:password  label="%{getText('password')}"         name="user.password" size="20" required="true"/>
+      <s:password  label="%{getText('password')}"         name="user.password" size="20" requiredLabel="true"/>
     </c:otherwise>
   </c:choose>
-  <s:password  label="%{getText('confirm.password')}" name="user.confirmPassword" size="20" required="true"/>
+  <s:password  label="%{getText('confirm.password')}" name="user.confirmPassword" size="20" requiredLabel="true"/>
   </redback:isNotReadOnlyUserManager>
 
 <s:if test="%{user.timestampAccountCreation != null}">
