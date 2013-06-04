@@ -106,4 +106,9 @@ public class ActionProxyStub
             return METHOD;
         }
     }
+
+    public boolean isMethodSpecified()
+    {
+        return false;
+    }
 }

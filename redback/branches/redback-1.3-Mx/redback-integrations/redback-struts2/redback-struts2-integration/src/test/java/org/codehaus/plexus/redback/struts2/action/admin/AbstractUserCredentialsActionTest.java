@@ -24,16 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.conversion.impl.XWorkConverter;
-import com.opensymphony.xwork2.inject.Container;
-import com.opensymphony.xwork2.inject.Scope;
-import com.opensymphony.xwork2.ognl.OgnlReflectionProvider;
-import com.opensymphony.xwork2.util.CompoundRoot;
-import com.opensymphony.xwork2.util.LocalizedTextUtil;
-import com.opensymphony.xwork2.util.TextParseUtil;
-import com.opensymphony.xwork2.util.ValueStack;
-import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
 import net.sf.ehcache.CacheManager;
 
 import org.codehaus.plexus.redback.authentication.AuthenticationException;
@@ -54,6 +44,17 @@ import org.codehaus.plexus.redback.users.UserManager;
 import org.codehaus.plexus.redback.users.UserNotFoundException;
 import org.codehaus.plexus.redback.users.memory.SimpleUser;
 import org.codehaus.plexus.spring.PlexusInSpringTestCase;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.conversion.impl.XWorkConverter;
+import com.opensymphony.xwork2.inject.Container;
+import com.opensymphony.xwork2.inject.Scope;
+import com.opensymphony.xwork2.ognl.OgnlReflectionProvider;
+import com.opensymphony.xwork2.util.CompoundRoot;
+import com.opensymphony.xwork2.util.OgnlTextParser;
+import com.opensymphony.xwork2.util.TextParser;
+import com.opensymphony.xwork2.util.ValueStack;
+import com.opensymphony.xwork2.util.reflection.ReflectionProvider;
 
 public abstract class AbstractUserCredentialsActionTest
     extends PlexusInSpringTestCase
@@ -153,6 +154,10 @@ public abstract class AbstractUserCredentialsActionTest
                 if ( type.getName().equals( XWorkConverter.class.getName() ) )
                 {
                     return (T) new FakeXWorkConverter();
+                }
+                if ( type.getName().equals( TextParser.class.getName() ) )
+                {
+                    return (T) new OgnlTextParser();
                 }
                 return null;
             }
@@ -267,11 +272,17 @@ public abstract class AbstractUserCredentialsActionTest
             {
                 // no op
             }
+            
+            public void setParameter(String expr, Object value) 
+            {
+			    // no op	
+            }
 
             public int size()
             {
                 return 0;
             }
+
         } );
         ActionContext.setContext( actionContext );
     }

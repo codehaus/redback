@@ -66,7 +66,7 @@ public class AssignmentsActionTest
         // This fix allow initialization of ActionContext.getContext() to avoid NPE
         
         ConfigurationManager configurationManager = new ConfigurationManager();
-        configurationManager.addConfigurationProvider( new com.opensymphony.xwork2.config.providers.XWorkConfigurationProvider() );
+        configurationManager.addContainerProvider( new com.opensymphony.xwork2.config.providers.XWorkConfigurationProvider() );
         Configuration config = configurationManager.getConfiguration();
         Container container =  config.getContainer();
         
