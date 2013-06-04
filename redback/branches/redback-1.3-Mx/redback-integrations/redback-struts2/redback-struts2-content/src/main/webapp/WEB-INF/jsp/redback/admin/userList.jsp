@@ -110,8 +110,8 @@
               <s:token/>
               <s:url id="userdeleteUrl" action="userdelete">
                 <s:param name="username">${user.username}</s:param>
-                <s:param name="struts.token.name">struts.token</s:param>
-                <s:param name="struts.token"><s:property value="struts.token"/></s:param>
+                <s:param name="struts.token.name">token</s:param>
+                <s:param name="token"><s:property value="token"/></s:param>
               </s:url>
               <s:a href="%{userdeleteUrl}" title="delete user">
      		  <img src="<c:url value="/images/redback/delete.gif"/>" border="none"/>
