@@ -32,13 +32,13 @@
 <s:form action="register" namespace="/security" theme="xhtml"
          id="registerForm" method="post" name="register" cssClass="security register">     
   
-  <s:textfield label="%{getText('username')}"         name="user.username" size="30" required="true"/>
-  <s:textfield label="%{getText('full.name')}"        name="user.fullName" size="30" required="true"/>
-  <s:textfield label="%{getText('email.address')}"    name="user.email" size="50"    required="true"/>
+  <s:textfield label="%{getText('username')}"         name="user.username" size="30" requiredLabel="true"/>
+  <s:textfield label="%{getText('full.name')}"        name="user.fullName" size="30" requiredLabel="true"/>
+  <s:textfield label="%{getText('email.address')}"    name="user.email" size="50"    requiredLabel="true"/>
 
   <c:if test="${! emailValidationRequired}">
-    <s:password  label="%{getText('password')}"         name="user.password" size="20" required="true"/>
-    <s:password  label="%{getText('confirm.password')}" name="user.confirmPassword" size="20" required="true"/>
+    <s:password  label="%{getText('password')}"         name="user.password" size="20" requiredLabel="true"/>
+    <s:password  label="%{getText('confirm.password')}" name="user.confirmPassword" size="20" requiredLabel="true"/>
   </c:if>
   
   <s:submit value="%{getText('register')}" method="register" />

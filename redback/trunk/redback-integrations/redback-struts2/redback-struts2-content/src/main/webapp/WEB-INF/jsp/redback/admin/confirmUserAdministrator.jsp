@@ -40,7 +40,7 @@
         <strong>edit the account information</strong> for user: <strong>${user.username}</strong>
       </p>
 
-      <s:password label="%{getText('user.admin.password')}" name="userAdminPassword" size="20" required="true"/>
+      <s:password label="%{getText('user.admin.password')}" name="userAdminPassword" size="20" requiredLabel="true"/>
       <s:hidden label="Username"    name="username" />
       <s:hidden name="user.username" value="%{user.username}"/>
       <s:hidden name="user.fullName" value="%{user.fullName}"/>

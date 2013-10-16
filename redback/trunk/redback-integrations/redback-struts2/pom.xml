@@ -25,7 +25,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <struts.version>2.2.3.1</struts.version>
+    <struts.version>2.3.14.2</struts.version>
   </properties>
 
   <dependencyManagement>
@@ -63,5 +63,4 @@
     <module>redback-struts2-content</module>
     <module>redback-struts2-example</module>
   </modules>
-
 </project>

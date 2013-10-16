@@ -31,7 +31,7 @@
 
 <s:form action="passwordReset" namespace="/security" theme="xhtml" 
          id="passwordResetForm" method="post" name="passwordReset" cssClass="security passwordReset">
-  <s:textfield label="%{getText('username')}" name="username" size="30" required="true" />
+  <s:textfield label="%{getText('username')}" name="username" size="30" requiredLabel="true" />
   <s:submit value="%{getText('request.password.reset')}" method="reset" />
   <s:submit value="%{getText('cancel')}" method="cancel" />
 </s:form>
