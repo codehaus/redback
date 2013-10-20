@@ -105,4 +105,12 @@ public class ActionInvocationStub
         
     }
 
+    public ActionInvocation serialize() {
+        return null;
+    }
+
+    public ActionInvocation deserialize(ActionContext actionContext) {
+        return null;
+    }
+
 }
