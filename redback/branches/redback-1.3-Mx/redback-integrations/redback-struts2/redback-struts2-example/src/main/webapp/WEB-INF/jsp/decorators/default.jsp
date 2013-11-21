@@ -92,7 +92,6 @@
             <em><c:out value="${ss.key}" /></em> :
               <c:choose>
                 <c:when test="${ss != null}">
-                  (<c:out value="${ss.value.class.name}" /> ) <br />
                   &nbsp; &nbsp; &nbsp; <c:out value="${ss.value}" />
                 </c:when>
                 <c:otherwise>
@@ -116,7 +115,6 @@
         <em><c:out value="${ss.key}" /></em> : 
           <c:choose>
             <c:when test="${ss.value != null}">
-              (<c:out value="${ss.value.class.name}" /> ) <br />
               &nbsp; &nbsp; &nbsp; <c:out value="${ss.value}" />
             </c:when>
             <c:otherwise>
@@ -134,7 +132,6 @@
         <em><c:out value="${rs.key}" /></em> : 
           <c:choose>
             <c:when test="${rs.value != null}">
-              (<c:out value="${rs.value.class.name}" /> ) <br />
               &nbsp; &nbsp; &nbsp; <c:out value="${rs.value}" />
             </c:when>
             <c:otherwise>
@@ -152,7 +149,6 @@
         <em><c:out value="${ps.key}" /></em> : 
           <c:choose>
             <c:when test="${ps.value != null}">
-              (<c:out value="${ps.value.class.name}" /> ) <br />
               &nbsp; &nbsp; &nbsp; <c:out value="${ps.value}" />
             </c:when>
             <c:otherwise>
