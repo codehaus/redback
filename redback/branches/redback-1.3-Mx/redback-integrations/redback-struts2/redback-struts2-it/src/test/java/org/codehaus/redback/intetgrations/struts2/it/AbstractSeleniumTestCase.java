@@ -51,7 +51,7 @@ public abstract class AbstractSeleniumTestCase
     @BeforeSuite
     public void createSeleniumInstance()
     {
-        baseUrl = "http://localhost:" + System.getProperty( "jetty.port", "8080" );
+        baseUrl = System.getProperty( "baseUrl", "http://localhost:9595/" );
         selenium =
             new DefaultSelenium( "localhost", Integer.valueOf( System.getProperty( "selenium.server", "4444" ) ),
                                  System.getProperty( "selenium.browser", "*firefox" ), baseUrl );

@@ -1,26 +1,275 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version='1.0' encoding='UTF-8'?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>redback-struts2</artifactId>
     <groupId>org.codehaus.redback</groupId>
-    <version>1.3-M1-SNAPSHOT</version>
+    <artifactId>redback-struts2</artifactId>
+    <version>1.3-M3-SNAPSHOT</version>
   </parent>
   <artifactId>redback-struts2-it</artifactId>
   <name>Redback :: Struts 2 Integration Selenium Test Suite</name>
+  <packaging>pom</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>testResources</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>selenium-maven-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <id>start-selenium</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start-server</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop-selenium</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop-server</goal>
+            </goals>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${selenium.version}</version>
+          </dependency> 
+          <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>${selenium.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${selenium.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven2-plugin</artifactId>
+        <version>1.2.3</version>
+        <configuration>
+          <container>
+            <containerId>${container.name}</containerId>
+            <log>${project.build.directory}/logs/${container.name}.log</log>
+            <output>${project.build.directory}/logs/${container.name}.out</output>
+            <timeout>180000</timeout>
+            <systemProperties>
+              <appserver.base>${project.build.directory}</appserver.base>
+              <derby.system.home>${project.build.directory}</derby.system.home>
+              <plexus.system.path>${plexus.system.path}</plexus.system.path>
+            </systemProperties>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+              </dependency>
+              <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+              </dependency>
+              <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+              </dependency>
+            </dependencies>
+          </container>
+          <configuration>
+            <properties>
+              <cargo.servlet.port>9595</cargo.servlet.port>
+              <cargo.jvmargs>${cargo.jvmargs}</cargo.jvmargs>
+              <cargo.datasource.datasource.users>
+                cargo.datasource.driver=org.apache.derby.jdbc.EmbeddedDriver|
+                cargo.datasource.url=jdbc:derby:${project.build.directory}/databases/${container.name}/users;create=true|
+                cargo.datasource.jndi=jdbc/users|
+                cargo.datasource.username=sa
+              </cargo.datasource.datasource.users>
+              <cargo.resource.resource.mail>
+                cargo.resource.name=mail/Session|
+                cargo.resource.type=javax.mail.Session|
+                cargo.resource.factory=org.apache.naming.factory.MailSessionFactory|
+                cargo.resource.parameters=mail.smtp.host=localhost
+              </cargo.resource.resource.mail>
+            </properties>
+          </configuration>
+          <deployables>
+            <deployable>
+              <artifactId>redback-struts2-example</artifactId>
+              <type>war</type>
+              <properties>
+                <context>/</context>
+              </properties>
+            </deployable>
+          </deployables>
+        </configuration>
+        <executions>
+          <execution>
+            <id>start-container</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop-container</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <!-- Better to be able to see the results output from the listener as we go -->
+          <redirectTestOutputToFile>false</redirectTestOutputToFile>
+          <suiteXmlFiles>
+            <suiteXmlFile>src/test/testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+        <executions>
+          <execution>
+            <id>integration-tests</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+            <configuration>
+              <systemProperties>
+                <property>
+                  <name>baseUrl</name>
+                  <value>${baseUrl}</value>
+                </property>
+                <property>
+                  <name>browser</name>
+                  <value>${browser}</value>
+                </property>
+                <property>
+                  <name>seleniumHost</name>
+                  <value>${seleniumHost}</value>
+                </property>
+                <property>
+                  <name>seleniumPort</name>
+                  <value>${seleniumPort}</value>
+                </property>
+              </systemProperties>
+            </configuration>
+          </execution>
+          <execution>
+            <id>verify-integration-tests</id>
+            <goals>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>selenium-maven-plugin</artifactId>
+          <version>2.3</version>
+          <configuration>
+            <port>${seleniumPort}</port>
+            <background>true</background>
+            <logOutput>true</logOutput>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
   <dependencies>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.2.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- deployables -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>redback-struts2-example</artifactId>
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
+
+    <!-- container dependencies -->
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!-- dependencies below are for code in src/test/it -->
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-utils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium.server</groupId>
+      <artifactId>selenium-server</artifactId>
+      <version>1.0.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium.client-drivers</groupId>
       <artifactId>selenium-java-client-driver</artifactId>
       <version>1.0.1</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>httpunit</groupId>
@@ -35,150 +284,98 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <classifier>jdk15</classifier>
-      <version>5.7</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>1.3.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <properties>
-            <property>
-              <name>listener</name>
-              <value>org.codehaus.redback.intetgrations.struts2.it.CaptureScreenShotsListener</value>
-            </property>
-          </properties>
-          <systemProperties>
-            <systemProperty>
-              <name>jetty.port</name>
-              <value>${jetty.port}</value>
-            </systemProperty>
-            <systemProperty>
-              <name>jetty.port.stop</name>
-              <value>${jetty.port.stop}</value>
-            </systemProperty>
-            <systemProperty>
-              <name>selenium.server</name>
-              <value>${selenium.server}</value>
-            </systemProperty>
-          </systemProperties>
-        </configuration>        
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>selenium-maven-plugin</artifactId>
-        <version>1.0.1</version>
-        <configuration>
-          <background>true</background>
-          <logOutput>true</logOutput>
-          <port>${selenium.port}</port>
-        </configuration>
-        <executions>
-          <execution>
-            <id>start</id>
-            <phase>process-test-classes</phase>
-            <goals>
-              <goal>start-server</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>stop</id>
-            <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop-server</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.11</version>
-        <configuration>
-          <contextPath>/</contextPath>
-          <jettyEnvXml>${basedir}/src/jetty-env.xml</jettyEnvXml>
-          <stopKey>STOP</stopKey>
-          <stopPort>${jetty.port.stop}</stopPort>
-          <classesDirectory>target/dependency/WEB-INF/classes</classesDirectory>
-          <webAppSourceDirectory>target/dependency</webAppSourceDirectory>
-          <systemProperties>
-            <systemProperty>
-              <name>appserver.base</name>
-              <value>${basedir}/target/appserver-base</value>
-            </systemProperty>
-            <systemProperty>
-              <name>plexus.home</name>
-              <value>${basedir}/target/appserver-base</value>
-            </systemProperty>
-          </systemProperties>
-          <connectors>
-            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-              <port>${jetty.port}</port>
-              <maxIdleTime>60000</maxIdleTime>
-            </connector>
-          </connectors>
-        </configuration>
-        <executions>
-          <execution>
-            <id>start-jetty</id>
-            <phase>process-test-classes</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <daemon>true</daemon>
-            </configuration>
-          </execution>
-          <execution>
-            <id>stop-jetty</id>
-            <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-          </execution>
-        </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.1.3.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeArtifactIds>redback-struts2-example</includeArtifactIds>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-  <properties>
-    <selenium.port>4444</selenium.port>
-    <jetty.port>8080</jetty.port>
-    <jetty.port.stop>8081</jetty.port.stop>
-  </properties>
+
   <profiles>
+    <profile>
+      <id>disable-cargo</id>
+      <activation>
+        <property>
+          <name>baseUrl</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.cargo</groupId>
+              <artifactId>cargo-maven2-plugin</artifactId>
+              <configuration>
+                <skip>true</skip>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+    <profile>
+      <id>disable-selenium-server</id>
+      <activation>
+        <property>
+          <name>seleniumHost</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>selenium-maven-plugin</artifactId>
+              <configuration>
+                <skip>true</skip>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+    <profile>
+      <id>firefox</id>
+      <properties>
+        <browser>*firefox</browser>
+      </properties>
+    </profile>
+    <profile>
+      <id>iexplore</id>
+      <activation>
+        <property>
+          <name>browser</name>
+          <value>iexplore</value>
+        </property>
+      </activation>
+      <properties>
+        <browser>*iexplore</browser>
+      </properties>
+    </profile>
+    <profile>
+      <id>safari</id>
+      <activation>
+        <property>
+          <name>browser</name>
+          <value>safari</value>
+        </property>
+      </activation>
+      <properties>
+        <browser>*safari</browser>
+      </properties>
+    </profile>
+    <profile>
+      <id>otherbrowser</id>
+      <activation>
+        <property>
+          <name>browser</name>
+          <value>other</value>
+        </property>
+      </activation>
+      <properties>
+        <browser>*custom ${browserPath}</browser>
+      </properties>
+    </profile>
     <profile>
       <id>headless</id>
       <build>
@@ -186,7 +383,6 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>selenium-maven-plugin</artifactId>
-            <version>1.0.1</version>
             <executions>
               <execution>
                 <id>xvfb</id>
@@ -200,5 +396,111 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>reporting</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>report-only</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>report-only</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>tomcat7x</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <!-- -DseleniumHost profile cancels this, so we need to trigger on that as well -->
+        <property>
+          <name>seleniumHost</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.cargo</groupId>
+              <artifactId>cargo-maven2-plugin</artifactId>
+              <configuration>
+                <container>
+                  <zipUrlInstaller>
+                    <url>
+                      http://archive.apache.org/dist/tomcat/tomcat-7/v${tomcat7x.version}/bin/apache-tomcat-${tomcat7x.version}.zip
+                    </url>
+                    <downloadDir>${user.home}/.cargo</downloadDir>
+                  </zipUrlInstaller>
+                </container>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+      <properties>
+        <container.name>tomcat7x</container.name>
+        <tomcat7x.version>7.0.29</tomcat7x.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>jetty7x</id>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.codehaus.cargo</groupId>
+              <artifactId>cargo-maven2-plugin</artifactId>
+              <configuration>
+                <container>
+                  <artifactInstaller>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-distribution</artifactId>
+                    <version>${jetty7x.version}</version>
+                  </artifactInstaller>
+                </container>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+      <properties>
+        <container.name>jetty7x</container.name>
+        <jetty7x.version>7.6.5.v20120716</jetty7x.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>debug</id>
+      <properties>
+        <cargo.jvmargs>
+          -Xmx512m
+          -XX:MaxPermSize=128m
+          -Xdebug
+          -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+          -Xnoagent
+          -Djava.compiler=NONE
+        </cargo.jvmargs>
+      </properties>
+    </profile>
   </profiles>
+  <properties>
+    <seleniumHost>localhost</seleniumHost>
+    <seleniumPort>4444</seleniumPort>
+    <baseUrl>http://localhost:9595/</baseUrl>
+    <browser>*firefox</browser>
+    <browserPath/>
+    <cargo.jvmargs>-Xmx512m -XX:MaxPermSize=128m</cargo.jvmargs>
+    <plexus.system.path/>
+<!--
+    <selenium.version>2.35.0</selenium.version>
+-->
+    <selenium.version>2.21.0</selenium.version>
+  </properties>
 </project>
