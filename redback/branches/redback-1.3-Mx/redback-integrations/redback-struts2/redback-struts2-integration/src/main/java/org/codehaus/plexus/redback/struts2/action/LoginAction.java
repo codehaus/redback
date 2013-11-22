@@ -80,6 +80,8 @@ public class LoginAction
 
     private boolean rememberMe;
 
+    private boolean cancel;
+
     /**
      * @plexus.requirement
      */
@@ -89,7 +91,7 @@ public class LoginAction
      * @plexus.requirement
      */
     private UserConfiguration config;
-    
+
     // ------------------------------------------------------------------
     // Action Entry Points - (aka Names)
     // ------------------------------------------------------------------
@@ -108,6 +110,11 @@ public class LoginAction
      */
     public String login()
     {
+        if ( cancel )
+        {
+            return CANCEL;
+        }
+
         if ( StringUtils.isNotEmpty( validateMe ) )
         {
             // Process a login / validate request.
@@ -309,6 +316,10 @@ public class LoginAction
         this.rememberMe = rememberMe;
     }
 
+    public void setCancel( String cancel )
+    {
+        this.cancel = "Cancel".equals(cancel);
+    }
 
     /**
      * 1) attempts to authentication based on the passed in data source
