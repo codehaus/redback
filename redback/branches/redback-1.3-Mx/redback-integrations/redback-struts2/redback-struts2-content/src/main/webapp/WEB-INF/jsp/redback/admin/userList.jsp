@@ -46,7 +46,7 @@
 <td><ec:table 
     var="user" 
     items="users" 
-    action="${pageContext.request.contextPath}/security/userlist!show.action"
+    action="${pageContext.request.contextPath}/security/userlist.action"
     imagePath="${pageContext.request.contextPath}/images/redback/table/*.gif"
     autoIncludeParameters="false"
     title="Users"
@@ -158,7 +158,7 @@
     <redback:isNotReadOnlyUserManager>
     <redback:ifAuthorized permission="user-management-user-create">
       <div class="task createUser">
-        <s:form action="usercreate!show" namespace="/security" theme="simple" method="post">
+        <s:form action="usercreate" namespace="/security" theme="simple" method="post">
           <s:token/>
           <s:submit cssClass="button" value="%{getText('user.list.create.new.user')}" />
         </s:form>
@@ -167,7 +167,7 @@
     </redback:isNotReadOnlyUserManager>
 
     <div class="task showRoles">
-      <s:form action="userlist!show" namespace="/security" theme="simple" method="get">
+      <s:form action="userlist" namespace="/security" theme="simple" method="get">
         <s:submit cssClass="button" value="%{getText('user.list.show.users.in.role')}" />
         <s:select list="roles"
                    name="roleName"
@@ -199,7 +199,7 @@
           </td>
           <td class="reportViews">
           <c:forEach items="${reportEntry.value}" var="report" varStatus="status">
-            <a href="<c:url value="/security/report!generate.action?reportId=${report.value.id}&reportType=${report.value.type}"/>" 
+            <a href="<c:url value="/security/report.action?reportId=${report.value.id}&reportType=${report.value.type}"/>"
               title="${report.value.name} Report (${report.value.type} type)"><img 
               src="<c:url value="/images/redback/table/${report.value.type}.gif"/>" /></a>
           </c:forEach>

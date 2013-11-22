@@ -318,7 +318,7 @@ public class LoginAction
 
     public void setCancel( String cancel )
     {
-        this.cancel = "Cancel".equals(cancel);
+        this.cancel = StringUtils.isNotEmpty( cancel );
     }
 
     /**

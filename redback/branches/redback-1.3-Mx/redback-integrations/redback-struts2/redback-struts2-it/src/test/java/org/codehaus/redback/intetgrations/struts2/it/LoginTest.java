@@ -118,7 +118,7 @@ public class LoginTest
         String value = selenium.getCookieByName( "rbkSignon" );
         WebConversation wc = new WebConversation();
         WebRequest req =
-            new GetMethodWebRequest( baseUrl + "/security/report!generate.action?reportId=userlist&reportType=csv" );
+            new GetMethodWebRequest( baseUrl + "/security/report.action?reportId=userlist&reportType=csv" );
         wc.putCookie( "rbkSignon", value );
         WebResponse resp = wc.getResponse( req );
 

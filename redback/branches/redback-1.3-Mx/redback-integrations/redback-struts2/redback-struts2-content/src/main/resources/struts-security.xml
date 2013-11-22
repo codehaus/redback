@@ -211,6 +211,11 @@
     <action name="usercreate" class="redback-admin-user-create" method="show">
       <result name="input">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
+    </action>
+
+    <action name="usercreate_submit" class="redback-admin-user-create" method="submit">
+      <result name="input">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
+      <result name="error">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
       <result name="success" type="redirectAction">
         <param name="actionName">assignments</param>
         <param name="principal">${user.username}</param>
@@ -221,6 +226,13 @@
     </action>
 
     <action name="userdelete" class="redback-admin-user-delete" method="confirm">
+      <result name="input">/WEB-INF/jsp/redback/admin/userDelete.jsp</result>
+      <result name="error" type="redirectAction">userlist</result>
+      <result name="success" type="redirectAction">userlist</result>
+      <result name="cancel" type="redirectAction">userlist</result>
+    </action>
+
+    <action name="userdelete_submit" class="redback-admin-user-delete" method="submit">
       <result name="input">/WEB-INF/jsp/redback/admin/userDelete.jsp</result>
       <result name="error" type="redirectAction">userlist</result>
       <result name="success" type="redirectAction">userlist</result>
