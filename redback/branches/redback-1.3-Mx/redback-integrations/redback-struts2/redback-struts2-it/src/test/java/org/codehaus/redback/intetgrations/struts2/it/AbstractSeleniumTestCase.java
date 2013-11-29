@@ -52,9 +52,8 @@ public abstract class AbstractSeleniumTestCase
     public void createSeleniumInstance()
     {
         baseUrl = System.getProperty( "baseUrl", "http://localhost:9595/" );
-        selenium =
-            new DefaultSelenium( "localhost", Integer.valueOf( System.getProperty( "selenium.server", "4444" ) ),
-                                 System.getProperty( "selenium.browser", "*firefox" ), baseUrl );
+        selenium = new DefaultSelenium( "localhost", Integer.valueOf( System.getProperty( "selenium.server", "4444" ) ),
+                                        System.getProperty( "selenium.browser", "*firefox" ), baseUrl );
         selenium.start();
     }
 
@@ -64,4 +63,59 @@ public abstract class AbstractSeleniumTestCase
         selenium.stop();
     }
 
+    protected void createUser( String username, String password, String name, String email,
+                               boolean forcePasswordChange )
+    {
+        doLogin( ADMIN_USERNAME, ADMIN_PASSWORD );
+
+        selenium.open( "/security/userlist.action" );
+
+        if ( !selenium.isElementPresent( "link=" + username ) )
+        {
+            createUserNoRoles( username, password, name, email );
+
+            selenium.click( "addRolesToUser_submitRolesButton" );
+            selenium.waitForPageToLoad( PAGE_TIMEOUT );
+
+            if ( !forcePasswordChange )
+            {
+                selenium.click( "link=" + username );
+                selenium.waitForPageToLoad( PAGE_TIMEOUT );
+                selenium.uncheck( "userEditForm_user_passwordChangeRequired" );
+                submit();
+            }
+        }
+    }
+
+    protected void createUserNoRoles( String username, String password, String name, String email )
+    {
+        selenium.click( "usercreate_0" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+        selenium.type( "userCreateForm_user_username", username );
+        selenium.type( "userCreateForm_user_fullName", name );
+        selenium.type( "userCreateForm_user_email", email );
+        selenium.type( "userCreateForm_user_password", password );
+        selenium.type( "userCreateForm_user_confirmPassword", password );
+        selenium.click( "userCreateForm_0" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+    }
+
+    protected void submit()
+    {
+        selenium.click( "//input[@type='submit']" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+    }
+
+    protected void deleteUser( String username )
+    {
+        doLogin( ADMIN_USERNAME, ADMIN_PASSWORD );
+
+        selenium.open( "/security/userlist.action" );
+        selenium.click( "//tr[.//a[text()='" + username + "']]/td/a[@title='delete user']" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+
+        assert selenium.isTextPresent( "[Admin] User Delete" );
+
+        submit();
+    }
 }
