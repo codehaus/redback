@@ -83,7 +83,7 @@ public class LoginTest
         selenium.type( "passwordForm_existingPassword", "user1" );
         selenium.type( "passwordForm_newPassword", "user2" );
         selenium.type( "passwordForm_newPasswordConfirm", "user2" );
-        selenium.click( "passwordForm__submit" );
+        selenium.click( "passwordForm_0" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
     }
 

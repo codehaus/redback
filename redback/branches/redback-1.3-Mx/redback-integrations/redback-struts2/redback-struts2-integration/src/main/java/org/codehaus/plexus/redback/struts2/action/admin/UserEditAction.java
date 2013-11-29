@@ -88,6 +88,8 @@ public class UserEditAction
 
     public static String CONFIRM_ERROR = "confirmError";
 
+    private boolean cancel;
+
     // ------------------------------------------------------------------
     // Action Entry Points - (aka Names)
     // ------------------------------------------------------------------
@@ -177,6 +179,11 @@ public class UserEditAction
 
     public String submit()
     {
+        if ( cancel )
+        {
+            return cancel();
+        }
+
         if ( getUsername() == null )
         {
             addActionError( getText( "cannot.edit.user.null.username" ) );
@@ -355,6 +362,11 @@ public class UserEditAction
     public void setUser( AdminEditUserCredentials user )
     {
         this.user = user;
+    }
+
+    public void setCancel( String cancel )
+    {
+        this.cancel = StringUtils.isNotEmpty( cancel );
     }
 
     public SecureActionBundle initSecureActionBundle()

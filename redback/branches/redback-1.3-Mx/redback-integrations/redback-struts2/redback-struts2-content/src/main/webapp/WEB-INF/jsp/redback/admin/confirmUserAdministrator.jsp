@@ -32,7 +32,7 @@
 
 <redback:ifAuthorized permission="user-management-user-edit" resource="${user.username}">
 
-  <s:form action="useredit" namespace="/security" theme="xhtml"
+  <s:form action="useredit_confirmAdminPassword" namespace="/security" theme="xhtml"
          id="userEditForm" method="post" cssClass="security userEdit">
     <redback:isNotReadOnlyUserManager>
       <p>
@@ -53,8 +53,8 @@
       <s:hidden name="user.locked" value="%{user.locked}"/>
       <s:hidden name="user.passwordChangeRequired" value="%{user.passwordChangeRequired}"/>
       <s:hidden name="method:confirmAdminPassword" value="Submit"/>
-      <s:submit value="%{getText('submit')}" method="confirmAdminPassword" />
-      <s:submit value="%{getText('cancel')}" method="cancel" />
+      <s:submit value="%{getText('submit')}" />
+      <s:submit value="%{getText('cancel')}" name="cancel" />
     </redback:isNotReadOnlyUserManager>
   </s:form>
 </redback:ifAuthorized>

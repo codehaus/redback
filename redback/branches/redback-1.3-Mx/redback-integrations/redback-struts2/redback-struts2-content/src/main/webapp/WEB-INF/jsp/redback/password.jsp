@@ -29,15 +29,15 @@
 
 <%@ include file="/WEB-INF/jsp/redback/include/formValidationResults.jsp" %>
 
-<s:form action="password" namespace="/security" theme="xhtml" 
+<s:form action="password_submit" namespace="/security" theme="xhtml"
          id="passwordForm" method="post" name="password" cssClass="security password">
   <c:if test="${provideExisting}">
     <s:password  label="%{getText('password.existing')}" name="existingPassword" size="20" requiredLabel="true" />
   </c:if>
   <s:password  label="%{getText('password.new')}" name="newPassword" size="20" requiredLabel="true" />
   <s:password  label="%{getText('password.new.confirm')}" name="newPasswordConfirm" size="20" requiredLabel="true" />
-  <s:submit value="%{getText('password.change')}" method="submit" />
-  <s:submit value="%{getText('cancel')}" method="cancel" />
+  <s:submit value="%{getText('password.change')}" />
+  <s:submit value="%{getText('cancel')}" name="cancel" />
 </s:form>
 
 <ul class="tips">

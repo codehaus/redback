@@ -27,10 +27,6 @@ public class ActionProxyStub
 
     public static final String NAMESPACE = "namespace";
 
-    public static final String METHOD = "method";
-
-    private String methodName;
-
     private String actionName;
 
     public Object getAction()
@@ -90,21 +86,9 @@ public class ActionProxyStub
         return null;
     }
 
-    public void setMethod( String name )
-    {
-        methodName = name;
-    }
-
     public String getMethod()
     {
-        if ( methodName != null )
-        {
-            return methodName;
-        }
-        else
-        {
-            return METHOD;
-        }
+        return null;
     }
 
     public boolean isMethodSpecified()

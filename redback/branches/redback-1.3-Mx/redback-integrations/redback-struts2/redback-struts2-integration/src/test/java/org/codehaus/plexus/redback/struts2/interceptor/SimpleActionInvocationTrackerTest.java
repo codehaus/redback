@@ -58,7 +58,6 @@ public class SimpleActionInvocationTrackerTest
         Map<String,Object> parametersMap = actionInvocation.getParametersMap();
 
         assertEquals( ActionProxyStub.ACTION_NAME, actionInvocation.getActionName() );
-        assertEquals( ActionProxyStub.METHOD, actionInvocation.getMethodName() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );
@@ -67,7 +66,6 @@ public class SimpleActionInvocationTrackerTest
 
         ActionProxyStub proxyStub = (ActionProxyStub) actionInvocationStub.getProxy();
         proxyStub.setActionName( "new_action" );
-        proxyStub.setMethod( "new_method" );
 
         ActionContextStub actionContextStub = (ActionContextStub) actionInvocationStub.getInvocationContext();
         actionContextStub.getParameters().put( "new_parameter", "new_value" );
@@ -80,7 +78,6 @@ public class SimpleActionInvocationTrackerTest
         parametersMap = actionInvocation.getParametersMap();
 
         assertEquals( "new_action", actionInvocation.getActionName() );
-        assertEquals( "new_method", actionInvocation.getMethodName() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );
@@ -91,7 +88,6 @@ public class SimpleActionInvocationTrackerTest
         parametersMap = actionInvocation.getParametersMap();
 
         assertEquals( ActionProxyStub.ACTION_NAME, actionInvocation.getActionName() );
-        assertEquals( ActionProxyStub.METHOD, actionInvocation.getMethodName() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );

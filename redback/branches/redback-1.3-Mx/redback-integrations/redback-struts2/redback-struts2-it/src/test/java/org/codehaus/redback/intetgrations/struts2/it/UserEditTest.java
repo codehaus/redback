@@ -116,13 +116,13 @@ public class UserEditTest
         selenium.type( "userEditForm_user_password", "user0" );
         selenium.type( "userEditForm_user_confirmPassword", "user0" );
         selenium.click( "userEditForm_user_passwordChangeRequired" );
-        selenium.click( "userEditForm__submit" );
+        selenium.click( "userEditForm_0" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
 
         assert selenium.getTitle().contains( "[Admin] User Edit - Confirm Administrator Password" );
 
         selenium.type( "userEditForm_userAdminPassword", ADMIN_PASSWORD );
-        selenium.click( "userEditForm__confirmAdminPassword" );
+        selenium.click( "userEditForm_0" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
         //assert selenium.getTitle().contains( "[Admin] User List" );
 
@@ -135,7 +135,7 @@ public class UserEditTest
         selenium.type( "passwordForm_existingPassword", "user0" );
         selenium.type( "passwordForm_newPassword", "user3" );
         selenium.type( "passwordForm_newPasswordConfirm", "user3" );
-        selenium.click( "passwordForm__submit" );
+        selenium.click( "passwordForm_0" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
         assert selenium.isTextPresent( "Password successfully changed" );
     }

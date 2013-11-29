@@ -31,15 +31,15 @@
 <h2><s:text name="user.edit.section.title"/></h2>
 
 <redback:ifAuthorized permission="user-management-user-edit" resource="${user.username}">
-  <s:form action="useredit" namespace="/security" theme="xhtml"
+  <s:form action="useredit_submit" namespace="/security" theme="xhtml"
          id="userEditForm" method="post" name="useredit" cssClass="security userEdit">
     <%@ include file="/WEB-INF/jsp/redback/include/userCredentials.jsp" %>
     <redback:isNotReadOnlyUserManager>
       <s:checkbox label="%{getText('user.edit.locked.user')}" name="user.locked" />
       <s:checkbox label="%{getText('user.edit.force.user.change.password')}" name="user.passwordChangeRequired" />    
       <s:hidden label="Username"    name="username" />
-      <s:submit value="%{getText('update')}" method="submit" />
-      <s:submit value="%{getText('cancel')}" method="cancel" />
+      <s:submit value="%{getText('update')}" />
+      <s:submit value="%{getText('cancel')}" name="cancel" />
     </redback:isNotReadOnlyUserManager>
   </s:form>
   

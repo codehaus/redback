@@ -130,7 +130,7 @@
 <td>
     <redback:ifAuthorized permission="user-management-user-create">
       <div class="task createUser">
-        <s:form action="usercreate!show" namespace="/security" theme="simple" method="post">
+        <s:form action="usercreate" namespace="/security" theme="simple" method="post">
           <s:submit cssClass="button" value="Create New User" />
         </s:form>
       </div>
