@@ -57,6 +57,22 @@ public abstract class AbstractSeleniumTestCase
         selenium.start();
     }
 
+    @BeforeSuite( dependsOnMethods = "createSeleniumInstance" )
+    public void createAdminPage()
+    {
+        selenium.open( "/" );
+
+        if ( selenium.isTextPresent( "Create Admin User" ) )
+        {
+            selenium.type( "adminCreateForm_user_fullName", "Admin User" );
+            selenium.type( "adminCreateForm_user_email", "admin@localhost" );
+            selenium.type( "adminCreateForm_user_password", ADMIN_PASSWORD );
+            selenium.type( "adminCreateForm_user_confirmPassword", ADMIN_PASSWORD );
+            selenium.click( "adminCreateForm_0" );
+            selenium.waitForPageToLoad( PAGE_TIMEOUT );
+        }
+    }
+
     @AfterSuite
     public void shutdownSelenium()
     {
@@ -108,6 +124,12 @@ public abstract class AbstractSeleniumTestCase
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
     }
 
+    protected void cancel()
+    {
+        selenium.click( "//input[@name='cancel']" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+    }
+
     protected void deleteUser( String username )
     {
         doLogin( ADMIN_USERNAME, ADMIN_PASSWORD );
@@ -126,5 +148,10 @@ public abstract class AbstractSeleniumTestCase
         selenium.type( "userEditForm_userAdminPassword", ADMIN_PASSWORD );
         selenium.click( "userEditForm_0" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
+    }
+
+    protected void assertMainPage()
+    {
+        assert selenium.isTextPresent( "This is the example mainpage" );
     }
 }
