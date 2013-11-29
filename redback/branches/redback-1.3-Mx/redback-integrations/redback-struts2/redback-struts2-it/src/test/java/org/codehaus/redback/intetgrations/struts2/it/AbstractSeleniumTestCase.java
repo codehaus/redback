@@ -83,6 +83,8 @@ public abstract class AbstractSeleniumTestCase
                 selenium.waitForPageToLoad( PAGE_TIMEOUT );
                 selenium.uncheck( "userEditForm_user_passwordChangeRequired" );
                 submit();
+
+                confirmAdminPassword();
             }
         }
     }
@@ -117,5 +119,12 @@ public abstract class AbstractSeleniumTestCase
         assert selenium.isTextPresent( "[Admin] User Delete" );
 
         submit();
+    }
+
+    protected void confirmAdminPassword()
+    {
+        selenium.type( "userEditForm_userAdminPassword", ADMIN_PASSWORD );
+        selenium.click( "userEditForm_0" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
     }
 }

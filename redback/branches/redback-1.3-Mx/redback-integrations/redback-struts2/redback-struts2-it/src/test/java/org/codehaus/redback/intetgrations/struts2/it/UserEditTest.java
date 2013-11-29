@@ -121,10 +121,7 @@ public class UserEditTest
 
         assert selenium.getTitle().contains( "[Admin] User Edit - Confirm Administrator Password" );
 
-        selenium.type( "userEditForm_userAdminPassword", ADMIN_PASSWORD );
-        selenium.click( "userEditForm_0" );
-        selenium.waitForPageToLoad( PAGE_TIMEOUT );
-        //assert selenium.getTitle().contains( "[Admin] User List" );
+        confirmAdminPassword();
 
         selenium.click( "link=Logout" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
@@ -139,4 +136,5 @@ public class UserEditTest
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
         assert selenium.isTextPresent( "Password successfully changed" );
     }
+
 }
