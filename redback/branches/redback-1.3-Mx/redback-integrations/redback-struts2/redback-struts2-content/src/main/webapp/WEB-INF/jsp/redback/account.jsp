@@ -30,15 +30,15 @@
 
 <h2><s:text name="account.details.section.title"/></h2>
    
-<s:form action="account" namespace="/security" theme="xhtml"
+<s:form action="account_submit" namespace="/security" theme="xhtml"
          id="registerForm" method="post" name="register" cssClass="security register">     
   <%@ include file="/WEB-INF/jsp/redback/include/userCredentials.jsp" %>
   <redback:isReadOnlyUserManager>
-  	<s:submit value="%{getText('goback')}" method="cancel" />
+  	<s:submit value="%{getText('goback')}" name="cancel" />
   </redback:isReadOnlyUserManager>
   <redback:isNotReadOnlyUserManager>
-    <s:submit value="%{getText('submit')}" method="submit" />
-    <s:submit value="%{getText('cancel')}" method="cancel" />
+    <s:submit value="%{getText('submit')}" />
+    <s:submit value="%{getText('cancel')}" name="cancel" />
   </redback:isNotReadOnlyUserManager>
 </s:form>
 
