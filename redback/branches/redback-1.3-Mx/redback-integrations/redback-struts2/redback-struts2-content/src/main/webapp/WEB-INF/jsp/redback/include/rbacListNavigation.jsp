@@ -18,10 +18,10 @@
 
 <div class="rbac-navigation-bar">
 
-<s:url id="rolesUrl" action="roles" namespace="/security" method="list"/>
-<s:url id="permissionsUrl" action="permissions" namespace="/security" method="list"/>
-<s:url id="operationsUrl" action="operations" namespace="/security" method="list"/>
-<s:url id="resourcesUrl" action="resources" namespace="/security" method="list"/>
+<s:url id="rolesUrl" action="roles" namespace="/security" />
+<s:url id="permissionsUrl" action="permissions" namespace="/security" />
+<s:url id="operationsUrl" action="operations" namespace="/security" />
+<s:url id="resourcesUrl" action="resources" namespace="/security" />
 
 <s:a href="%{rolesUrl}"><s:text name="roles"/></s:a> | 
 <s:a href="%{permissionsUrl}"><s:text name="permissions"/></s:a> | 

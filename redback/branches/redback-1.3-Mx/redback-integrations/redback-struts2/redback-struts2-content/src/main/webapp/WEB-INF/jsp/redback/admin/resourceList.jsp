@@ -31,7 +31,7 @@
 
 <%@ include file="/WEB-INF/jsp/redback/include/formValidationResults.jsp" %>
 
-<s:form action="resources!remove" method="post" theme="simple">
+<s:form action="resources_remove" method="post" theme="simple">
 
   <table>
 

@@ -298,6 +298,9 @@
 
     <action name="rolecreate" class="redback-role-create" method="show">
       <result name="input">/WEB-INF/jsp/redback/admin/roleCreate.jsp</result>
+    </action>
+
+    <action name="rolecreate_submit" class="redback-role-create" method="submit">
       <result name="error">/WEB-INF/jsp/redback/admin/roleCreate.jsp</result>
       <result name="success" type="redirectAction">userlist</result>
       <interceptor-ref name="securedStack">
@@ -360,7 +363,15 @@
       <result name="list">/WEB-INF/jsp/redback/admin/operationList.jsp</result>
     </action>
 
+    <action name="operations_remove" class="redback-operations" method="remove">
+      <result name="list">/WEB-INF/jsp/redback/admin/operationList.jsp</result>
+    </action>
+
     <action name="resources" class="redback-resources" method="list">
+      <result name="list">/WEB-INF/jsp/redback/admin/resourceList.jsp</result>
+    </action>
+
+    <action name="resources_remove" class="redback-resources" method="remove">
       <result name="list">/WEB-INF/jsp/redback/admin/resourceList.jsp</result>
     </action>
 
