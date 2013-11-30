@@ -60,6 +60,8 @@ public class PasswordResetAction
 
     private String username;
 
+    private boolean cancel;
+
     // ------------------------------------------------------------------
     // Action Entry Points - (aka Names)
     // ------------------------------------------------------------------
@@ -71,6 +73,11 @@ public class PasswordResetAction
 
     public String reset()
     {
+        if ( cancel )
+        {
+            return cancel();
+        }
+
         if ( StringUtils.isEmpty( username ) )
         {
             addFieldError( "username", getText( "username.cannot.be.empty" ) );
@@ -143,4 +150,8 @@ public class PasswordResetAction
         this.username = username;
     }
 
+    public void setCancel( String cancel )
+    {
+        this.cancel = StringUtils.isNotEmpty( cancel );
+    }
 }

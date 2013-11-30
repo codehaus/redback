@@ -45,7 +45,7 @@ public class LoginTest
     @BeforeClass
     public void createUser1()
     {
-        createUser( USERNAME, PASSWORD, "User", "user@localhost", true );
+        createUser( USERNAME, PASSWORD, "User", "user@localhost" );
     }
 
     @Test

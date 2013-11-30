@@ -161,6 +161,11 @@
       <result name="none">/WEB-INF/jsp/redback/login.jsp</result>
     </action>
 
+    <action name="passwordReset_submit" class="redback-password-reset" method="reset">
+      <result name="input">/WEB-INF/jsp/redback/requestPasswordReset.jsp</result>
+      <result name="none">/WEB-INF/jsp/redback/login.jsp</result>
+    </action>
+
     <action name="addadmin" class="redback-admin-account" method="show">
       <interceptor-ref name="defaultStack"/>
       <result name="input">/WEB-INF/jsp/redback/admin/createAdmin.jsp</result>

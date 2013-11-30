@@ -29,7 +29,7 @@ public class UserDeleteTest
     @BeforeClass
     public void createUser()
     {
-        createUser( USERNAME, PASSWORD, "Delete User", "deluser@localhost", true );
+        createUser( USERNAME, PASSWORD, "Delete User", "deluser@localhost" );
     }
 
     @Test

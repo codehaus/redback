@@ -28,7 +28,7 @@ public class UserCreateTest
     @Test
     public void createUser()
     {
-        createUser( USERNAME, PASSWORD, "New User", "newuser@localhost", true );
+        createUser( USERNAME, PASSWORD, "New User", "newuser@localhost" );
 
         selenium.open( "/security/userlist.action" );
         assert selenium.isElementPresent( "link=newuser" );

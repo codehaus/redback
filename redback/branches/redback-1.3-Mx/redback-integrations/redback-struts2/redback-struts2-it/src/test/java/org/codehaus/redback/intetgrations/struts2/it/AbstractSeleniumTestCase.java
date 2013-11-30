@@ -167,4 +167,9 @@ public abstract class AbstractSeleniumTestCase
     {
         assert selenium.isTextPresent( "This is the example mainpage" );
     }
+
+    protected void createUser( String username, String password, String name, String email )
+    {
+        createUser( username, password, name, email, true );
+    }
 }
