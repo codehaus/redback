@@ -120,6 +120,10 @@
       </result>
     </action>
 
+    <action name="resendRegistrationEmail" class="redback-register" method="resendRegistrationEmail">
+      <result name="error">/WEB-INF/jsp/redback/register.jsp</result>
+    </action>
+
     <action name="account" class="redback-account" method="show">
       <result name="input">/WEB-INF/jsp/redback/account.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/account.jsp</result>

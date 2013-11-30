@@ -45,10 +45,10 @@
   
   <c:if test="${ emailValidationRequired}">
   <p>
-    <s:form action="register!resendRegistrationEmail" namespace="/security" theme="xhtml"
+    <s:form action="resendRegistrationEmail" namespace="/security" theme="xhtml"
          id="resendRegistationForm" method="post" name="resendRegistration" cssClass="security userEdit">
          <s:hidden label="Username"    name="username" />
-         <s:submit value="Resend Validation" method="submit" />
+         <s:submit value="Resend Validation" />
     </s:form>
   </p>
   </c:if>

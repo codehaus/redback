@@ -16,6 +16,8 @@ package org.codehaus.redback.intetgrations.struts2.it;
  * limitations under the License.
  */
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -24,6 +26,38 @@ import org.testng.annotations.Test;
 public class UserEditTest
     extends AbstractSeleniumTestCase
 {
+    private static final String USERNAME = "user_edit";
+
+    private static final String PASSWORD = "password1";
+
+    @BeforeMethod
+    public void createUser()
+    {
+        createUser( USERNAME, PASSWORD, "User", "user@localhost" );
+    }
+
+    @AfterMethod
+    public void deleteUser()
+    {
+        deleteUser( USERNAME );
+    }
+
+    @Test
+    public void resendValidationEmail()
+    {
+        doLogin( ADMIN_USERNAME, ADMIN_PASSWORD );
+
+        selenium.open( "/security/userlist.action" );
+
+        selenium.click( "link=" + USERNAME );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+
+        selenium.click( "//input[@type='submit' and @value='Resend Validation']" );
+        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+
+        assert selenium.getTitle().contains( "[Admin] User List" );
+    }
+
     @Test( description = "REDBACK-262" )
     public void testUserListUrlLength()
         throws Exception
@@ -59,7 +93,7 @@ public class UserEditTest
         assert selenium.getLocation().endsWith( "username=admin" );
     }
 
-    @Test( description = "REDBACK-188" )
+    @Test(description = "REDBACK-188")
     public void testUserEdit()
         throws Exception
     {
@@ -85,22 +119,22 @@ public class UserEditTest
         assert selenium.getLocation().endsWith( "username=admin" );
     }
 
-    @Test( description = "REDBACK-166", enabled = false )
+    @Test(description = "REDBACK-166", enabled = false)
     public void testFeedbackAfterUserEdit()
         throws Exception
     {
         selenium.open( "/security/userlist.action" );
-        selenium.click( "link=user1" );
+        selenium.click( "link=" + USERNAME );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
         selenium.type( "userEditForm_user_fullName", "User Edited" );
         selenium.click( "userEditForm__submit" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
 
         // Not yet implemented. Since we redirect to the userlist, it is difficult to pass the success message there.
-        assert selenium.isTextPresent( "User details for 'user1' successfully changed" );
+        assert selenium.isTextPresent( "User details for '" + USERNAME + "' successfully changed" );
     }
 
-    @Test( description = "REDBACK-157", dependsOnMethods = "loginForcedPasswordChange" )
+    @Test(description = "REDBACK-157", dependsOnMethods = "loginForcedPasswordChange")
     public void testForceChangePassword()
         throws Exception
     {
@@ -109,7 +143,7 @@ public class UserEditTest
         selenium.open( "/security/userlist.action" );
         assert selenium.getTitle().contains( "[Admin] User List" );
 
-        selenium.click( "link=user1" );
+        selenium.click( "link=" + USERNAME );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
         assert selenium.getTitle().contains( "[Admin] User Edit" );
 
@@ -126,7 +160,7 @@ public class UserEditTest
         selenium.click( "link=Logout" );
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
 
-        doLogin( "user1", "user0" );
+        doLogin( USERNAME, "user0" );
 
         assert selenium.getTitle().contains( "Change Password" );
         selenium.type( "passwordForm_existingPassword", "user0" );
