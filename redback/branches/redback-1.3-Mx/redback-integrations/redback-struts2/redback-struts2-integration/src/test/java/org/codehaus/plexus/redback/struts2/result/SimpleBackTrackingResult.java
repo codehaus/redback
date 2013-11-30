@@ -24,16 +24,10 @@ public class SimpleBackTrackingResult
     public SimpleBackTrackingResult( ActionInvocationStub invocation )
     {
         super.actionName = invocation.getProxy().getActionName();
-        super.method = invocation.getProxy().getMethod();
     }
 
     public String getActionName()
     {
         return super.actionName;
-    }
-
-    public String getMethod()
-    {
-        return super.method;
     }
 }
