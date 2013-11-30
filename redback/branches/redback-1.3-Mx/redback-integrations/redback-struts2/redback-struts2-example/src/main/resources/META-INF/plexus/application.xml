@@ -3,7 +3,7 @@
 
     <component>
       <role>org.codehaus.plexus.redback.configuration.UserConfiguration</role>
-      <implementation>org.codehaus.plexus.redback.configuration.UserConfiguration</implementation>
+      <implementation>org.codehaus.plexus.redback.example.web.UserConfigurationDelegate</implementation>
       <configuration>
         <configs>
           <config>${user.home}/.m2/security.properties</config>

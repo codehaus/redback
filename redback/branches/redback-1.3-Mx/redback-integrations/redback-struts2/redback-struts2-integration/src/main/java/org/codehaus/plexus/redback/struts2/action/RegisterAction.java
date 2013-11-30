@@ -26,6 +26,7 @@ import org.codehaus.plexus.redback.role.RoleManagerException;
 import org.codehaus.plexus.redback.users.User;
 import org.codehaus.plexus.redback.users.UserManager;
 import org.codehaus.plexus.redback.users.UserNotFoundException;
+import org.codehaus.plexus.util.StringUtils;
 import org.codehaus.redback.integration.interceptor.SecureActionBundle;
 import org.codehaus.redback.integration.interceptor.SecureActionException;
 import org.codehaus.redback.integration.mail.Mailer;
@@ -69,7 +70,9 @@ public class RegisterAction
     private boolean emailValidationRequired;
 
     private String username;
-    
+
+    private boolean cancel;
+
     // ------------------------------------------------------------------
     // Action Entry Points - (aka Names)
     // ------------------------------------------------------------------
@@ -88,6 +91,11 @@ public class RegisterAction
 
     public String register()
     {
+        if ( cancel )
+        {
+            return cancel();
+        }
+
         if ( user == null )
         {
             user = new CreateUserCredentials();
@@ -248,7 +256,12 @@ public class RegisterAction
 		this.username = username;
 	}
 
-	public SecureActionBundle initSecureActionBundle()
+    public void setCancel( String cancel )
+    {
+        this.cancel = StringUtils.isNotEmpty( cancel );
+    }
+
+    public SecureActionBundle initSecureActionBundle()
         throws SecureActionException
     {
         return SecureActionBundle.OPEN;

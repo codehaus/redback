@@ -118,7 +118,7 @@
                 cargo.resource.name=mail/Session|
                 cargo.resource.type=javax.mail.Session|
                 cargo.resource.factory=org.apache.naming.factory.MailSessionFactory|
-                cargo.resource.parameters=mail.smtp.host=localhost
+                cargo.resource.parameters=mail.smtp.host=disabled
               </cargo.resource.resource.mail>
             </properties>
           </configuration>

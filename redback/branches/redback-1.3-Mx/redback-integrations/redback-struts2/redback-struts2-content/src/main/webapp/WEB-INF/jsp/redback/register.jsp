@@ -29,7 +29,7 @@
 
 <h2><s:text name="register.section.title"/></h2>
    
-<s:form action="register" namespace="/security" theme="xhtml"
+<s:form action="register_submit" namespace="/security" theme="xhtml"
          id="registerForm" method="post" name="register" cssClass="security register">     
   
   <s:textfield label="%{getText('username')}"         name="user.username" size="30" requiredLabel="true"/>
@@ -41,8 +41,8 @@
     <s:password  label="%{getText('confirm.password')}" name="user.confirmPassword" size="20" requiredLabel="true"/>
   </c:if>
   
-  <s:submit value="%{getText('register')}" method="register" />
-  <s:submit value="%{getText('cancel')}" method="cancel" />
+  <s:submit value="%{getText('register')}" />
+  <s:submit value="%{getText('cancel')}" name="cancel" />
 </s:form>
 
 </body>

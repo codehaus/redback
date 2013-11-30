@@ -26,6 +26,11 @@
   <name>Redback :: Integration :: Struts 2 Example Webapp</name>
   <dependencies>
     <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-slf4j-logging</artifactId>
       <scope>runtime</scope>

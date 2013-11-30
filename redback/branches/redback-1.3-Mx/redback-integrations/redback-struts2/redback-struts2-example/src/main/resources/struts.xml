@@ -75,5 +75,9 @@
       <result name="success">/WEB-INF/jsp/mainpage.jsp</result>
     </action>
     
+    <action name="reconfig" class="reconfig" method="execute">
+      <result name="success">/WEB-INF/jsp/mainpage.jsp</result>
+    </action>
+
   </package>
 </struts>

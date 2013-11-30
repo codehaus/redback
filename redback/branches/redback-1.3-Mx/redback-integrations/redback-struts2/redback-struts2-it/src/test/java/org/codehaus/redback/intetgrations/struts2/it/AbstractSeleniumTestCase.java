@@ -130,17 +130,30 @@ public abstract class AbstractSeleniumTestCase
         selenium.waitForPageToLoad( PAGE_TIMEOUT );
     }
 
+    protected void deleteUserIfExists( String username )
+    {
+        deleteUser( username, false );
+    }
+
     protected void deleteUser( String username )
+    {
+        deleteUser( username, true );
+    }
+
+    private void deleteUser( String username, boolean failIfMissing )
     {
         doLogin( ADMIN_USERNAME, ADMIN_PASSWORD );
 
         selenium.open( "/security/userlist.action" );
-        selenium.click( "//tr[.//a[text()='" + username + "']]/td/a[@title='delete user']" );
-        selenium.waitForPageToLoad( PAGE_TIMEOUT );
+        if ( failIfMissing || selenium.isElementPresent( "link=" + username ) )
+        {
+            selenium.click( "//tr[.//a[text()='" + username + "']]/td/a[@title='delete user']" );
+            selenium.waitForPageToLoad( PAGE_TIMEOUT );
 
-        assert selenium.isTextPresent( "[Admin] User Delete" );
+            assert selenium.isTextPresent( "[Admin] User Delete" );
 
-        submit();
+            submit();
+        }
     }
 
     protected void confirmAdminPassword()
