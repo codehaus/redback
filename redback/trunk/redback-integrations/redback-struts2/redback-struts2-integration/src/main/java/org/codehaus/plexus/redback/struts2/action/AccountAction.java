@@ -55,6 +55,8 @@ public class AccountAction
 
     private String oldPassword;
 
+    private boolean cancel;
+
     // ------------------------------------------------------------------
     // Action Entry Points - (aka Names)
     // ------------------------------------------------------------------
@@ -117,6 +119,11 @@ public class AccountAction
 
     public String submit()
     {
+        if ( cancel )
+        {
+            return cancel();
+        }
+
         SecuritySession session = getSecuritySession();
 
         if ( !session.isAuthenticated() )
@@ -246,6 +253,11 @@ public class AccountAction
     public void setOldPassword( String oldPassword )
     {
         this.oldPassword = oldPassword;
+    }
+
+    public void setCancel( String cancel )
+    {
+        this.cancel = StringUtils.isNotEmpty( cancel );
     }
 
     public boolean isSelf()

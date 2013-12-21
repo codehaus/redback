@@ -1,9 +1,7 @@
-package org.codehaus.plexus.redback.struts2.result;
-
-import org.codehaus.plexus.redback.struts2.ActionInvocationStub;
+package org.codehaus.plexus.redback.example.web;
 
 /*
- * Copyright 2006-2007 The Codehaus Foundation.
+ * Copyright 2013
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,16 +16,24 @@ import org.codehaus.plexus.redback.struts2.ActionInvocationStub;
  * limitations under the License.
  */
 
-public class SimpleBackTrackingResult
-    extends AbstractBackTrackingResult
+import org.codehaus.plexus.redback.configuration.UserConfiguration;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class UserConfigurationDelegate
+    extends UserConfiguration
 {
-    public SimpleBackTrackingResult( ActionInvocationStub invocation )
+    private Map<String, String> overrides = new HashMap<String, String>();
+
+    @Override
+    public boolean getBoolean( String key )
     {
-        super.actionName = invocation.getProxy().getActionName();
+        return overrides.containsKey( key ) ? Boolean.valueOf( overrides.get( key ) ) : super.getBoolean( key );
     }
 
-    public String getActionName()
+    public void addOverride( String key, String value )
     {
-        return super.actionName;
+        overrides.put( key, value );
     }
 }

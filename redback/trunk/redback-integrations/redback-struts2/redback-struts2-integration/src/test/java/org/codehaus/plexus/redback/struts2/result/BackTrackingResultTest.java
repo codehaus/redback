@@ -53,7 +53,6 @@ public class BackTrackingResultTest
         ActionInvocationStub previousActionInvocation = new ActionInvocationStub();
         ActionProxyStub previousProxyStub = (ActionProxyStub) previousActionInvocation.getProxy();
         previousProxyStub.setActionName( "previous_action" );
-        previousProxyStub.setMethod( "previous_method" );
 
         ActionContextStub previousActionContext = (ActionContextStub) previousActionInvocation.getInvocationContext();
         previousActionContext.getParameters().put( "previous_parameter", "previous_value" );
@@ -62,7 +61,6 @@ public class BackTrackingResultTest
         ActionInvocationStub currentActionInvocation = new ActionInvocationStub();
         ActionProxyStub currentProxyStub = (ActionProxyStub) currentActionInvocation.getProxy();
         currentProxyStub.setActionName( "current_action" );
-        currentProxyStub.setMethod( "current_method" );
 
         ActionContextStub currentActionContext = (ActionContextStub) currentActionInvocation.getInvocationContext();
         currentActionContext.getParameters().put( "current_parameter", "current_value" );
@@ -81,7 +79,6 @@ public class BackTrackingResultTest
         Map<String,Object> parametersMap = actionInvocation1.getInvocationContext().getParameters();
 
         assertEquals( ActionProxyStub.ACTION_NAME, backtrackingResult.getActionName() );
-        assertEquals( ActionProxyStub.METHOD, backtrackingResult.getMethod() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );
@@ -92,7 +89,6 @@ public class BackTrackingResultTest
         parametersMap = actionInvocation1.getInvocationContext().getParameters();
 
         assertEquals( "previous_action", backtrackingResult.getActionName() );
-        assertEquals( "previous_method", backtrackingResult.getMethod() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );
@@ -112,7 +108,6 @@ public class BackTrackingResultTest
         ActionInvocationStub previousActionInvocation = new ActionInvocationStub();
         ActionProxyStub previousProxyStub = (ActionProxyStub) previousActionInvocation.getProxy();
         previousProxyStub.setActionName( "previous_action" );
-        previousProxyStub.setMethod( "previous_method" );
 
         ActionContextStub previousActionContext = (ActionContextStub) previousActionInvocation.getInvocationContext();
         previousActionContext.getParameters().put( "previous_parameter", "previous_value" );
@@ -121,7 +116,6 @@ public class BackTrackingResultTest
         ActionInvocationStub currentActionInvocation = new ActionInvocationStub();
         ActionProxyStub currentProxyStub = (ActionProxyStub) currentActionInvocation.getProxy();
         currentProxyStub.setActionName( "current_action" );
-        currentProxyStub.setMethod( "current_method" );
 
         ActionContextStub currentActionContext = (ActionContextStub) currentActionInvocation.getInvocationContext();
         currentActionContext.getParameters().put( "current_parameter", "current_value" );
@@ -140,7 +134,6 @@ public class BackTrackingResultTest
         Map<String, Object> parametersMap = actionInvocation1.getInvocationContext().getParameters();
 
         assertEquals( ActionProxyStub.ACTION_NAME, backtrackingResult.getActionName() );
-        assertEquals( ActionProxyStub.METHOD, backtrackingResult.getMethod() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );
@@ -149,7 +142,6 @@ public class BackTrackingResultTest
 
         // after backtrack
         assertEquals( "current_action", backtrackingResult.getActionName() );
-        assertEquals( "current_method", backtrackingResult.getMethod() );
         assertEquals( ActionContextStub.VALUE_1, parametersMap.get( ActionContextStub.PARAMETER_1 ) );
         assertEquals( ActionContextStub.VALUE_2, parametersMap.get( ActionContextStub.PARAMETER_2 ) );
         assertEquals( ActionContextStub.VALUE_3, parametersMap.get( ActionContextStub.PARAMETER_3 ) );

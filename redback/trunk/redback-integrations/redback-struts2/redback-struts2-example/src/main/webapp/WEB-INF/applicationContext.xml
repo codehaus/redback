@@ -14,7 +14,7 @@
     </property>
   </bean>  
   
-  <bean name="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  <bean name="mailSender" class="org.codehaus.plexus.redback.example.web.JavaMailSenderDelegate">
     <property name="session" ref="mailSession"/>
   </bean>
 

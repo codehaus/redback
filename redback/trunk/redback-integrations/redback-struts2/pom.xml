@@ -25,7 +25,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <struts.version>2.3.15.3</struts.version>
+    <struts.version>2.3.16</struts.version>
   </properties>
 
   <dependencyManagement>

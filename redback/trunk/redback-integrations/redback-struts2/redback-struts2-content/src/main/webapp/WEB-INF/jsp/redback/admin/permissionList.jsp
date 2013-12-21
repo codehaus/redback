@@ -31,8 +31,7 @@
 
 <%@ include file="/WEB-INF/jsp/redback/include/formValidationResults.jsp" %>
 
-<s:form action="permissions!remove" method="post" theme="simple">
-
+<s:form action="permissions_remove" method="post" theme="simple">
   <table>
 
     <c:choose>
@@ -66,17 +65,15 @@
         <p><em><s:text name="permission.list.no.permissions.available"/></em></p>
       </c:otherwise>
     </c:choose>
-    
+    <%-- Remove not implemented for permissions
     <tr>
       <td colspan="3">
         <s:submit value="%{getText('remove.selected.roles')}" />
       </td>
     </tr>
-
+--%>
   </table>
-  
 </s:form>
-
 </body>
 </s:i18n>
 </html>

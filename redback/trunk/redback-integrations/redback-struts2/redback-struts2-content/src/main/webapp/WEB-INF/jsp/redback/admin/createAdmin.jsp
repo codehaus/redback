@@ -29,7 +29,7 @@
 
 <h2><s:text name="create.admin.section.title"/></h2>
 
-<s:form action="addadmin!submit" namespace="/security" theme="xhtml"
+<s:form action="addadminSubmit" namespace="/security" theme="xhtml"
          id="adminCreateForm" method="post" name="admincreate" cssClass="security adminCreate">
   <c:import url="/WEB-INF/jsp/redback/include/userCredentials.jsp" />
   <s:submit value="%{getText('create.admin')}" />

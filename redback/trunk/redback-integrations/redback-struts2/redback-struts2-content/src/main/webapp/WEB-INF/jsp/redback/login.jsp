@@ -35,13 +35,13 @@
   <%@ include file="/WEB-INF/jsp/redback/include/formValidationResults.jsp" %>
   
   
-    <s:form action="login" namespace="/security" theme="xhtml" 
+    <s:form action="login_submit" namespace="/security" theme="xhtml"
          id="loginForm" method="post" name="login" cssClass="security login">
       <s:textfield label="%{getText('username')}" name="username" size="30" />
       <s:password  label="%{getText('password')}" name="password" size="20" />
       <s:checkbox label="%{getText('login.remember.me')}" name="rememberMe" value="false" />
-      <s:submit value="%{getText('login')}" method="login" id="loginSubmit"/>
-      <s:submit value="%{getText('cancel')}" method="cancel" id="loginCancel" />
+      <s:submit value="%{getText('login')}" id="loginSubmit"/>
+      <s:submit value="%{getText('cancel')}" name="cancel" id="loginCancel" />
   </s:form>
 <%-- TODO: Figure out how to auto-focus to first field --%>
 

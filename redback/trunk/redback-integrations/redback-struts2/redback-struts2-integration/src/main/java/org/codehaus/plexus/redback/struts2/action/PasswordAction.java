@@ -71,6 +71,8 @@ public class PasswordAction
 
     private boolean provideExisting;
 
+    private boolean cancel;
+
     public String show()
     {
         provideExisting = StringUtils.isNotEmpty( getSecuritySession().getUser().getEncodedPassword() );
@@ -79,6 +81,11 @@ public class PasswordAction
 
     public String submit()
     {
+        if ( cancel )
+        {
+            return cancel();
+        }
+
         final SecuritySession securitySession = getSecuritySession();
 
         provideExisting = StringUtils.isNotEmpty( securitySession.getUser().getEncodedPassword() );
@@ -287,5 +294,10 @@ public class PasswordAction
     public void setTargetUrl( String targetUrl )
     {
         this.targetUrl = targetUrl;
+    }
+
+    public void setCancel( String cancel )
+    {
+        this.cancel = StringUtils.isNotEmpty( cancel );
     }
 }

@@ -26,7 +26,7 @@
 
 <h2><s:text name="user.delete.section.title"/></h2>
 
-<s:form action="userdelete!submit" namespace="/security">
+<s:form action="userdelete_submit" namespace="/security">
   <p>
     <s:text name="user.delete.message"/>:
   </p>
@@ -38,7 +38,7 @@
   <s:hidden label="Username" name="username" />
   <s:token/>
   <s:submit value="%{getText('user.delete')}" theme="simple" id="userDeleteSubmit"/>
-  <s:submit value="%{getText('cancel')}" action="userdelete!cancel" theme="simple"/>
+  <s:submit value="%{getText('cancel')}" name="cancel" theme="simple"/>
 </s:form>
 
 </body>

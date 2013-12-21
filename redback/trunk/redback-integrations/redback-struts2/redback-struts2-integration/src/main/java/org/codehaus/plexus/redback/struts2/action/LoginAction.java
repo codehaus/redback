@@ -83,6 +83,8 @@ public class LoginAction
 
     private boolean rememberMe;
 
+    private boolean cancel;
+
     /**
      *
      */
@@ -113,6 +115,11 @@ public class LoginAction
      */
     public String login()
     {
+        if ( cancel )
+        {
+            return CANCEL;
+        }
+
         if ( StringUtils.isNotEmpty( validateMe ) )
         {
             // Process a login / validate request.
@@ -314,6 +321,10 @@ public class LoginAction
         this.rememberMe = rememberMe;
     }
 
+    public void setCancel( String cancel )
+    {
+        this.cancel = StringUtils.isNotEmpty( cancel );
+    }
 
     /**
      * 1) attempts to authentication based on the passed in data source

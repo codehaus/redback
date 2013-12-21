@@ -74,6 +74,8 @@ public class UserDeleteAction
 
     private String username;
 
+    private boolean cancel;
+
     private User user;
 
     // ------------------------------------------------------------------
@@ -103,6 +105,11 @@ public class UserDeleteAction
 
     public String submit()
     {
+        if ( cancel )
+        {
+            return CANCEL;
+        }
+
         if ( username == null )
         {
             addActionError( getText( "invalid.user.credentials" ) );
@@ -185,6 +192,10 @@ public class UserDeleteAction
     public void setUser( User user )
     {
         this.user = user;
+    }
+
+    public void setCancel(String cancel) {
+        this.cancel = StringUtils.isNotEmpty(cancel);
     }
 
     public SecureActionBundle initSecureActionBundle()

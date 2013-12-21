@@ -29,7 +29,7 @@
 
 <h2><s:text name="user.create.section.title"/></h2>
 
-<s:form action="usercreate!submit" namespace="/security" theme="xhtml"
+<s:form action="usercreate_submit" namespace="/security" theme="xhtml"
          id="userCreateForm" method="post" name="usercreate" cssClass="security userCreate">
   <%@ include file="/WEB-INF/jsp/redback/include/userCredentials.jsp" %>
   <s:submit value="%{getText('user.create')}" id="userCreateSubmit" />

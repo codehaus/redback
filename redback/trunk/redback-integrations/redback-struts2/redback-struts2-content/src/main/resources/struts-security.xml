@@ -83,6 +83,10 @@
 
     <action name="login" class="redback-login" method="show">
       <result name="input">/WEB-INF/jsp/redback/login.jsp</result>
+    </action>
+
+    <action name="login_submit" class="redback-login" method="login">
+      <result name="input">/WEB-INF/jsp/redback/login.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/login.jsp</result>
       <result name="security-login-success" type="security-external">
         <param name="externalResult">security-login-success</param>
@@ -103,6 +107,9 @@
 
     <action name="register" class="redback-register" method="show">
       <result name="input">/WEB-INF/jsp/redback/register.jsp</result>
+    </action>
+
+    <action name="register_submit" class="redback-register" method="register">
       <result name="error">/WEB-INF/jsp/redback/register.jsp</result>
       <result name="validation-note">/WEB-INF/jsp/redback/validationNotification.jsp</result>
       <result name="security-register-success" type="security-external">
@@ -113,8 +120,16 @@
       </result>
     </action>
 
+    <action name="resendRegistrationEmail" class="redback-register" method="resendRegistrationEmail">
+      <result name="error">/WEB-INF/jsp/redback/register.jsp</result>
+    </action>
+
     <action name="account" class="redback-account" method="show">
       <result name="input">/WEB-INF/jsp/redback/account.jsp</result>
+      <result name="error">/WEB-INF/jsp/redback/account.jsp</result>
+    </action>
+
+    <action name="account_submit" class="redback-account" method="submit">
       <result name="error">/WEB-INF/jsp/redback/account.jsp</result>
       <result name="security-account-success" type="security-external">
         <param name="externalResult">security-account-success</param>
@@ -125,6 +140,10 @@
     </action>
 
     <action name="password" class="redback-password" method="show">
+      <result name="input">/WEB-INF/jsp/redback/password.jsp</result>
+    </action>
+
+    <action name="password_submit" class="redback-password" method="submit">
       <result name="input">/WEB-INF/jsp/redback/password.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/password.jsp</result>
       <result name="security-login-success" type="security-external">
@@ -146,7 +165,25 @@
       <result name="none">/WEB-INF/jsp/redback/login.jsp</result>
     </action>
 
+    <action name="passwordReset_submit" class="redback-password-reset" method="reset">
+      <result name="input">/WEB-INF/jsp/redback/requestPasswordReset.jsp</result>
+      <result name="none">/WEB-INF/jsp/redback/login.jsp</result>
+    </action>
+
     <action name="addadmin" class="redback-admin-account" method="show">
+      <interceptor-ref name="defaultStack"/>
+      <result name="input">/WEB-INF/jsp/redback/admin/createAdmin.jsp</result>
+      <result name="error">/WEB-INF/jsp/redback/admin/createAdmin.jsp</result>
+      <result name="login-error">/WEB-INF/jsp/redback/login.jsp</result>
+      <result name="security-login-success" type="security-external">
+        <param name="externalResult">security-login-success</param>
+      </result>
+      <result name="security-login-locked" type="security-external">
+        <param name="externalResult">security-login-locked</param>
+      </result>
+    </action>
+
+    <action name="addadminSubmit" class="redback-admin-account" method="submit">
       <interceptor-ref name="defaultStack"/>
       <result name="input">/WEB-INF/jsp/redback/admin/createAdmin.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/admin/createAdmin.jsp</result>
@@ -185,13 +222,30 @@
     <action name="useredit" class="redback-admin-user-edit" method="edit">
       <result name="input">/WEB-INF/jsp/redback/admin/userEdit.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/admin/userEdit.jsp</result>
+    </action>
+
+    <action name="useredit_submit" class="redback-admin-user-edit" method="submit">
+      <result name="input">/WEB-INF/jsp/redback/admin/userEdit.jsp</result>
+      <result name="error">/WEB-INF/jsp/redback/admin/userEdit.jsp</result>
       <result name="confirm">/WEB-INF/jsp/redback/admin/confirmUserAdministrator.jsp</result>
+      <result name="success" type="redirectAction">userlist</result>
+      <result name="cancel" type="redirectAction">userlist</result>
+    </action>
+
+    <action name="useredit_confirmAdminPassword" class="redback-admin-user-edit" method="confirmAdminPassword">
+      <result name="input">/WEB-INF/jsp/redback/admin/userEdit.jsp</result>
+      <result name="error">/WEB-INF/jsp/redback/admin/userEdit.jsp</result>
       <result name="confirmError">/WEB-INF/jsp/redback/admin/confirmUserAdministrator.jsp</result>
       <result name="success" type="redirectAction">userlist</result>
       <result name="cancel" type="redirectAction">userlist</result>
     </action>
 
     <action name="usercreate" class="redback-admin-user-create" method="show">
+      <result name="input">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
+      <result name="error">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
+    </action>
+
+    <action name="usercreate_submit" class="redback-admin-user-create" method="submit">
       <result name="input">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
       <result name="error">/WEB-INF/jsp/redback/admin/userCreate.jsp</result>
       <result name="success" type="redirectAction">
@@ -204,6 +258,13 @@
     </action>
 
     <action name="userdelete" class="redback-admin-user-delete" method="confirm">
+      <result name="input">/WEB-INF/jsp/redback/admin/userDelete.jsp</result>
+      <result name="error" type="redirectAction">userlist</result>
+      <result name="success" type="redirectAction">userlist</result>
+      <result name="cancel" type="redirectAction">userlist</result>
+    </action>
+
+    <action name="userdelete_submit" class="redback-admin-user-delete" method="submit">
       <result name="input">/WEB-INF/jsp/redback/admin/userDelete.jsp</result>
       <result name="error" type="redirectAction">userlist</result>
       <result name="success" type="redirectAction">userlist</result>
@@ -237,6 +298,9 @@
 
     <action name="rolecreate" class="redback-role-create" method="show">
       <result name="input">/WEB-INF/jsp/redback/admin/roleCreate.jsp</result>
+    </action>
+
+    <action name="rolecreate_submit" class="redback-role-create" method="submit">
       <result name="error">/WEB-INF/jsp/redback/admin/roleCreate.jsp</result>
       <result name="success" type="redirectAction">userlist</result>
       <interceptor-ref name="securedStack">
@@ -299,7 +363,15 @@
       <result name="list">/WEB-INF/jsp/redback/admin/operationList.jsp</result>
     </action>
 
+    <action name="operations_remove" class="redback-operations" method="remove">
+      <result name="list">/WEB-INF/jsp/redback/admin/operationList.jsp</result>
+    </action>
+
     <action name="resources" class="redback-resources" method="list">
+      <result name="list">/WEB-INF/jsp/redback/admin/resourceList.jsp</result>
+    </action>
+
+    <action name="resources_remove" class="redback-resources" method="remove">
       <result name="list">/WEB-INF/jsp/redback/admin/resourceList.jsp</result>
     </action>
 

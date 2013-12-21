@@ -105,7 +105,7 @@ public class VelocityMailGenerator
             context.put( "feedback", feedback );
         }
 
-        context.put( "urlPath", config.getString( "email.url.path", "security/login!login.action" ) );
+        context.put( "urlPath", config.getString( "email.url.path", "security/login_submit.action" ) );
 
         context.put( "authkey", authkey.getKey() );
 

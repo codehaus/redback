@@ -65,8 +65,7 @@ public class AbstractBackTrackingResult
             {
                 setNamespace( savedInvocation.getNamespace() );
                 setActionName( savedInvocation.getActionName() );
-                setMethod( savedInvocation.getMethodName() );
-                                
+
                 invocation.getInvocationContext().getParameters().clear();
                 invocation.getInvocationContext().getParameters().putAll( savedInvocation.getParametersMap() );
                 

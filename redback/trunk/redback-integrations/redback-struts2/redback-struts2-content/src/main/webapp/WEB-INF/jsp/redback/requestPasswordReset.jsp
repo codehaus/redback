@@ -29,11 +29,11 @@
 
 <%@ include file="/WEB-INF/jsp/redback/include/formValidationResults.jsp" %>
 
-<s:form action="passwordReset" namespace="/security" theme="xhtml" 
+<s:form action="passwordReset_submit" namespace="/security" theme="xhtml"
          id="passwordResetForm" method="post" name="passwordReset" cssClass="security passwordReset">
   <s:textfield label="%{getText('username')}" name="username" size="30" requiredLabel="true" />
-  <s:submit value="%{getText('request.password.reset')}" method="reset" />
-  <s:submit value="%{getText('cancel')}" method="cancel" />
+  <s:submit value="%{getText('request.password.reset')}" />
+  <s:submit value="%{getText('cancel')}" name="cancel" />
 </s:form>
 
 </body>

@@ -30,8 +30,8 @@
 
 <h2><s:text name="role.create.section.title"/></h2>
 
-<s:form action="rolecreate!submit" method="post" theme="xhtml"
-         name="roleCreateForm" cssClass="securiy rolecreate">
+<s:form action="rolecreate_submit" method="post" theme="xhtml"
+         name="roleCreateForm" cssClass="security rolecreate">
   <s:token/>
   <s:textfield label="%{getText('role.name')}" name="roleName" />
   <s:textfield label="%{getText('role.description')}" name="description" maxlength="255"/>
