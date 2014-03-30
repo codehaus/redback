@@ -55,6 +55,6 @@
   </profiles>
 
   <properties>
-    <struts.version>2.3.16</struts.version>
+    <struts.version>2.3.16.1</struts.version>
   </properties>
 </project>
